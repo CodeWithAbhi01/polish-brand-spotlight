@@ -78,8 +78,8 @@ function Nav() {
           <a href="#contact" className="hidden rounded-full border border-secondary/20 px-4 py-2 text-sm font-semibold text-secondary transition-colors hover:border-secondary md:inline-block">
             Login
           </a>
-          <a href="#cta" className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-brand transition-transform hover:scale-[1.03]">
-            Get Started <ArrowRight className="h-4 w-4" />
+          <a href="#cta" className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition-transform hover:scale-[1.03] sm:px-4 sm:text-sm">
+            Get Started <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           </a>
           <button className="ml-1 rounded-md p-2 text-secondary md:hidden" aria-label="Menu">
             <Menu className="h-5 w-5" />
@@ -107,7 +107,7 @@ function Hero() {
         />
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-24 pt-16 md:pt-24 lg:grid-cols-[1.05fr_0.95fr] lg:pb-32">
+      <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-14 md:pt-24 lg:grid-cols-[1.05fr_0.95fr] lg:pb-32">
         <div className="flex flex-col justify-center">
           <motion.span
             initial="hidden" animate="visible" variants={fadeUp}
@@ -154,54 +154,91 @@ function Hero() {
           </motion.div>
         </div>
 
-        {/* Right — device / logo composition */}
+        {/* Right — orbital logo composition (no shadow, all pattern) */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto w-full max-w-md"
+          className="relative mx-auto aspect-square w-full max-w-[420px] sm:max-w-[480px]"
         >
-          <div className="absolute inset-0 -z-10 translate-x-6 translate-y-6 rounded-[2.5rem] bg-brand-gradient opacity-90 blur-[2px]" />
-          <div className="rounded-[2.5rem] border border-border bg-card p-8 shadow-brand">
-            <div className="flex items-center justify-between text-xs font-medium text-muted-foreground">
-              <span>apnisabha.app</span>
-              <span className="rounded-full bg-primary/10 px-2 py-0.5 text-primary">Live</span>
-            </div>
-            <div className="mt-6 flex flex-col items-center text-center">
-              <img src={logoMark} alt="ApniSabha logo" width={180} height={180} className="h-40 w-40 object-contain drop-shadow-xl" />
-              <div className="mt-4 font-display text-3xl font-extrabold tracking-tight">
-                <span className="text-secondary">Apni</span><span className="text-primary">Sabha</span>
-              </div>
-              <div className="mt-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                Apna Manch • Apni Awaaz
-              </div>
-            </div>
-            <div className="mt-8 grid grid-cols-3 gap-3">
-              {[
-                { n: "50K+", l: "Voices" },
-                { n: "1.2K", l: "Sabhas" },
-                { n: "98%", l: "Trust" },
-              ].map(s => (
-                <div key={s.l} className="rounded-2xl bg-muted/60 p-3 text-center">
-                  <div className="font-display text-lg font-bold text-secondary">{s.n}</div>
-                  <div className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">{s.l}</div>
-                </div>
-              ))}
-            </div>
+          {/* Concentric rings */}
+          <div className="absolute inset-0 rounded-full border border-secondary/15" />
+          <div className="absolute inset-[8%] rounded-full border border-secondary/12" />
+          <div className="absolute inset-[18%] rounded-full border border-dashed border-primary/30" />
+          <div className="absolute inset-[30%] rounded-full border border-secondary/10" />
+
+          {/* Rotating dashed ring */}
+          <motion.div
+            aria-hidden
+            animate={{ rotate: 360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-[6%] rounded-full border-2 border-dashed border-primary/25"
+          />
+
+          {/* Orbiting dots */}
+          <motion.div
+            aria-hidden
+            animate={{ rotate: -360 }}
+            transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-[18%] rounded-full"
+          >
+            <span className="absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary" />
+            <span className="absolute right-0 top-1/2 h-2 w-2 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent" />
+            <span className="absolute bottom-0 left-1/2 h-2.5 w-2.5 -translate-x-1/2 translate-y-1/2 rounded-full bg-secondary" />
+            <span className="absolute left-0 top-1/2 h-2 w-2 -translate-y-1/2 -translate-x-1/2 rounded-full bg-primary/70" />
+          </motion.div>
+
+          {/* Center logo disc */}
+          <div className="absolute left-1/2 top-1/2 grid aspect-square w-[46%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-border bg-card">
+            <img
+              src={logoMark}
+              alt="ApniSabha logo"
+              width={220}
+              height={220}
+              className="h-[70%] w-[70%] object-contain"
+            />
           </div>
 
-          {/* Floating chip */}
+          {/* Floating stat chips positioned around the orbit */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.6 }}
-            className="absolute -bottom-6 -left-6 flex items-center gap-3 rounded-2xl border border-border bg-card px-4 py-3 shadow-lg"
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="absolute left-0 top-[12%] flex items-center gap-2 rounded-full border border-border bg-card/95 px-3 py-2 backdrop-blur"
           >
-            <div className="grid h-9 w-9 place-items-center rounded-full bg-primary text-primary-foreground">
-              <MessageCircle className="h-4 w-4" />
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-primary/15 text-primary">
+              <Users className="h-3 w-3" />
+            </span>
+            <div className="leading-tight">
+              <div className="font-display text-xs font-bold text-secondary">50K+</div>
+              <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Voices</div>
             </div>
-            <div className="text-left">
-              <div className="text-xs font-semibold text-secondary">New discussion</div>
-              <div className="text-[11px] text-muted-foreground">248 people joined in</div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55, duration: 0.5 }}
+            className="absolute right-0 top-[38%] flex items-center gap-2 rounded-full border border-border bg-card/95 px-3 py-2 backdrop-blur"
+          >
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-accent/15 text-accent">
+              <MessageCircle className="h-3 w-3" />
+            </span>
+            <div className="leading-tight">
+              <div className="font-display text-xs font-bold text-secondary">1.2K</div>
+              <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Sabhas</div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 0.5 }}
+            className="absolute bottom-[8%] left-[10%] flex items-center gap-2 rounded-full border border-border bg-card/95 px-3 py-2 backdrop-blur"
+          >
+            <span className="grid h-6 w-6 place-items-center rounded-full bg-secondary/10 text-secondary">
+              <Sparkles className="h-3 w-3" />
+            </span>
+            <div className="leading-tight">
+              <div className="font-display text-xs font-bold text-secondary">98%</div>
+              <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Trust</div>
             </div>
           </motion.div>
         </motion.div>
