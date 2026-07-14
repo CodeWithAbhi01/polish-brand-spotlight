@@ -16,9 +16,9 @@ const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: (i: number = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const, delay: i * 0.08 },
   }),
-};
+} as const;
 
 const values = [
   { icon: Users, title: "Community First", desc: "We believe in the power of people coming together, sharing ideas and creating impact." },
