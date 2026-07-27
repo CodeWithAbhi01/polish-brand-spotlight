@@ -49,9 +49,28 @@ const highlights = [
   { icon: Globe, label: "Accessible Anywhere" },
 ];
 
+export const smoothScrollToSection = (e?: React.MouseEvent, id?: string) => {
+  if (e) e.preventDefault();
+  if (!id || id === "#" || id === "top") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    return;
+  }
+  const targetId = id.replace("#", "");
+  const el = document.getElementById(targetId);
+  if (el) {
+    const yOffset = -84;
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+};
+
 function Logo({ className = "" }: { className?: string }) {
   return (
-    <a href="#" className={`flex items-center gap-2 sm:gap-2.5 ${className}`}>
+    <a
+      href="#"
+      onClick={(e) => smoothScrollToSection(e, "top")}
+      className={`flex items-center gap-2 sm:gap-2.5 ${className}`}
+    >
       <img src={logoMark} alt="ApniSabha" width={32} height={32} className="h-7 w-7 sm:h-8 sm:w-8 object-contain" />
       <div className="text-[16px] sm:text-[17px] font-semibold tracking-tight text-obsidian leading-none">
         ApniSabha
@@ -133,7 +152,12 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
         {/* Desktop Nav */}
         <nav className="hidden items-center gap-8 md:flex">
           {links.map(l => (
-            <a key={l.href} href={l.href} className="text-[14px] font-medium text-graphite/80 transition-colors hover:text-obsidian">
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={(e) => smoothScrollToSection(e, l.href)}
+              className="text-[14px] font-medium text-graphite/80 transition-colors hover:text-obsidian"
+            >
               {l.label}
             </a>
           ))}
@@ -300,7 +324,10 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
                 <a
                   key={l.href}
                   href={l.href}
-                  onClick={() => setShowMenu(false)}
+                  onClick={(e) => {
+                    smoothScrollToSection(e, l.href);
+                    setShowMenu(false);
+                  }}
                   className="flex items-center justify-between py-3.5 text-[15px] font-medium text-graphite hover:text-obsidian"
                 >
                   <span>{l.label}</span>
@@ -329,8 +356,7 @@ function Hero({ user, onOpenSignupWithEmail, onOpenReport }: HeroProps) {
     e.preventDefault();
     if (user) {
       toast.info("Aap pehle se hi logged in hain! Niche Live Sabhas explore karein.");
-      const el = document.getElementById("sabhas");
-      el?.scrollIntoView({ behavior: "smooth" });
+      smoothScrollToSection(undefined, "sabhas");
     } else {
       if (!emailInput.trim()) {
         toast.error("Kripya pehle apna Email ya Phone Number enter karein!");
@@ -705,7 +731,7 @@ function CTASection({ user, onOpenLogin, onOpenSignup, onOpenReport }: CTASectio
           <div id="contact" className="flex flex-col gap-3 sm:gap-3.5">
             {user ? (
               <>
-                <DarkBtn onClick={() => { toast.info("Scrolled to Active Sabhas!"); const el = document.getElementById("sabhas"); el?.scrollIntoView({ behavior: "smooth" }); }} className="justify-center !py-3.5 sm:!py-4 text-[15px] sm:text-[16px] !bg-ember hover:!bg-ember/90 shadow-lg shadow-ember/20">
+                <DarkBtn onClick={() => { toast.info("Scrolled to Active Sabhas!"); smoothScrollToSection(undefined, "sabhas"); }} className="justify-center !py-3.5 sm:!py-4 text-[15px] sm:text-[16px] !bg-ember hover:!bg-ember/90 shadow-lg shadow-ember/20">
                   Explore Your Sabha Rooms <ArrowRight className="h-5 w-5" />
                 </DarkBtn>
                 <GhostBtn onClick={onOpenReport} className="justify-center !py-3.5 sm:!py-4 text-[15px] sm:text-[16px] !bg-red-600 !text-snow !border-red-600 hover:!bg-red-700">
@@ -828,7 +854,7 @@ function Index() {
   };
 
   return (
-    <main className="min-h-screen bg-paper text-graphite selection:bg-ember selection:text-snow">
+    <main className="min-h-screen overflow-x-clip bg-paper text-graphite selection:bg-ember selection:text-snow">
       <Toaster position="top-right" richColors closeButton />
       
       {/* Live Activity Ticker */}

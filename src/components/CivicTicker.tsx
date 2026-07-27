@@ -152,9 +152,13 @@ export function CivicTicker() {
             onClick={() => {
               toast.info("Scrolled to Live Sabhas Feed!");
               const el = document.getElementById("sabhas");
-              el?.scrollIntoView({ behavior: "smooth" });
+              if (el) {
+                const yOffset = -84;
+                const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: "smooth" });
+              }
             }}
-            className="flex items-center gap-1 text-[11px] sm:text-[12px] font-semibold text-ember hover:underline"
+            className="flex items-center gap-1 text-[11px] sm:text-[12px] font-semibold text-ember hover:underline cursor-pointer"
           >
             <span>View All</span>
             <ArrowUpRight className="h-3 w-3" />

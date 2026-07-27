@@ -170,8 +170,8 @@
   }
 
   html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+    scroll-behavior: smooth !important;
+    scroll-padding-top: 84px;
   }
 
   body {
@@ -179,7 +179,6 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
 
   h1, h2, h3, h4 {
