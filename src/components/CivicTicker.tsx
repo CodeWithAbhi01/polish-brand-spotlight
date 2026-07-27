@@ -97,20 +97,51 @@ export function CivicTicker() {
     <div
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="relative overflow-hidden border-b border-cloud bg-obsidian py-2.5 sm:py-3 px-4 sm:px-6 text-snow shadow-md transition-all selection:bg-ember selection:text-snow"
+      className="relative overflow-hidden border-b border-cloud bg-obsidian py-3 sm:py-3.5 px-4 sm:px-6 text-snow shadow-md transition-all selection:bg-ember selection:text-snow"
     >
-      <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 text-[12px] sm:text-[13px]">
-        {/* Left Indicator */}
-        <div className="flex items-center gap-2 flex-none">
-          <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span className="font-bold tracking-wider uppercase text-[10px] sm:text-[11px] text-ember flex items-center gap-1">
-            <Sparkles className="h-3 w-3" /> <span>LIVE <span className="hidden sm:inline">CIVIC IMPACT</span></span>
-          </span>
-          <span className="text-cloud/40 hidden md:inline">|</span>
+      <div className="mx-auto flex flex-col md:flex-row max-w-[1200px] items-stretch md:items-center justify-between gap-2.5 md:gap-3 text-[12px] sm:text-[13px]">
+        {/* Top bar on mobile / Left indicator on desktop */}
+        <div className="flex items-center justify-between md:justify-start gap-2 flex-none w-full md:w-auto pb-1.5 md:pb-0 border-b border-white/10 md:border-b-0">
+          <div className="flex items-center gap-2">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="font-bold tracking-wider uppercase text-[10px] sm:text-[11px] text-ember flex items-center gap-1">
+              <Sparkles className="h-3 w-3" /> <span>LIVE <span className="hidden sm:inline">CIVIC IMPACT</span></span>
+            </span>
+            <span className="text-cloud/40 hidden md:inline">|</span>
+          </div>
+
+          {/* Right Actions shown in top row on mobile so they don't squish the name/action */}
+          <div className="flex md:hidden items-center gap-2 flex-none">
+            <button
+              onClick={handleLike}
+              title="Appreciate this action"
+              className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all ${
+                isLiked ? "bg-red-500/20 text-red-400 border border-red-500/30" : "bg-white/10 text-snow hover:bg-white/20"
+              }`}
+            >
+              <Heart className={`h-3 w-3 ${isLiked ? "fill-current" : ""}`} />
+              <span>{isLiked ? "Supported" : "Appreciate"}</span>
+            </button>
+            <button
+              onClick={() => {
+                toast.info("Scrolled to Live Sabhas Feed!");
+                const el = document.getElementById("sabhas");
+                if (el) {
+                  const yOffset = -84;
+                  const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                  window.scrollTo({ top: y, behavior: "smooth" });
+                }
+              }}
+              className="flex items-center gap-0.5 text-[11px] font-semibold text-ember hover:underline cursor-pointer"
+            >
+              <span>View All</span>
+              <ArrowUpRight className="h-3 w-3" />
+            </button>
+          </div>
         </div>
 
         {/* Center Animated Activity Item */}
-        <div className="flex-1 overflow-hidden min-w-0 px-1">
+        <div className="flex-1 overflow-hidden min-w-0 py-1 md:py-0">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
@@ -118,36 +149,41 @@ export function CivicTicker() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.35 }}
-              className="flex items-center gap-2 truncate"
+              className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2"
             >
-              <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-bold text-snow ${current.color} flex-none`}>
-                {current.badge}
-              </span>
-              <span className="font-semibold text-snow flex items-center gap-1 truncate">
-                {current.user}
-                <ShieldCheck className="h-3 w-3 text-blue-400 flex-none hidden sm:inline" />
-              </span>
-              <span className="text-ash truncate">
-                {current.action} <span className="text-fog">({current.city})</span>
-              </span>
-              <span className="text-[11px] text-fog/70 flex-none hidden lg:inline">· {current.timeAgo}</span>
+              {/* Badge & Name Row - Shown cleanly without truncate on mobile! */}
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] sm:text-[10px] font-bold text-snow ${current.color} flex-none shadow-sm`}>
+                  {current.badge}
+                </span>
+                <span className="font-bold text-snow flex items-center gap-1 text-[13px] sm:text-[13px] whitespace-normal">
+                  {current.user}
+                  <ShieldCheck className="h-3.5 w-3.5 text-blue-400 flex-none inline" />
+                </span>
+              </div>
+
+              {/* Action & City - Shown underneath on mobile (niche dikhe)! */}
+              <div className="text-ash text-[12px] sm:text-[13px] leading-relaxed truncate md:truncate pl-0.5 md:pl-0">
+                {current.action} <span className="text-fog font-medium">({current.city})</span>
+                <span className="text-[11px] text-fog/70 inline md:hidden ml-1">· {current.timeAgo}</span>
+              </div>
+              <span className="text-[11px] text-fog/70 flex-none hidden md:inline">· {current.timeAgo}</span>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Right Actions */}
-        <div className="flex items-center gap-2 sm:gap-3 flex-none">
+        {/* Right Actions shown on desktop */}
+        <div className="hidden md:flex items-center gap-3 flex-none">
           <button
             onClick={handleLike}
             title="Appreciate this action"
-            className={`flex items-center gap-1 rounded-full px-2 sm:px-2.5 py-1 text-[11px] font-medium transition-all ${
+            className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all ${
               isLiked ? "bg-red-500/20 text-red-400 border border-red-500/30" : "bg-white/10 text-snow hover:bg-white/20"
             }`}
           >
             <Heart className={`h-3 w-3 ${isLiked ? "fill-current" : ""}`} />
-            <span className="hidden md:inline">{isLiked ? "Supported" : "Appreciate"}</span>
+            <span>{isLiked ? "Supported" : "Appreciate"}</span>
           </button>
-
           <button
             onClick={() => {
               toast.info("Scrolled to Live Sabhas Feed!");
@@ -158,7 +194,7 @@ export function CivicTicker() {
                 window.scrollTo({ top: y, behavior: "smooth" });
               }
             }}
-            className="flex items-center gap-1 text-[11px] sm:text-[12px] font-semibold text-ember hover:underline cursor-pointer"
+            className="flex items-center gap-1 text-[12px] font-semibold text-ember hover:underline cursor-pointer"
           >
             <span>View All</span>
             <ArrowUpRight className="h-3 w-3" />

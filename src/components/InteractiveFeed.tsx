@@ -238,7 +238,7 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
                         {item.author.slice(0, 2).toUpperCase()}
                       </div>
                       <div>
-                        <div className="flex items-center gap-1 text-[12px] sm:text-[13px] font-semibold text-obsidian">
+                        <div className="flex items-center gap-1 text-[12px] sm:text-[13px] font-semibold text-obsidian flex-wrap whitespace-normal">
                           {item.author} <ShieldCheck className="h-3.5 w-3.5 text-blue-600 flex-none" />
                         </div>
                         <div className="text-[11px] text-fog">{item.authorRole} · {item.timeAgo}</div>
