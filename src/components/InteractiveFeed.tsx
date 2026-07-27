@@ -151,10 +151,10 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
   };
 
   return (
-    <section id="sabhas" className="px-6 py-20 sm:py-28 bg-paper">
+    <section id="sabhas" className="px-4 sm:px-6 py-14 sm:py-20 md:py-28 bg-paper">
       <div className="mx-auto max-w-[1200px]">
         {/* Header */}
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1 rounded-[10px] bg-ember/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-ember">
@@ -162,22 +162,22 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
               </span>
               <span className="text-[12px] font-medium text-fog">Real-time Citizen Action</span>
             </div>
-            <h2 className="mt-3 text-[36px] font-semibold leading-[1.1] tracking-[-0.025em] text-obsidian sm:text-[48px]">
+            <h2 className="mt-2 text-[30px] font-semibold leading-[1.15] tracking-[-0.025em] text-obsidian sm:text-[38px] md:text-[48px]">
               Active discussions shaping our cities.
             </h2>
           </div>
-          <p className="max-w-md text-[14px] leading-relaxed text-steel">
+          <p className="max-w-md text-[13px] sm:text-[14px] leading-relaxed text-steel">
             Filter by civic category, support verified citizen initiatives, and join real-world working groups in your neighborhood.
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="mt-10 flex flex-wrap items-center gap-2 border-b border-cloud pb-6">
+        {/* Category Tabs - Scrollable on mobile */}
+        <div className="mt-8 flex items-center gap-2 overflow-x-auto pb-4 pt-1 scrollbar-none border-b border-cloud -mx-4 px-4 sm:mx-0 sm:px-0">
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setSelectedCat(cat)}
-              className={`rounded-[14px] px-4 py-2.5 text-[13px] font-medium transition-all ${
+              className={`whitespace-nowrap rounded-[14px] px-3.5 py-2 text-[12px] sm:text-[13px] font-medium transition-all flex-none ${
                 selectedCat === cat
                   ? "bg-obsidian text-snow shadow-md scale-[1.02]"
                   : "bg-snow text-graphite border border-cloud hover:border-iron"
@@ -189,7 +189,7 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
         </div>
 
         {/* Feed Cards Grid */}
-        <div className="mt-8 grid gap-5 lg:grid-cols-2">
+        <div className="mt-6 sm:mt-8 grid gap-4 sm:gap-5 lg:grid-cols-2">
           <AnimatePresence mode="popLayout">
             {filteredTopics.map((item, idx) => {
               const isUpvoted = upvotedIds.includes(item.id);
@@ -203,12 +203,12 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   key={item.id}
-                  className="group flex flex-col justify-between rounded-[32px] border border-cloud bg-snow p-7 transition-all hover:border-iron/40 hover:shadow-xl"
+                  className="group flex flex-col justify-between rounded-[24px] sm:rounded-[32px] border border-cloud bg-snow p-5 sm:p-7 transition-all hover:border-iron/40 hover:shadow-xl"
                 >
                   <div>
                     {/* Top strip */}
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1.5 flex-wrap">
                         <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-bold text-snow ${item.badgeColor}`}>
                           <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse"></span>
                           {item.status}
@@ -217,35 +217,35 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
                           {item.category}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1.5 text-[12px] font-medium text-fog">
-                        <MapPin className="h-3.5 w-3.5 text-ember" /> {item.sabha}
+                      <div className="flex items-center gap-1 text-[11px] sm:text-[12px] font-medium text-fog">
+                        <MapPin className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-ember" /> {item.sabha}
                       </div>
                     </div>
 
                     {/* Title & Desc */}
-                    <h3 className="mt-4 text-[20px] font-semibold leading-[1.3] tracking-tight text-obsidian group-hover:text-ember transition-colors">
+                    <h3 className="mt-3.5 sm:mt-4 text-[18px] sm:text-[20px] font-semibold leading-[1.3] tracking-tight text-obsidian group-hover:text-ember transition-colors">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-[14px] leading-relaxed text-steel line-clamp-3">
+                    <p className="mt-2 text-[13px] sm:text-[14px] leading-relaxed text-steel line-clamp-3">
                       {item.desc}
                     </p>
                   </div>
 
                   {/* Author info & Actions footer */}
-                  <div className="mt-6 pt-5 border-t border-cloud flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-cloud flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
                     <div className="flex items-center gap-2.5">
-                      <div className="grid h-9 w-9 place-items-center rounded-full bg-obsidian text-[12px] font-bold text-snow">
+                      <div className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full bg-obsidian text-[11px] sm:text-[12px] font-bold text-snow flex-none">
                         {item.author.slice(0, 2).toUpperCase()}
                       </div>
                       <div>
-                        <div className="flex items-center gap-1 text-[13px] font-semibold text-obsidian">
-                          {item.author} <ShieldCheck className="h-3.5 w-3.5 text-blue-600" />
+                        <div className="flex items-center gap-1 text-[12px] sm:text-[13px] font-semibold text-obsidian">
+                          {item.author} <ShieldCheck className="h-3.5 w-3.5 text-blue-600 flex-none" />
                         </div>
                         <div className="text-[11px] text-fog">{item.authorRole} · {item.timeAgo}</div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 justify-end">
                       {/* Upvote Button */}
                       <button
                         onClick={() => handleUpvote(item.id, item.title)}
@@ -262,7 +262,7 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
                       {/* Comments / Join button */}
                       <button
                         onClick={() => handleJoinDiscussion(item.id, item.title)}
-                        className={`flex items-center gap-1.5 rounded-[12px] px-3.5 py-2 text-[12px] font-medium transition-all ${
+                        className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 rounded-[12px] px-3.5 py-2 text-[12px] font-medium transition-all ${
                           isJoined
                             ? "bg-emerald-600 text-snow shadow-sm"
                             : "bg-obsidian text-snow hover:bg-graphite"
@@ -285,7 +285,7 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
                       <button
                         onClick={() => handleShare(item.title)}
                         title="Share discussion"
-                        className="rounded-[12px] border border-cloud bg-paper p-2 text-fog hover:text-obsidian hover:bg-cloud transition-colors"
+                        className="rounded-[12px] border border-cloud bg-paper p-2 text-fog hover:text-obsidian hover:bg-cloud transition-colors flex-none"
                       >
                         <Share2 className="h-3.5 w-3.5" />
                       </button>

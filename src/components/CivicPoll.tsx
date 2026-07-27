@@ -77,27 +77,27 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
   };
 
   return (
-    <section className="px-6 py-16 bg-snow border-y border-cloud">
-      <div className="mx-auto max-w-[1000px] rounded-[36px] bg-obsidian p-8 sm:p-12 text-snow shadow-2xl relative overflow-hidden">
+    <section className="px-4 sm:px-6 py-12 sm:py-16 bg-snow border-y border-cloud">
+      <div className="mx-auto max-w-[1000px] rounded-[26px] sm:rounded-[36px] bg-obsidian p-6 sm:p-10 md:p-12 text-snow shadow-2xl relative overflow-hidden">
         {/* Decorative background blur */}
         <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-ember/20 blur-3xl pointer-events-none"></div>
         <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl pointer-events-none"></div>
 
-        <div className="relative z-10 grid gap-8 lg:grid-cols-12 lg:items-center">
+        <div className="relative z-10 grid gap-6 sm:gap-8 lg:grid-cols-12 lg:items-center">
           {/* Left Column: Question & Info */}
           <div className="lg:col-span-5">
             <div className="inline-flex items-center gap-1.5 rounded-full bg-ember/20 px-3 py-1 text-[11px] font-bold text-ember uppercase tracking-wider border border-ember/30">
               <BarChart2 className="h-3.5 w-3.5" /> DAILY CIVIC PULSE POLL
             </div>
-            <h3 className="mt-4 text-[28px] font-semibold leading-[1.2] tracking-tight text-snow sm:text-[34px]">
+            <h3 className="mt-3.5 sm:mt-4 text-[22px] sm:text-[28px] font-semibold leading-[1.25] tracking-tight text-snow md:text-[32px]">
               Should solar rooftops be mandatory for metro commercial buildings by 2027?
             </h3>
-            <p className="mt-3 text-[14px] leading-relaxed text-ash">
+            <p className="mt-2.5 sm:mt-3 text-[13px] sm:text-[14px] leading-relaxed text-ash">
               Your verified vote directly informs municipal green energy benchmarks and civic sustainability reports submitted to urban development authorities.
             </p>
-            <div className="mt-6 flex items-center gap-4 pt-4 border-t border-slate text-[12px] text-fog">
+            <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-2 sm:gap-4 pt-4 border-t border-slate text-[11px] sm:text-[12px] text-fog">
               <span className="flex items-center gap-1 text-snow font-medium">
-                <ShieldCheck className="h-4 w-4 text-emerald-400" /> 100% Verified Citizens
+                <ShieldCheck className="h-4 w-4 text-emerald-400 flex-none" /> 100% Verified Citizens
               </span>
               <span>·</span>
               <span>{totalVotes.toLocaleString()} Votes Today</span>
@@ -105,14 +105,14 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
           </div>
 
           {/* Right Column: Interactive Options */}
-          <div className="lg:col-span-7 space-y-3.5">
+          <div className="lg:col-span-7 space-y-3">
             {options.map((opt) => {
               const isSelected = selectedId === opt.id;
               return (
                 <div
                   key={opt.id}
                   onClick={() => handleVote(opt.id)}
-                  className={`group relative overflow-hidden rounded-[22px] border p-5 transition-all cursor-pointer ${
+                  className={`group relative overflow-hidden rounded-[18px] sm:rounded-[22px] border p-4 sm:p-5 transition-all cursor-pointer ${
                     isSelected
                       ? "border-ember bg-slate/90 shadow-lg shadow-ember/10"
                       : "border-slate bg-graphite/80 hover:border-iron hover:bg-slate/50"
@@ -128,25 +128,25 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
                     />
                   )}
 
-                  <div className="relative z-10 flex items-center justify-between gap-4">
-                    <div className="flex items-start gap-3">
+                  <div className="relative z-10 flex items-center justify-between gap-3 sm:gap-4">
+                    <div className="flex items-start gap-2.5 sm:gap-3">
                       <div className={`mt-0.5 grid h-5 w-5 flex-none place-items-center rounded-full border ${
                         isSelected ? "border-ember bg-ember text-snow" : "border-fog text-transparent group-hover:border-snow"
                       }`}>
                         <CheckCircle2 className="h-3.5 w-3.5" />
                       </div>
-                      <span className="text-[14px] font-medium text-snow leading-snug">
+                      <span className="text-[13px] sm:text-[14px] font-medium text-snow leading-snug">
                         {opt.text}
                       </span>
                     </div>
 
                     {hasVoted ? (
                       <div className="text-right flex-none">
-                        <span className="text-[18px] font-bold text-snow">{opt.percentage}%</span>
-                        <div className="text-[11px] text-ash">{opt.votes} votes</div>
+                        <span className="text-[16px] sm:text-[18px] font-bold text-snow">{opt.percentage}%</span>
+                        <div className="text-[10px] sm:text-[11px] text-ash">{opt.votes} votes</div>
                       </div>
                     ) : (
-                      <span className="text-[12px] font-medium text-ash opacity-0 group-hover:opacity-100 transition-opacity flex-none">
+                      <span className="text-[11px] sm:text-[12px] font-medium text-ash opacity-0 group-hover:opacity-100 transition-opacity flex-none hidden sm:inline">
                         Click to Vote &rarr;
                       </span>
                     )}
@@ -156,7 +156,7 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
             })}
 
             {!hasVoted && (
-              <div className="text-center pt-2 text-[12px] text-ash italic">
+              <div className="text-center pt-1 text-[11px] sm:text-[12px] text-ash italic">
                 * Click on any option to submit your verified civic opinion.
               </div>
             )}
