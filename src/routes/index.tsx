@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   Users, ShieldCheck, Lightbulb, Target, TrendingUp,
   MessageCircle, Megaphone, Handshake, ArrowRight, Bell, Globe, Sparkles,
-  CheckCircle2, Menu, ArrowUpRight, User, LogOut, LayoutDashboard, Settings, MapPin, Award, X
+  CheckCircle2, Menu, ArrowUpRight, User, LogOut, LayoutDashboard, Settings, MapPin, Award, X, Loader2
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import logoMark from "@/assets/logo-mark.png";
@@ -12,6 +12,8 @@ import community from "@/assets/community.jpg";
 import { AuthModal, UserProfile } from "@/components/AuthModal";
 import { InteractiveFeed } from "@/components/InteractiveFeed";
 import { CivicPoll } from "@/components/CivicPoll";
+import { CivicTicker } from "@/components/CivicTicker";
+import { ReportIssueModal } from "@/components/ReportIssueModal";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -108,10 +110,11 @@ interface NavProps {
   user: UserProfile | null;
   onOpenLogin: () => void;
   onOpenSignup: () => void;
+  onOpenReport: () => void;
   onLogout: () => void;
 }
 
-function Nav({ user, onOpenLogin, onOpenSignup, onLogout }: NavProps) {
+function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavProps) {
   const [showMenu, setShowMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
@@ -138,6 +141,15 @@ function Nav({ user, onOpenLogin, onOpenSignup, onLogout }: NavProps) {
 
         {/* Right action area */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Report Issue CTA */}
+          <button
+            onClick={onOpenReport}
+            className="flex items-center gap-1.5 rounded-[12px] bg-red-500/10 border border-red-500/20 px-3 py-2 text-[12px] sm:text-[13px] font-bold text-red-600 hover:bg-red-500/20 transition-all shadow-sm"
+          >
+            <Megaphone className="h-3.5 w-3.5 animate-bounce" />
+            <span className="hidden sm:inline">Report Issue</span>
+          </button>
+
           {user ? (
             <div className="relative">
               <button
@@ -171,6 +183,12 @@ function Nav({ user, onOpenLogin, onOpenSignup, onLogout }: NavProps) {
                     className="w-full flex items-center gap-2.5 rounded-[12px] px-3 py-2 text-[13px] text-graphite hover:bg-paper transition-colors"
                   >
                     <LayoutDashboard className="h-4 w-4 text-fog" /> Meri Sabha Dashboard
+                  </button>
+                  <button
+                    onClick={() => { setShowProfileMenu(false); onOpenReport(); }}
+                    className="w-full flex items-center gap-2.5 rounded-[12px] px-3 py-2 text-[13px] text-red-600 hover:bg-red-50 transition-colors font-medium"
+                  >
+                    <Megaphone className="h-4 w-4 text-red-500" /> Report Ward Issue 📢
                   </button>
                   <button
                     onClick={() => { setShowProfileMenu(false); toast.info("Profile settings opened."); }}
@@ -214,7 +232,7 @@ function Nav({ user, onOpenLogin, onOpenSignup, onLogout }: NavProps) {
         </div>
       </div>
 
-      {/* Mobile Drawer Menu - Polished and Full-featured */}
+      {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {showMenu && (
           <motion.div
@@ -223,7 +241,6 @@ function Nav({ user, onOpenLogin, onOpenSignup, onLogout }: NavProps) {
             exit={{ opacity: 0, height: 0 }}
             className="border-t border-cloud bg-snow px-4 py-5 md:hidden overflow-hidden shadow-2xl"
           >
-            {/* User card in mobile drawer */}
             {user ? (
               <div className="mb-4 rounded-[18px] bg-paper p-3.5 border border-cloud">
                 <div className="flex items-center gap-3">
@@ -239,16 +256,16 @@ function Nav({ user, onOpenLogin, onOpenSignup, onLogout }: NavProps) {
                 </div>
                 <div className="mt-3 grid grid-cols-2 gap-2 pt-3 border-t border-cloud/80">
                   <button
-                    onClick={() => { setShowMenu(false); toast.info("Opening Meri Sabha Dashboard..."); }}
-                    className="flex items-center justify-center gap-1.5 rounded-[10px] bg-snow py-2 text-[12px] font-medium text-obsidian border border-cloud"
+                    onClick={() => { setShowMenu(false); onOpenReport(); }}
+                    className="flex items-center justify-center gap-1.5 rounded-[10px] bg-red-50 py-2 text-[12px] font-bold text-red-600 border border-red-200"
                   >
-                    <LayoutDashboard className="h-3.5 w-3.5" /> Dashboard
+                    <Megaphone className="h-3.5 w-3.5" /> Report Issue
                   </button>
                   <button
                     onClick={() => { setShowMenu(false); onLogout(); }}
-                    className="flex items-center justify-center gap-1.5 rounded-[10px] bg-red-50 py-2 text-[12px] font-medium text-red-600 border border-red-200"
+                    className="flex items-center justify-center gap-1.5 rounded-[10px] bg-snow py-2 text-[12px] font-medium text-graphite border border-cloud"
                   >
-                    <LogOut className="h-3.5 w-3.5" /> Logout
+                    <LogOut className="h-3.5 w-3.5 text-red-500" /> Logout
                   </button>
                 </div>
               </div>
@@ -270,6 +287,15 @@ function Nav({ user, onOpenLogin, onOpenSignup, onLogout }: NavProps) {
             )}
 
             <nav className="flex flex-col divide-y divide-cloud/60">
+              <button
+                onClick={() => { setShowMenu(false); onOpenReport(); }}
+                className="flex items-center justify-between py-3.5 text-[15px] font-bold text-red-600 text-left w-full"
+              >
+                <span className="flex items-center gap-2">
+                  <Megaphone className="h-4 w-4" /> Report Ward Issue 📢
+                </span>
+                <ArrowRight className="h-4 w-4 text-red-400" />
+              </button>
               {links.map(l => (
                 <a
                   key={l.href}
@@ -291,11 +317,13 @@ function Nav({ user, onOpenLogin, onOpenSignup, onLogout }: NavProps) {
 
 interface HeroProps {
   user: UserProfile | null;
-  onOpenSignup: () => void;
+  onOpenSignupWithEmail: (email: string) => void;
+  onOpenReport: () => void;
 }
 
-function Hero({ user, onOpenSignup }: HeroProps) {
+function Hero({ user, onOpenSignupWithEmail, onOpenReport }: HeroProps) {
   const [emailInput, setEmailInput] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
 
   const handleJoinClick = (e: React.FormEvent) => {
     e.preventDefault();
@@ -304,10 +332,20 @@ function Hero({ user, onOpenSignup }: HeroProps) {
       const el = document.getElementById("sabhas");
       el?.scrollIntoView({ behavior: "smooth" });
     } else {
-      if (emailInput) {
-        toast.info(`Great! Proceeding with ${emailInput}. Complete your profile:`);
+      if (!emailInput.trim()) {
+        toast.error("Kripya pehle apna Email ya Phone Number enter karein!");
+        return;
       }
-      onOpenSignup();
+
+      // Realistic Contact Verification Simulation
+      setIsVerifying(true);
+      toast.info("⚡ Verifying mobile/email with National Civic Citizen Registry...");
+
+      setTimeout(() => {
+        setIsVerifying(false);
+        toast.success(`🎉 Congratulations! '${emailInput}' is pre-verified for ward access. Welcome to the movement!`);
+        onOpenSignupWithEmail(emailInput);
+      }, 1000);
     }
   };
 
@@ -354,12 +392,26 @@ function Hero({ user, onOpenSignup }: HeroProps) {
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 placeholder="Enter email or mobile number..."
-                className="flex-1 bg-transparent px-3 py-2.5 text-[14px] text-graphite outline-none placeholder:text-ash"
+                disabled={isVerifying}
+                className="flex-1 bg-transparent px-3 py-2.5 text-[14px] text-graphite outline-none placeholder:text-ash disabled:opacity-50"
               />
-              <DarkBtn onClick={() => {}} className="!py-3 !px-5 shadow-sm justify-center">
-                {user ? "Explore Sabhas" : "Join Sabha"}
-                <ArrowRight className="h-4 w-4" />
-              </DarkBtn>
+              <button
+                type="submit"
+                disabled={isVerifying}
+                className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-obsidian px-5 py-3 text-[14px] font-medium text-snow transition-all hover:bg-graphite disabled:opacity-50 shadow-sm cursor-pointer"
+              >
+                {isVerifying ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin text-ember" />
+                    <span>Verifying...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{user ? "Explore Sabhas" : "Verify & Join"}</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </>
+                )}
+              </button>
             </div>
           </motion.form>
 
@@ -375,12 +427,22 @@ function Hero({ user, onOpenSignup }: HeroProps) {
           </motion.div>
         </div>
 
-        {/* Right — editorial card stack */}
+        {/* Right — editorial card stack with subtle floating movement animation */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="relative flex flex-col gap-3.5 sm:gap-4"
         >
+          {/* Floating animated badge */}
+          <motion.div
+            animate={{ y: [-4, 4, -4] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            className="absolute -top-6 -right-2 sm:-top-5 sm:-right-4 z-20 hidden sm:flex items-center gap-2 rounded-full border border-cloud bg-obsidian px-3.5 py-1.5 text-snow shadow-xl text-[12px] font-semibold"
+          >
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>🔥 42 Ward Sabhas Debating Right Now</span>
+          </motion.div>
+
           <div className="rounded-[26px] sm:rounded-[36px] border border-cloud bg-snow p-5 sm:p-7 shadow-xl">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5 rounded-[10px] sm:rounded-[12px] bg-ember px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-snow">
@@ -406,12 +468,21 @@ function Hero({ user, onOpenSignup }: HeroProps) {
 
           <div className="grid grid-cols-2 gap-3.5 sm:gap-4">
             <div className="rounded-[22px] sm:rounded-[28px] border border-cloud bg-snow p-4 sm:p-6 shadow-md">
-              <div className="text-[26px] sm:text-[32px] font-bold leading-none tracking-tight text-obsidian">50,000+</div>
+              <div className="text-[26px] sm:text-[32px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1">
+                <span>50,000+</span>
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              </div>
               <div className="mt-1.5 sm:mt-2 text-[12px] sm:text-[13px] text-steel">Verified citizens across India</div>
             </div>
-            <div className="rounded-[22px] sm:rounded-[28px] border border-cloud bg-obsidian p-4 sm:p-6 text-snow shadow-xl">
-              <div className="text-[26px] sm:text-[32px] font-bold leading-none tracking-tight text-ember">1,200+</div>
-              <div className="mt-1.5 sm:mt-2 text-[12px] sm:text-[13px] text-ash">Active ward sabhas and rooms</div>
+            <div
+              onClick={onOpenReport}
+              className="group rounded-[22px] sm:rounded-[28px] border border-red-500/30 bg-gradient-to-br from-red-600 to-obsidian p-4 sm:p-6 text-snow shadow-xl cursor-pointer transition-all hover:scale-[1.02]"
+            >
+              <div className="flex items-center justify-between">
+                <div className="text-[22px] sm:text-[26px] font-bold leading-none tracking-tight text-snow">Report 📢</div>
+                <ArrowRight className="h-5 w-5 text-snow group-hover:translate-x-1 transition-transform" />
+              </div>
+              <div className="mt-1.5 sm:mt-2 text-[12px] sm:text-[13px] text-red-100 font-medium">Report Ward Issue & Get Action</div>
             </div>
           </div>
 
@@ -436,7 +507,7 @@ function Hero({ user, onOpenSignup }: HeroProps) {
           <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.2em] text-ash w-full sm:w-auto">Active Sabhas in Metro Cities:</span>
           {["Delhi NCR", "Mumbai", "Bengaluru", "Pune", "Jaipur", "Hyderabad", "Kolkata", "Lucknow"].map(c => (
             <span key={c} className="text-[13px] sm:text-[15px] font-semibold text-graphite flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 flex-none"></span> {c}
+              <span className="h-2 w-2 rounded-full bg-emerald-500 flex-none animate-pulse"></span> {c}
             </span>
           ))}
         </div>
@@ -609,9 +680,10 @@ interface CTASectionProps {
   user: UserProfile | null;
   onOpenLogin: () => void;
   onOpenSignup: () => void;
+  onOpenReport: () => void;
 }
 
-function CTASection({ user, onOpenLogin, onOpenSignup }: CTASectionProps) {
+function CTASection({ user, onOpenLogin, onOpenSignup, onOpenReport }: CTASectionProps) {
   return (
     <section id="cta" className="px-4 sm:px-6 pb-16 sm:pb-24 pt-8 sm:pt-10 bg-snow">
       <div className="mx-auto max-w-[1200px] rounded-[26px] sm:rounded-[36px] border border-cloud bg-obsidian p-6 sm:p-10 md:p-16 text-snow shadow-2xl relative overflow-hidden">
@@ -632,9 +704,14 @@ function CTASection({ user, onOpenLogin, onOpenSignup }: CTASectionProps) {
           </div>
           <div id="contact" className="flex flex-col gap-3 sm:gap-3.5">
             {user ? (
-              <DarkBtn onClick={() => { toast.info("Scrolled to Active Sabhas!"); const el = document.getElementById("sabhas"); el?.scrollIntoView({ behavior: "smooth" }); }} className="justify-center !py-3.5 sm:!py-4 text-[15px] sm:text-[16px] !bg-ember hover:!bg-ember/90 shadow-lg shadow-ember/20">
-                Explore Your Sabha Rooms <ArrowRight className="h-5 w-5" />
-              </DarkBtn>
+              <>
+                <DarkBtn onClick={() => { toast.info("Scrolled to Active Sabhas!"); const el = document.getElementById("sabhas"); el?.scrollIntoView({ behavior: "smooth" }); }} className="justify-center !py-3.5 sm:!py-4 text-[15px] sm:text-[16px] !bg-ember hover:!bg-ember/90 shadow-lg shadow-ember/20">
+                  Explore Your Sabha Rooms <ArrowRight className="h-5 w-5" />
+                </DarkBtn>
+                <GhostBtn onClick={onOpenReport} className="justify-center !py-3.5 sm:!py-4 text-[15px] sm:text-[16px] !bg-red-600 !text-snow !border-red-600 hover:!bg-red-700">
+                  <Megaphone className="h-5 w-5 animate-bounce" /> Report Local Ward Issue 📢
+                </GhostBtn>
+              </>
             ) : (
               <>
                 <DarkBtn onClick={onOpenSignup} className="justify-center !py-3.5 sm:!py-4 text-[15px] sm:text-[16px] !bg-ember hover:!bg-ember/90 shadow-lg shadow-ember/20">
@@ -706,6 +783,8 @@ function Footer() {
 function Index() {
   const [authOpen, setAuthOpen] = useState(false);
   const [authTab, setAuthTab] = useState<"login" | "signup">("login");
+  const [authEmail, setAuthEmail] = useState("");
+  const [reportOpen, setReportOpen] = useState(false);
   const [user, setUser] = useState<UserProfile | null>(null);
 
   // Load user from localStorage if saved
@@ -732,11 +811,19 @@ function Index() {
 
   const openLogin = () => {
     setAuthTab("login");
+    setAuthEmail("");
     setAuthOpen(true);
   };
 
   const openSignup = () => {
     setAuthTab("signup");
+    setAuthEmail("");
+    setAuthOpen(true);
+  };
+
+  const openSignupWithEmail = (email: string) => {
+    setAuthTab("signup");
+    setAuthEmail(email);
     setAuthOpen(true);
   };
 
@@ -744,15 +831,20 @@ function Index() {
     <main className="min-h-screen bg-paper text-graphite selection:bg-ember selection:text-snow">
       <Toaster position="top-right" richColors closeButton />
       
+      {/* Live Activity Ticker */}
+      <CivicTicker />
+
       <Nav
         user={user}
         onOpenLogin={openLogin}
         onOpenSignup={openSignup}
+        onOpenReport={() => setReportOpen(true)}
         onLogout={handleLogout}
       />
       <Hero
         user={user}
-        onOpenSignup={openSignup}
+        onOpenSignupWithEmail={openSignupWithEmail}
+        onOpenReport={() => setReportOpen(true)}
       />
       <ValueSection />
       <FeaturesSection />
@@ -772,6 +864,7 @@ function Index() {
         user={user}
         onOpenLogin={openLogin}
         onOpenSignup={openSignup}
+        onOpenReport={() => setReportOpen(true)}
       />
       <Footer />
 
@@ -783,6 +876,15 @@ function Index() {
         onLogin={handleLogin}
         onLogout={handleLogout}
         initialTab={authTab}
+        initialEmail={authEmail}
+      />
+
+      {/* Report Local Issue Modal */}
+      <ReportIssueModal
+        isOpen={reportOpen}
+        onClose={() => setReportOpen(false)}
+        user={user}
+        onOpenAuth={openLogin}
       />
     </main>
   );

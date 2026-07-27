@@ -18,6 +18,7 @@ interface AuthModalProps {
   onLogin: (user: UserProfile) => void;
   onLogout: () => void;
   initialTab?: "login" | "signup";
+  initialEmail?: string;
 }
 
 export function AuthModal({
@@ -27,14 +28,21 @@ export function AuthModal({
   onLogin,
   onLogout,
   initialTab = "login",
+  initialEmail = "",
 }: AuthModalProps) {
   const [tab, setTab] = useState<"login" | "signup">(initialTab);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [city, setCity] = useState("Delhi Sabha");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  React.useEffect(() => {
+    if (initialEmail) {
+      setEmail(initialEmail);
+    }
+  }, [initialEmail]);
 
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
