@@ -19,13 +19,14 @@
  */
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
+  --radius-3xl: 36px;
+  --radius-4xl: 48px;
+  --radius-pill: 10000px;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -59,38 +60,60 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-obsidian: var(--obsidian);
+  --color-graphite: var(--graphite);
+  --color-slate: var(--slate);
+  --color-iron: var(--iron);
+  --color-steel: var(--steel);
+  --color-fog: var(--fog);
+  --color-ash: var(--ash);
+  --color-mist: var(--mist);
+  --color-cloud: var(--cloud);
+  --color-paper: var(--paper);
+  --color-snow: var(--snow);
+  --color-ember: var(--ember);
+  --color-magenta-spark: var(--magenta-spark);
+  --font-display: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.875rem;
-  /* ApniSabha brand */
-  --brand-orange: oklch(0.72 0.19 45);       /* #FF6A00 */
-  --brand-navy: oklch(0.22 0.09 275);        /* #1A1A40 */
-  --brand-purple: oklch(0.42 0.19 295);      /* #5B21B6 */
-  --brand-light: oklch(0.975 0.005 250);     /* #F5F7FA */
-  --brand-ink: oklch(0.15 0.01 260);         /* #0D0D0D */
+  --radius: 14px;
 
-  --background: var(--brand-light);
-  --foreground: var(--brand-navy);
-  --card: oklch(1 0 0);
-  --card-foreground: var(--brand-navy);
-  --popover: oklch(1 0 0);
-  --popover-foreground: var(--brand-navy);
-  --primary: var(--brand-orange);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: var(--brand-navy);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.955 0.008 260);
-  --muted-foreground: oklch(0.45 0.03 265);
-  --accent: var(--brand-purple);
-  --accent-foreground: oklch(1 0 0);
+  /* Awesomic editorial zinc palette */
+  --obsidian: #09090b;
+  --graphite: #18181b;
+  --slate: #27272a;
+  --iron: #3f3f46;
+  --steel: #52525b;
+  --fog: #71717a;
+  --ash: #a1a1aa;
+  --mist: #d4d4d8;
+  --cloud: #ececee;
+  --paper: #f4f4f5;
+  --snow: #ffffff;
+  --ember: #ff5a00;
+  --magenta-spark: #fe45e2;
+
+  --background: var(--paper);
+  --foreground: var(--obsidian);
+  --card: var(--snow);
+  --card-foreground: var(--graphite);
+  --popover: var(--snow);
+  --popover-foreground: var(--graphite);
+  --primary: var(--obsidian);
+  --primary-foreground: var(--snow);
+  --secondary: var(--graphite);
+  --secondary-foreground: var(--snow);
+  --muted: var(--paper);
+  --muted-foreground: var(--steel);
+  --accent: var(--ember);
+  --accent-foreground: var(--snow);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.9 0.01 260);
-  --input: oklch(0.9 0.01 260);
-  --ring: var(--brand-orange);
+  --destructive-foreground: #ffffff;
+  --border: var(--cloud);
+  --input: var(--cloud);
+  --ring: var(--obsidian);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -155,21 +178,27 @@
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
+    font-weight: 600;
   }
 }
 
-@utility bg-brand-gradient {
-  background-image: linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-purple) 60%, var(--brand-orange) 130%);
+@utility btn-dark {
+  background-color: var(--obsidian);
+  color: var(--snow);
+  border-radius: 14px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: inset 0 0.5px 0 0 rgba(255,255,255,0.5), 0 0 0 1.5px #2c2e34, 0 4px 6px 0 rgba(0,0,0,0.14);
+  transition: transform .2s ease;
+}
+@utility btn-dark-hover {
+  &:hover { transform: translateY(-1px); }
 }
 
-@utility text-brand-gradient {
-  background-image: linear-gradient(135deg, var(--brand-orange), var(--brand-purple));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-@utility shadow-brand {
-  box-shadow: 0 20px 60px -20px color-mix(in oklab, var(--brand-orange) 45%, transparent);
+@utility card-hairline {
+  background-color: var(--snow);
+  border: 1px solid var(--cloud);
+  border-radius: 36px;
 }
