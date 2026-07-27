@@ -89,7 +89,7 @@ export function CivicTicker() {
       toast.info("Support removed.");
     } else {
       setLikedIds((prev) => [...prev, current.id]);
-      toast.success(`Aapne ${current.user} ke civic effort ko appreciate kiya! ❤️`);
+      toast.success("You appreciated " + current.user + "'s civic effort! ❤️");
     }
   };
 
@@ -104,13 +104,13 @@ export function CivicTicker() {
         <div className="flex items-center gap-2 flex-none">
           <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span className="font-bold tracking-wider uppercase text-[10px] sm:text-[11px] text-ember flex items-center gap-1">
-            <Sparkles className="h-3 w-3" /> LIVE CIVIC IMPACT
+            <Sparkles className="h-3 w-3" /> <span>LIVE <span className="hidden sm:inline">CIVIC IMPACT</span></span>
           </span>
           <span className="text-cloud/40 hidden md:inline">|</span>
         </div>
 
         {/* Center Animated Activity Item */}
-        <div className="flex-1 overflow-hidden min-w-0">
+        <div className="flex-1 overflow-hidden min-w-0 px-1">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
@@ -140,12 +140,12 @@ export function CivicTicker() {
           <button
             onClick={handleLike}
             title="Appreciate this action"
-            className={`flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-medium transition-all ${
+            className={`flex items-center gap-1 rounded-full px-2 sm:px-2.5 py-1 text-[11px] font-medium transition-all ${
               isLiked ? "bg-red-500/20 text-red-400 border border-red-500/30" : "bg-white/10 text-snow hover:bg-white/20"
             }`}
           >
             <Heart className={`h-3 w-3 ${isLiked ? "fill-current" : ""}`} />
-            <span className="hidden sm:inline">{isLiked ? "Supported" : "Appreciate"}</span>
+            <span className="hidden md:inline">{isLiked ? "Supported" : "Appreciate"}</span>
           </button>
 
           <button

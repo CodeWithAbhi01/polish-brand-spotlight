@@ -47,12 +47,12 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
 
   const handleVote = (id: string) => {
     if (!user) {
-      toast.error("Vote darz karne ke liye kripya pehle Login / Register karein!");
+      toast.error("Please login or register to cast your verified vote!");
       onOpenAuth();
       return;
     }
     if (hasVoted) {
-      toast.info("Aap pehle se hi aaj ke Civic Pulse poll me vote darz kar chuke hain.");
+      toast.info("You have already voted in today's Civic Pulse poll.");
       return;
     }
 
@@ -73,7 +73,7 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
       });
     });
 
-    toast.success("Aapka vote successfully verified & register ho gaya hai! Civic data updated.");
+    toast.success("Your vote has been verified and registered! Civic data updated.");
   };
 
   return (

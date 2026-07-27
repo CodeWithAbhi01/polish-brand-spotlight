@@ -115,7 +115,7 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
 
   const handleUpvote = (id: string, title: string) => {
     if (!user) {
-      toast.error("Upvote karne ke liye kripya pehle Login karein!");
+      toast.error("Please login to endorse or upvote civic discussions!");
       onOpenAuth();
       return;
     }
@@ -126,28 +126,28 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
     } else {
       setUpvotedIds(prev => [...prev, id]);
       setTopics(prev => prev.map(t => t.id === id ? { ...t, upvotes: t.upvotes + 1 } : t));
-      toast.success("Aapne is civic mudde ko support (upvote) kiya!");
+      toast.success("You endorsed this civic issue discussion!");
     }
   };
 
   const handleJoinDiscussion = (id: string, title: string) => {
     if (!user) {
-      toast.error("Sabha discussion me bhag lene ke liye Login / Register karein!");
+      toast.error("Please login or register to join this Sabha discussion!");
       onOpenAuth();
       return;
     }
     if (joinedIds.includes(id)) {
-      toast.info("Aap pehle se hi is discussion me shamil hain.");
+      toast.info("You are already a verified participant in this discussion.");
     } else {
       setJoinedIds(prev => [...prev, id]);
       setTopics(prev => prev.map(t => t.id === id ? { ...t, participants: t.participants + 1 } : t));
-      toast.success(`Badhai ho! Aap '${title.slice(0, 30)}...' sabha discussion me shamil ho chuke hain.`);
+      toast.success("Congratulations! You joined the '" + title.slice(0, 30) + "...' Sabha discussion.");
     }
   };
 
   const handleShare = (title: string) => {
     navigator.clipboard?.writeText(window.location.href);
-    toast.success("Discussion link clipboard me copy ho gaya hai! Apne dosto ke saath share karein.");
+    toast.success("Discussion link copied to clipboard! Share with your community.");
   };
 
   return (

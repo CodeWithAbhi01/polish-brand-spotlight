@@ -59,14 +59,14 @@ export function AuthModal({
           city: "Delhi Sabha",
           role: "Verified Civic Leader",
         });
-        toast.success("ApniSabha me swagat hai Priya! Aapka civic dashboard loaded hai.");
+        toast.success("Welcome to ApniSabha, Priya! Your Civic Dashboard is ready.");
         onClose();
       } else if (email && password) {
         // If wrong credentials entered, show realistic error as requested by user
-        setError("Galat email ya password! (Demo ke liye 'Quick Demo Login' button par click karein ya demo@apnisabha.in / 123456 use karein)");
+        setError("Invalid email or password! (For instant demo, click 'Quick Demo Login' or use demo@apnisabha.in / 123456)");
         toast.error("Login failed! Invalid credentials entered.");
       } else {
-        setError("Kripya email aur password dono enter karein.");
+        setError("Please enter both email and password.");
       }
     }, 800);
   };
@@ -81,7 +81,7 @@ export function AuthModal({
         city: "Mumbai Sabha",
         role: "National Community Creator",
       });
-      toast.success("Quick Demo Login Successful! Swagat hai Abhishek Kumar.");
+      toast.success("Quick Demo Login Successful! Welcome Abhishek Kumar.");
       onClose();
     }, 600);
   };
@@ -90,7 +90,7 @@ export function AuthModal({
     e.preventDefault();
     setError("");
     if (!name || !email || !password) {
-      setError("Kripya sabhi fields enter karein.");
+      setError("Please fill in all required fields.");
       return;
     }
     setIsLoading(true);
@@ -102,7 +102,7 @@ export function AuthModal({
         city,
         role: "Verified Citizen Voice",
       });
-      toast.success(`Badhai ho ${name}! Aapka ApniSabha account successfully register ho gaya hai.`);
+      toast.success("Congratulations " + name + "! Your ApniSabha citizen account is registered.");
       onClose();
     }, 800);
   };
@@ -152,7 +152,7 @@ export function AuthModal({
                 <button
                   onClick={() => {
                     onLogout();
-                    toast.info("Aap successfully logout ho chuke hain.");
+                    toast.info("You have successfully logged out.");
                     onClose();
                   }}
                   className="flex items-center justify-center gap-2 rounded-[14px] sm:rounded-[16px] border border-red-200 bg-red-50 py-3 text-[13px] sm:text-[14px] font-medium text-red-600 hover:bg-red-100 transition-colors"

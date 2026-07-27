@@ -28,13 +28,13 @@ export function ReportIssueModal({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) {
-      toast.error("Issue darz karne ke liye kripya pehle Login / Register karein!");
+      toast.error("Please login or register to report a ward issue!");
       onClose();
       onOpenAuth();
       return;
     }
     if (!description.trim()) {
-      toast.error("Kripya mudde (issue) ke baare me thodi jankari likhein.");
+      toast.error("Please enter issue details and suggested resolution.");
       return;
     }
 
@@ -47,7 +47,7 @@ export function ReportIssueModal({
         setSimMessage("⚡ Notifying 14 active citizen volunteers in your neighborhood...");
         setTimeout(() => {
           setStep("success");
-          toast.success("Aapka civic issue successfully register ho gaya hai!");
+          toast.success("Your civic issue petition has been successfully registered!");
         }, 1200);
       }, 1200);
     }, 1200);

@@ -168,7 +168,7 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
           {/* Report Issue CTA */}
           <button
             onClick={onOpenReport}
-            className="flex items-center gap-1.5 rounded-[12px] bg-red-500/10 border border-red-500/20 px-3 py-2 text-[12px] sm:text-[13px] font-bold text-red-600 hover:bg-red-500/20 transition-all shadow-sm"
+            className="hidden md:flex items-center gap-1.5 rounded-[12px] bg-red-500/10 border border-red-500/20 px-3 py-2 text-[12px] sm:text-[13px] font-bold text-red-600 hover:bg-red-500/20 transition-all shadow-sm"
           >
             <Megaphone className="h-3.5 w-3.5 animate-bounce" />
             <span className="hidden sm:inline">Report Issue</span>
@@ -355,11 +355,11 @@ function Hero({ user, onOpenSignupWithEmail, onOpenReport }: HeroProps) {
   const handleJoinClick = (e: React.FormEvent) => {
     e.preventDefault();
     if (user) {
-      toast.info("Aap pehle se hi logged in hain! Niche Live Sabhas explore karein.");
+      toast.info("You are already logged in! Explore active Sabhas below.");
       smoothScrollToSection(undefined, "sabhas");
     } else {
       if (!emailInput.trim()) {
-        toast.error("Kripya pehle apna Email ya Phone Number enter karein!");
+        toast.error("Please enter your email or phone number first!");
         return;
       }
 
