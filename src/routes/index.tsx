@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import {
   Users, ShieldCheck, Lightbulb, Target, TrendingUp,
   MessageCircle, Megaphone, Handshake, ArrowRight, Bell, Globe, Sparkles,
-  CheckCircle2, Menu
+  CheckCircle2, Menu, ArrowUpRight
 } from "lucide-react";
 import logoMark from "@/assets/logo-mark.png";
 import community from "@/assets/community.jpg";
@@ -45,14 +45,34 @@ const highlights = [
 function Logo({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2.5 ${className}`}>
-      <img src={logoMark} alt="" width={40} height={40} className="h-10 w-10 object-contain" />
-      <div className="leading-none">
-        <div className="font-display text-xl font-extrabold tracking-tight">
-          <span className="text-secondary">Apni</span>
-          <span className="text-primary">Sabha</span>
-        </div>
+      <img src={logoMark} alt="" width={32} height={32} className="h-8 w-8 object-contain" />
+      <div className="text-[17px] font-semibold tracking-tight text-obsidian leading-none">
+        ApniSabha
       </div>
     </div>
+  );
+}
+
+function DarkBtn({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
+  return (
+    <a
+      href={href}
+      className={`inline-flex items-center gap-2 rounded-[14px] bg-obsidian px-4 py-3 text-[14px] font-medium text-snow transition-transform hover:-translate-y-[1px] ${className}`}
+      style={{ boxShadow: "inset 0 0.5px 0 0 rgba(255,255,255,0.5), 0 0 0 1.5px #2c2e34, 0 4px 6px 0 rgba(0,0,0,0.14)" }}
+    >
+      {children}
+    </a>
+  );
+}
+
+function GhostBtn({ href, children, className = "" }: { href: string; children: React.ReactNode; className?: string }) {
+  return (
+    <a
+      href={href}
+      className={`inline-flex items-center gap-2 rounded-[14px] border border-cloud bg-snow px-4 py-3 text-[14px] font-medium text-graphite transition-colors hover:border-iron ${className}`}
+    >
+      {children}
+    </a>
   );
 }
 
@@ -64,24 +84,25 @@ function Nav() {
     { label: "Contact", href: "#contact" },
   ];
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+    <header className="sticky top-0 z-50 bg-paper/80 backdrop-blur-md">
+      <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6">
         <Logo />
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-7 md:flex">
           {links.map(l => (
-            <a key={l.href} href={l.href} className="text-sm font-medium text-secondary/80 transition-colors hover:text-primary">
+            <a key={l.href} href={l.href} className="text-[14px] font-medium text-graphite/80 transition-colors hover:text-obsidian">
               {l.label}
             </a>
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <a href="#contact" className="hidden rounded-full border border-secondary/20 px-4 py-2 text-sm font-semibold text-secondary transition-colors hover:border-secondary md:inline-block">
+          <a href="#contact" className="hidden rounded-[14px] px-3 py-2 text-[14px] font-medium text-graphite transition-colors hover:text-obsidian md:inline-block">
             Login
           </a>
-          <a href="#cta" className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition-transform hover:scale-[1.03] sm:px-4 sm:text-sm">
-            Get Started <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-          </a>
-          <button className="ml-1 rounded-md p-2 text-secondary md:hidden" aria-label="Menu">
+          <DarkBtn href="#cta" className="!py-2 !px-3 sm:!px-4">
+            <span className="whitespace-nowrap">Get Started</span>
+            <ArrowRight className="h-4 w-4" />
+          </DarkBtn>
+          <button className="ml-1 rounded-md p-2 text-graphite md:hidden" aria-label="Menu">
             <Menu className="h-5 w-5" />
           </button>
         </div>
@@ -92,156 +113,116 @@ function Nav() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      {/* Decorative background */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-40 top-[-10%] h-[520px] w-[520px] rounded-full bg-primary/20 blur-3xl" />
-        <div className="absolute right-[-10%] top-[20%] h-[420px] w-[420px] rounded-full bg-accent/25 blur-3xl" />
-        <div
-          className="absolute inset-0 opacity-[0.35]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, color-mix(in oklab, var(--secondary) 25%, transparent) 1px, transparent 0)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-      </div>
-
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-14 md:pt-24 lg:grid-cols-[1.05fr_0.95fr] lg:pb-32">
+    <section className="relative">
+      <div className="mx-auto grid max-w-[1200px] gap-16 px-6 pb-20 pt-16 md:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-28">
         <div className="flex flex-col justify-center">
           <motion.span
             initial="hidden" animate="visible" variants={fadeUp}
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary"
+            className="inline-flex w-fit items-center gap-2 rounded-[12px] bg-ember px-2.5 py-1 text-[12px] font-medium text-snow"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" /> Apna Manch, Apni Awaaz
+            Apna Manch · Apni Awaaz
           </motion.span>
 
           <motion.h1
             initial="hidden" animate="visible" custom={1} variants={fadeUp}
-            className="mt-6 font-display text-5xl font-extrabold leading-[1.02] text-secondary sm:text-6xl lg:text-7xl"
+            className="mt-6 text-[44px] font-semibold leading-[1.08] tracking-[-0.03em] text-obsidian sm:text-[56px] lg:text-[64px] lg:leading-[1.05]"
           >
-            Where every <span className="text-brand-gradient">voice</span> builds a <span className="text-primary">movement</span>.
+            Where every voice<br />
+            builds a <span className="italic font-normal text-iron">movement</span>.
           </motion.h1>
 
           <motion.p
             initial="hidden" animate="visible" custom={2} variants={fadeUp}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
+            className="mt-6 max-w-xl text-[15px] leading-[1.6] text-steel"
           >
-            ApniSabha is a digital platform where communities connect, discuss, share and solve real-world problems — together. A manch built on trust, empowerment and inclusivity.
+            ApniSabha is a digital manch where communities connect, discuss, and solve real-world problems — built on trust, empowerment and inclusivity.
           </motion.p>
 
           <motion.div
             initial="hidden" animate="visible" custom={3} variants={fadeUp}
-            className="mt-8 flex flex-wrap items-center gap-4"
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
-            <a href="#cta" className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-brand transition-transform hover:scale-[1.03]">
-              Join the Sabha <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="#features" className="inline-flex items-center gap-2 rounded-full border border-secondary/20 px-6 py-3.5 text-sm font-semibold text-secondary transition-colors hover:border-secondary">
-              Explore Features
-            </a>
+            <div className="flex w-full max-w-md items-center gap-2 rounded-[16px] border border-cloud bg-snow p-2">
+              <input
+                type="email"
+                placeholder="you@community.in"
+                className="flex-1 bg-transparent px-3 py-2 text-[14px] text-graphite outline-none placeholder:text-ash"
+              />
+              <DarkBtn href="#cta" className="!py-2 !px-4">Join<ArrowRight className="h-4 w-4" /></DarkBtn>
+            </div>
           </motion.div>
 
           <motion.div
             initial="hidden" animate="visible" custom={4} variants={fadeUp}
-            className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-muted-foreground"
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-fog"
           >
-            {["Free to join", "No ads, ever", "Verified voices"].map(t => (
-              <div key={t} className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary" /> {t}
+            {["Free forever", "No ads, ever", "Verified voices"].map(t => (
+              <div key={t} className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-3.5 w-3.5 text-obsidian" /> {t}
               </div>
             ))}
           </motion.div>
         </div>
 
-        {/* Right — orbital logo composition (no shadow, all pattern) */}
+        {/* Right — editorial card stack */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative mx-auto aspect-square w-full max-w-[420px] sm:max-w-[480px]"
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative flex flex-col gap-4"
         >
-          {/* Concentric rings */}
-          <div className="absolute inset-0 rounded-full border border-secondary/15" />
-          <div className="absolute inset-[8%] rounded-full border border-secondary/12" />
-          <div className="absolute inset-[18%] rounded-full border border-dashed border-primary/30" />
-          <div className="absolute inset-[30%] rounded-full border border-secondary/10" />
-
-          {/* Rotating dashed ring */}
-          <motion.div
-            aria-hidden
-            animate={{ rotate: 360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-[6%] rounded-full border-2 border-dashed border-primary/25"
-          />
-
-          {/* Orbiting dots */}
-          <motion.div
-            aria-hidden
-            animate={{ rotate: -360 }}
-            transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-[18%] rounded-full"
-          >
-            <span className="absolute left-1/2 top-0 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary" />
-            <span className="absolute right-0 top-1/2 h-2 w-2 -translate-y-1/2 translate-x-1/2 rounded-full bg-accent" />
-            <span className="absolute bottom-0 left-1/2 h-2.5 w-2.5 -translate-x-1/2 translate-y-1/2 rounded-full bg-secondary" />
-            <span className="absolute left-0 top-1/2 h-2 w-2 -translate-y-1/2 -translate-x-1/2 rounded-full bg-primary/70" />
-          </motion.div>
-
-          {/* Center logo disc */}
-          <div className="absolute left-1/2 top-1/2 grid aspect-square w-[46%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-border bg-card">
-            <img
-              src={logoMark}
-              alt="ApniSabha logo"
-              width={220}
-              height={220}
-              className="h-[70%] w-[70%] object-contain"
-            />
+          <div className="rounded-[36px] border border-cloud bg-snow p-7">
+            <div className="flex items-center justify-between">
+              <span className="inline-flex items-center gap-1.5 rounded-[12px] bg-ember px-2 py-0.5 text-[11px] font-medium text-snow">LIVE</span>
+              <span className="text-[12px] text-fog">Sabha · Delhi</span>
+            </div>
+            <div className="mt-6 flex items-center gap-3">
+              <img src={logoMark} alt="" className="h-12 w-12 rounded-[16px] border border-cloud object-contain p-1.5" />
+              <div>
+                <div className="text-[16px] font-semibold text-obsidian">Clean Yamuna Initiative</div>
+                <div className="text-[12px] text-fog">1,284 voices · 12 sabhas joined</div>
+              </div>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-1.5">
+              {["Water", "Civic", "Community", "Volunteers"].map(t => (
+                <span key={t} className="rounded-[12px] border border-cloud px-2 py-1 text-[12px] text-graphite">{t}</span>
+              ))}
+            </div>
           </div>
 
-          {/* Floating stat chips positioned around the orbit */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            className="absolute left-0 top-[12%] flex items-center gap-2 rounded-full border border-border bg-card/95 px-3 py-2 backdrop-blur"
-          >
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-primary/15 text-primary">
-              <Users className="h-3 w-3" />
-            </span>
-            <div className="leading-tight">
-              <div className="font-display text-xs font-bold text-secondary">50K+</div>
-              <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Voices</div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="rounded-[28px] border border-cloud bg-snow p-5">
+              <div className="text-[32px] font-semibold leading-none tracking-tight text-obsidian">50K+</div>
+              <div className="mt-2 text-[12px] text-steel">Verified voices across 240 cities</div>
             </div>
-          </motion.div>
+            <div className="rounded-[28px] border border-cloud bg-obsidian p-5 text-snow">
+              <div className="text-[32px] font-semibold leading-none tracking-tight">1.2K</div>
+              <div className="mt-2 text-[12px] text-ash">Active sabhas this month</div>
+            </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.5 }}
-            className="absolute right-0 top-[38%] flex items-center gap-2 rounded-full border border-border bg-card/95 px-3 py-2 backdrop-blur"
-          >
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-accent/15 text-accent">
-              <MessageCircle className="h-3 w-3" />
-            </span>
-            <div className="leading-tight">
-              <div className="font-display text-xs font-bold text-secondary">1.2K</div>
-              <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Sabhas</div>
+          <div className="flex items-center justify-between rounded-[28px] border border-cloud bg-snow px-5 py-4">
+            <div className="flex items-center gap-3">
+              <div className="grid h-9 w-9 place-items-center rounded-full bg-paper text-obsidian">
+                <MessageCircle className="h-4 w-4" />
+              </div>
+              <div>
+                <div className="text-[14px] font-medium text-obsidian">New discussion started</div>
+                <div className="text-[12px] text-fog">Priya · 2m ago</div>
+              </div>
             </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.5 }}
-            className="absolute bottom-[8%] left-[10%] flex items-center gap-2 rounded-full border border-border bg-card/95 px-3 py-2 backdrop-blur"
-          >
-            <span className="grid h-6 w-6 place-items-center rounded-full bg-secondary/10 text-secondary">
-              <Sparkles className="h-3 w-3" />
-            </span>
-            <div className="leading-tight">
-              <div className="font-display text-xs font-bold text-secondary">98%</div>
-              <div className="text-[9px] uppercase tracking-wider text-muted-foreground">Trust</div>
-            </div>
-          </motion.div>
+            <ArrowUpRight className="h-4 w-4 text-iron" />
+          </div>
         </motion.div>
+      </div>
+
+      {/* Logo strip / social proof */}
+      <div className="mx-auto max-w-[1200px] border-y border-cloud px-6 py-8">
+        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-fog">
+          <span className="text-[12px] uppercase tracking-[0.2em]">Trusted by communities across</span>
+          {["Delhi", "Mumbai", "Bengaluru", "Pune", "Jaipur", "Kolkata"].map(c => (
+            <span key={c} className="text-[15px] font-medium">{c}</span>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -249,33 +230,32 @@ function Hero() {
 
 function ValueSection() {
   return (
-    <section id="values" className="relative bg-secondary py-24 text-white sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="values" className="px-6 py-20 sm:py-28">
+      <div className="mx-auto max-w-[1200px] rounded-[36px] bg-obsidian p-8 text-snow sm:p-14">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">Brand Values</span>
-            <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight sm:text-5xl">
-              Five principles that <span className="text-primary">guide every voice.</span>
+            <span className="inline-flex items-center rounded-[12px] bg-ember px-2 py-1 text-[11px] font-medium text-snow">Brand Values</span>
+            <h2 className="mt-5 text-[40px] font-semibold leading-[1.1] tracking-[-0.025em] sm:text-[48px]">
+              Five principles that guide every voice.
             </h2>
-            <p className="mt-5 max-w-md text-white/70">
+            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-ash">
               ApniSabha is more than a platform — it's a movement. A place where every voice matters and every idea has the power to inspire change.
             </p>
-            <div className="mt-8 h-1 w-16 bg-primary" />
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-3 sm:grid-cols-2">
             {values.map((v, i) => (
               <motion.div
                 key={v.title}
                 initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
                 custom={i} variants={fadeUp}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:border-primary/40 hover:bg-white/[0.06]"
+                className="group rounded-[24px] border border-white/10 bg-slate p-6 transition-colors hover:border-white/25"
               >
-                <div className={`grid h-12 w-12 place-items-center rounded-xl ${i % 2 === 0 ? "bg-primary text-primary-foreground" : "bg-white/10 text-white"}`}>
-                  <v.icon className="h-5 w-5" />
+                <div className="grid h-10 w-10 place-items-center rounded-[12px] bg-snow/10 text-snow">
+                  <v.icon className="h-4 w-4" />
                 </div>
-                <h3 className="mt-5 font-display text-lg font-bold">{v.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/70">{v.desc}</p>
+                <h3 className="mt-5 text-[18px] font-semibold tracking-tight">{v.title}</h3>
+                <p className="mt-2 text-[13px] leading-relaxed text-ash">{v.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -287,49 +267,62 @@ function ValueSection() {
 
 function FeaturesSection() {
   return (
-    <section id="features" className="py-24 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">What You Can Do</span>
-          <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-secondary sm:text-5xl">
-            One manch. <span className="text-brand-gradient">Endless possibilities.</span>
-          </h2>
-          <p className="mt-5 text-muted-foreground">
+    <section id="features" className="px-6 py-20 sm:py-28">
+      <div className="mx-auto max-w-[1200px]">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <span className="text-[12px] font-medium uppercase tracking-[0.22em] text-fog">What You Can Do</span>
+            <h2 className="mt-3 text-[40px] font-semibold leading-[1.1] tracking-[-0.025em] text-obsidian sm:text-[52px]">
+              One manch.<br />Endless possibilities.
+            </h2>
+          </div>
+          <p className="max-w-sm text-[15px] leading-relaxed text-steel">
             From starting a conversation to leading a movement — everything you need to participate lives in one place.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((f, i) => (
             <motion.div
               key={f.title}
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
               custom={i} variants={fadeUp}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-brand"
+              className="group flex flex-col rounded-[36px] border border-cloud bg-snow p-7 transition-colors hover:border-iron"
             >
-              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-primary/10 transition-transform group-hover:scale-125" />
-              <div className="relative">
-                <div className="grid h-14 w-14 place-items-center rounded-2xl bg-secondary text-white shadow-lg">
-                  <f.icon className="h-6 w-6" />
-                </div>
-                <h3 className="mt-6 font-display text-xl font-bold text-secondary">{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-                <div className="mt-6 flex items-center gap-1.5 text-xs font-semibold text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                  Learn more <ArrowRight className="h-3.5 w-3.5" />
-                </div>
+              <div className="grid h-11 w-11 place-items-center rounded-[14px] bg-paper text-obsidian">
+                <f.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-8 text-[20px] font-semibold tracking-tight text-obsidian">{f.title}</h3>
+              <p className="mt-2 text-[14px] leading-relaxed text-steel">{f.desc}</p>
+              <div className="mt-6 flex items-center gap-1 text-[13px] font-medium text-obsidian">
+                Learn more <ArrowUpRight className="h-3.5 w-3.5" />
               </div>
             </motion.div>
           ))}
         </div>
 
         {/* Highlights strip */}
-        <div className="mt-16 grid gap-6 rounded-3xl border border-border bg-card p-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-4 rounded-[36px] border border-cloud bg-snow p-6 sm:grid-cols-2 lg:grid-cols-4">
           {highlights.map(h => (
-            <div key={h.label} className="flex items-center gap-4">
-              <div className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
-                <h.icon className="h-5 w-5" />
+            <div key={h.label} className="flex items-center gap-3 rounded-[20px] bg-paper px-4 py-3">
+              <div className="grid h-9 w-9 place-items-center rounded-[12px] bg-snow text-obsidian border border-cloud">
+                <h.icon className="h-4 w-4" />
               </div>
-              <div className="font-display text-sm font-semibold text-secondary">{h.label}</div>
+              <div className="text-[14px] font-medium text-graphite">{h.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Stats row */}
+        <div className="mt-14 grid gap-8 sm:grid-cols-3">
+          {[
+            { n: "50K+", l: "Verified voices building the manch every day" },
+            { n: "1.2K", l: "Active sabhas across 240+ cities in India" },
+            { n: "98%", l: "Members say ApniSabha is a safe space to speak" },
+          ].map(s => (
+            <div key={s.n} className="flex items-baseline gap-4">
+              <div className="text-[48px] font-semibold leading-none tracking-[-0.03em] text-obsidian sm:text-[56px]">{s.n}</div>
+              <div className="text-[13px] leading-relaxed text-steel">{s.l}</div>
             </div>
           ))}
         </div>
@@ -340,50 +333,41 @@ function FeaturesSection() {
 
 function AboutSection() {
   return (
-    <section id="about" className="py-24 sm:py-28">
-      <div className="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-2 lg:items-center">
+    <section id="about" className="px-6 py-20 sm:py-28">
+      <div className="mx-auto grid max-w-[1200px] gap-10 lg:grid-cols-2 lg:items-center">
         <motion.div
-          initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7 }}
           className="relative"
         >
-          <div className="absolute -inset-4 -z-10 rounded-3xl bg-brand-gradient opacity-20 blur-2xl" />
           <img
             src={community} alt="Community in conversation"
             width={1600} height={1200} loading="lazy"
-            className="aspect-[4/3] w-full rounded-3xl border border-border object-cover shadow-2xl"
+            className="aspect-[4/3] w-full rounded-[36px] border border-cloud object-cover"
           />
-          <div className="absolute -bottom-6 -right-6 hidden rounded-2xl border border-border bg-card p-4 shadow-xl sm:block">
-            <div className="flex -space-x-2">
-              {[0,1,2,3].map(i => (
-                <div key={i} className={`h-9 w-9 rounded-full border-2 border-card ${["bg-primary","bg-accent","bg-secondary","bg-primary/70"][i]}`} />
-              ))}
-            </div>
-            <div className="mt-2 text-xs font-semibold text-secondary">+50K community members</div>
-          </div>
         </motion.div>
 
         <div>
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">About ApniSabha</span>
-          <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-secondary sm:text-5xl">
+          <span className="text-[12px] font-medium uppercase tracking-[0.22em] text-fog">About ApniSabha</span>
+          <h2 className="mt-3 text-[40px] font-semibold leading-[1.1] tracking-[-0.025em] text-obsidian sm:text-[52px]">
             A place where every voice matters.
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-            ApniSabha is more than a platform — it's a movement. We're building a digital manch where communities gather without fear, share without filter, and grow without limits.
+          <p className="mt-5 text-[16px] leading-[1.6] text-steel">
+            ApniSabha is more than a platform — it's a movement. A digital manch where communities gather without fear, share without filter, and grow without limits.
           </p>
 
-          <div className="mt-8 space-y-4">
+          <div className="mt-8 space-y-3">
             {[
               "Verified profiles and moderated spaces keep conversations respectful.",
               "Local, regional and national sabhas so every issue finds its people.",
               "Multi-language support — express yourself in the language you think in.",
               "Impact tracking that turns every discussion into real-world outcomes.",
             ].map(t => (
-              <div key={t} className="flex items-start gap-3">
-                <div className="mt-0.5 grid h-6 w-6 flex-none place-items-center rounded-full bg-primary/15 text-primary">
-                  <CheckCircle2 className="h-4 w-4" />
+              <div key={t} className="flex items-start gap-3 rounded-[20px] border border-cloud bg-snow px-4 py-3">
+                <div className="mt-0.5 grid h-5 w-5 flex-none place-items-center rounded-full bg-obsidian text-snow">
+                  <CheckCircle2 className="h-3 w-3" />
                 </div>
-                <p className="text-sm text-secondary/85">{t}</p>
+                <p className="text-[14px] leading-relaxed text-graphite">{t}</p>
               </div>
             ))}
           </div>
@@ -396,30 +380,24 @@ function AboutSection() {
 function CTASection() {
   return (
     <section id="cta" className="px-6 pb-24">
-      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-brand-gradient p-10 text-white shadow-2xl sm:p-16">
-        <div
-          className="pointer-events-none absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)",
-            backgroundSize: "24px 24px",
-          }}
-        />
-        <div className="relative grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-center">
+      <div className="mx-auto max-w-[1200px] rounded-[36px] border border-cloud bg-snow p-10 sm:p-16">
+        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-center">
           <div>
-            <h2 className="font-display text-4xl font-extrabold leading-tight sm:text-5xl">
+            <span className="inline-flex items-center rounded-[12px] bg-ember px-2 py-1 text-[11px] font-medium text-snow">Join the Sabha</span>
+            <h2 className="mt-5 text-[40px] font-semibold leading-[1.08] tracking-[-0.025em] text-obsidian sm:text-[56px]">
               Your voice is the beginning of change.
             </h2>
-            <p className="mt-5 max-w-xl text-white/85">
+            <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-steel">
               Join thousands already shaping the conversation on ApniSabha. Free forever. Built for you.
             </p>
           </div>
           <div id="contact" className="flex flex-col gap-3">
-            <a href="#" className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-4 text-base font-bold text-secondary transition-transform hover:scale-[1.02]">
+            <DarkBtn href="#" className="justify-center !py-4 text-[15px]">
               Get Started Free <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="#" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-white/10">
+            </DarkBtn>
+            <GhostBtn href="#" className="justify-center !py-4 text-[15px]">
               Login to your Sabha
-            </a>
+            </GhostBtn>
           </div>
         </div>
       </div>
@@ -429,11 +407,11 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border bg-secondary text-white/80">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="border-t border-cloud bg-paper">
+      <div className="mx-auto grid max-w-[1200px] gap-10 px-6 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo className="[&_span:first-child]:text-white" />
-          <p className="mt-4 max-w-xs text-sm text-white/60">
+          <Logo />
+          <p className="mt-4 max-w-xs text-[14px] leading-relaxed text-steel">
             Apna Manch, Apni Awaaz — a digital platform for the communities of tomorrow.
           </p>
         </div>
@@ -443,19 +421,19 @@ function Footer() {
           { title: "Legal", items: ["Privacy", "Terms", "Guidelines", "Safety"] },
         ].map(col => (
           <div key={col.title}>
-            <div className="font-display text-sm font-bold uppercase tracking-widest text-primary">{col.title}</div>
-            <ul className="mt-4 space-y-2 text-sm">
+            <div className="text-[12px] font-medium uppercase tracking-[0.2em] text-fog">{col.title}</div>
+            <ul className="mt-4 space-y-2 text-[14px]">
               {col.items.map(i => (
-                <li key={i}><a href="#" className="transition-colors hover:text-primary">{i}</a></li>
+                <li key={i}><a href="#" className="text-graphite transition-colors hover:text-obsidian">{i}</a></li>
               ))}
             </ul>
           </div>
         ))}
       </div>
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-xs text-white/50 sm:flex-row">
+      <div className="border-t border-cloud">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-3 px-6 py-6 text-[12px] text-fog sm:flex-row">
           <div>© {new Date().getFullYear()} ApniSabha. All rights reserved.</div>
-          <div>Made with intention • Apna Manch, Apni Awaaz</div>
+          <div>Made with intention · Apna Manch, Apni Awaaz</div>
         </div>
       </div>
     </footer>
@@ -464,7 +442,7 @@ function Footer() {
 
 function Index() {
   return (
-    <main className="min-h-screen bg-background text-secondary">
+    <main className="min-h-screen bg-paper text-graphite">
       <Nav />
       <Hero />
       <ValueSection />
