@@ -89,7 +89,7 @@ export function CivicTicker() {
       toast.info("Support removed.");
     } else {
       setLikedIds((prev) => [...prev, current.id]);
-      toast.success("You appreciated " + current.user + "'s civic effort! ❤️");
+      toast.success("You appreciated " + current.user + "'s civic effort!");
     }
   };
 

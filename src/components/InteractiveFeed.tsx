@@ -183,7 +183,7 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
                   : "bg-snow text-graphite border border-cloud hover:border-iron"
               }`}
             >
-              {cat === "All" ? "🔥 All Live Sabhas" : cat}
+              {cat === "All" ? "All Live Sabhas" : cat}
             </button>
           ))}
         </div>

@@ -72,12 +72,12 @@ export function ReportIssueModal({ isOpen, onClose, user, onOpenAuth }: ReportIs
     }
 
     setStep("simulating");
-    setSimMessage("📍 Simulating GPS Geo-Tagging & Ward Boundary Check...");
+    setSimMessage("Simulating GPS Geo-Tagging & Ward Boundary Check...");
 
     setTimeout(() => {
-      setSimMessage(`🏛️ Routing to ${selectedCategory?.defaultDepartment || "Municipal Authority"}...`);
+      setSimMessage(`Routing to ${selectedCategory?.defaultDepartment || "Municipal Authority"}...`);
       setTimeout(() => {
-        setSimMessage(`⚡ Notifying ${selectedCategory?.escalationChain[0]?.responsibleDesignation || "Nodal Officer"} & nearby volunteers...`);
+        setSimMessage(`Notifying ${selectedCategory?.escalationChain[0]?.responsibleDesignation || "Nodal Officer"} & nearby volunteers...`);
         setTimeout(() => {
           setStep("success");
           toast.success("Your civic issue petition has been successfully registered!");
@@ -246,7 +246,7 @@ export function ReportIssueModal({ isOpen, onClose, user, onOpenAuth }: ReportIs
                   <Clock className="h-3 w-3" /> SLA: {selectedCategory.defaultSlaHours} hours
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-[8px] bg-blue-50 border border-blue-200 px-2.5 py-1 text-[10px] font-bold text-blue-700">
-                  🏛️ {selectedCategory.defaultDepartment.slice(0, 35)}
+                  {selectedCategory.defaultDepartment.slice(0, 35)}
                 </span>
               </div>
 
@@ -284,7 +284,7 @@ export function ReportIssueModal({ isOpen, onClose, user, onOpenAuth }: ReportIs
                     <span>Attach Photo Evidence (Simulated GPS metadata)</span>
                   </span>
                   <span className="rounded-[8px] bg-snow px-2 py-1 font-medium text-obsidian border border-cloud">
-                    Auto-Tagged 📍
+                    Auto-Tagged
                   </span>
                 </div>
 
@@ -336,7 +336,7 @@ export function ReportIssueModal({ isOpen, onClose, user, onOpenAuth }: ReportIs
               </motion.div>
               <div className="space-y-2">
                 <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-3 py-1 text-[12px] font-bold text-emerald-600 border border-emerald-500/20">
-                  ⚡ WARD PETITION ID: {petitionId}
+                  WARD PETITION ID: {petitionId}
                 </span>
                 <h3 className="text-[22px] font-bold text-obsidian">Petition Officially Published!</h3>
                 <p className="text-[14px] leading-relaxed text-steel max-w-sm mx-auto">

@@ -22,8 +22,10 @@ export const IssueCard: React.FC<IssueCardProps> = ({ issue, onClick, isExpanded
     <motion.div
       whileHover={{ y: isExpanded ? 0 : -2 }}
       onClick={onClick}
-      className={`p-5 rounded-[24px] border transition-all cursor-pointer bg-snow ${
-        isExpanded ? "border-obsidian shadow-md" : "border-cloud hover:shadow-md"
+      className={`p-5 rounded-[24px] border transition-all duration-300 cursor-pointer bg-white flex flex-col gap-1 ${
+        isExpanded 
+          ? "border-obsidian shadow-[0_8px_30px_rgb(0,0,0,0.06)]" 
+          : "border-cloud/80 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-cloud"
       }`}
     >
       <div className="flex items-start justify-between gap-4 mb-3">

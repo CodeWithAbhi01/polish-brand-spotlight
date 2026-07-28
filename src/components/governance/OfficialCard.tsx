@@ -19,10 +19,10 @@ export const OfficialCard: React.FC<OfficialCardProps> = ({ official }) => {
   const progressColor = responseRate > 70 ? 'bg-emerald-500' : responseRate >= 40 ? 'bg-amber-500' : 'bg-red-500';
 
   return (
-    <div className="bg-white rounded-[24px] p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-cloud flex flex-col gap-4">
+    <div className="bg-white rounded-[24px] p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 transform hover:-translate-y-1 border border-cloud/80 flex flex-col gap-4 group">
       {/* Header */}
       <div className="flex items-start gap-4">
-        <div className="flex-shrink-0 w-12 h-12 rounded-full bg-paper flex items-center justify-center text-graphite font-bold text-lg border border-cloud">
+        <div className="flex-shrink-0 w-12 h-12 rounded-[14px] bg-gradient-to-br from-paper to-snow flex items-center justify-center text-obsidian font-bold text-lg border border-cloud/80 shadow-sm group-hover:shadow-md transition-shadow">
           {initials}
         </div>
         <div className="flex-1 min-w-0">

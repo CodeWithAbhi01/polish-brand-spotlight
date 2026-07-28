@@ -260,7 +260,7 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
                 className="flex items-center justify-between py-3.5 text-[15px] font-bold text-red-600 text-left w-full"
               >
                 <span className="flex items-center gap-2">
-                  <Megaphone className="h-4 w-4" /> Report Ward Issue 📢
+                  <Megaphone className="h-4 w-4" /> Report Ward Issue
                 </span>
                 <ArrowRight className="h-4 w-4 text-red-400" />
               </button>
@@ -461,7 +461,7 @@ function CTASection({ user, onOpenLogin, onOpenSignup, onOpenReport }: CTASectio
                   Explore Your Sabha Rooms <ArrowRight className="h-5 w-5" />
                 </DarkBtn>
                 <GhostBtn onClick={onOpenReport} className="justify-center !py-3.5 sm:!py-4 text-[15px] sm:text-[16px] !bg-red-600 !text-snow !border-red-600 hover:!bg-red-700">
-                  <Megaphone className="h-5 w-5 animate-bounce" /> Report Local Ward Issue 📢
+                  <Megaphone className="h-5 w-5 animate-bounce" /> Report Local Ward Issue
                 </GhostBtn>
               </>
             ) : (

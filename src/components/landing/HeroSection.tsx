@@ -45,11 +45,11 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
 
       // Realistic Contact Verification Simulation
       setIsVerifying(true);
-      toast.info("⚡ Verifying mobile/email with National Civic Citizen Registry...");
+      toast.info("Verifying mobile/email with National Civic Citizen Registry...");
 
       setTimeout(() => {
         setIsVerifying(false);
-        toast.success(`🎉 Congratulations! '${emailInput}' is pre-verified for ward access. Welcome to the movement!`);
+        toast.success(`Congratulations! '${emailInput}' is pre-verified for ward access. Welcome to the movement.`);
         onOpenSignupWithEmail(emailInput);
       }, 1000);
     }
@@ -146,49 +146,63 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
             className="absolute -top-6 -right-2 sm:-top-5 sm:-right-4 z-20 hidden sm:flex items-center gap-2 rounded-full border border-cloud bg-obsidian px-3.5 py-1.5 text-snow shadow-xl text-[12px] font-semibold"
           >
             <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>🔥 42 Ward Sabhas Debating Right Now</span>
+            <span>42 Ward Sabhas Debating Right Now</span>
           </motion.div>
 
-          <div className="rounded-[26px] sm:rounded-[36px] border border-cloud bg-snow p-5 sm:p-7 shadow-xl">
-            <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-1.5 rounded-[10px] sm:rounded-[12px] bg-ember px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-snow">
-                <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse"></span> LIVE DISCUSSION
+          <div className="rounded-[24px] sm:rounded-[32px] border border-cloud/80 bg-snow p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow">
+            <div className="flex items-center justify-between border-b border-cloud/60 pb-4 mb-4">
+              <span className="inline-flex items-center gap-1.5 rounded-[8px] bg-ember/10 px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-ember uppercase tracking-wider">
+                <span className="h-1.5 w-1.5 rounded-full bg-ember animate-pulse"></span> LIVE DISCUSSION
               </span>
               <span className="text-[11px] sm:text-[12px] font-semibold text-fog flex items-center gap-1">
                 <MapPin className="h-3.5 w-3.5 text-ember" /> Delhi Sabha
               </span>
             </div>
-            <div className="mt-4 sm:mt-6 flex items-center gap-3">
-              <img src={logoMark} alt="" className="h-10 w-10 sm:h-12 sm:w-12 rounded-[14px] sm:rounded-[16px] border border-cloud object-contain p-1.5 bg-paper flex-none" />
+            <div className="flex items-center gap-4">
+              <img src={logoMark} alt="" className="h-12 w-12 sm:h-14 sm:w-14 rounded-[12px] border border-cloud/60 object-contain p-2 bg-paper flex-none shadow-sm" />
               <div>
-                <div className="text-[15px] sm:text-[17px] font-semibold text-obsidian leading-snug">Clean Yamuna Citizen Initiative</div>
-                <div className="text-[12px] sm:text-[13px] text-fog font-medium">1,284 verified voices · 12 wards active</div>
+                <div className="text-[16px] sm:text-[18px] font-bold text-obsidian tracking-tight">Clean Yamuna Citizen Initiative</div>
+                <div className="text-[12px] sm:text-[13px] text-steel font-medium mt-0.5">1,284 verified voices · 12 wards active</div>
               </div>
             </div>
-            <div className="mt-4 sm:mt-6 flex flex-wrap gap-1.5">
+            <div className="mt-5 flex flex-wrap gap-2">
               {["Water Preservation", "Civic Audit", "Volunteer Squad", "Municipal Action"].map(t => (
-                <span key={t} className="rounded-[10px] sm:rounded-[12px] border border-cloud bg-paper px-2.5 py-1 text-[11px] sm:text-[12px] font-medium text-graphite">{t}</span>
+                <span key={t} className="rounded-[8px] border border-cloud/60 bg-paper px-2.5 py-1 text-[11px] sm:text-[12px] font-medium text-graphite hover:border-iron/40 cursor-default">{t}</span>
               ))}
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3.5 sm:gap-4">
-            <div className="rounded-[22px] sm:rounded-[28px] border border-cloud bg-snow p-4 sm:p-6 shadow-md">
-              <div className="text-[26px] sm:text-[32px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1">
+            <div className="rounded-[20px] sm:rounded-[24px] border border-cloud/80 bg-snow p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
+              <div className="text-[28px] sm:text-[34px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1.5">
                 <span>50,000+</span>
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
               </div>
-              <div className="mt-1 text-[12px] sm:text-[13px] font-medium text-fog">Citizens across India actively engaged</div>
+              <div className="mt-2 text-[12px] sm:text-[13px] font-medium text-steel leading-snug">Citizens across India actively engaged</div>
             </div>
-            <div className="rounded-[22px] sm:rounded-[28px] border border-cloud bg-paper p-4 sm:p-6 shadow-md">
-              <div className="text-[26px] sm:text-[32px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1">
+            <div className="rounded-[20px] sm:rounded-[24px] border border-cloud/80 bg-paper p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
+              <div className="text-[28px] sm:text-[34px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1.5">
                 <span>92%</span>
-                <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
               </div>
-              <div className="mt-1 text-[12px] sm:text-[13px] font-medium text-fog">Civic issues routed to municipal officers</div>
+              <div className="mt-2 text-[12px] sm:text-[13px] font-medium text-steel leading-snug">Civic issues routed to municipal officers</div>
             </div>
           </div>
         </motion.div>
+      </div>
+
+      {/* Official Government Logos Integration Section */}
+      <div className="mx-auto max-w-[1200px] border-t border-cloud mt-6 sm:mt-10 px-4 sm:px-6 py-6 sm:py-8 relative z-10">
+        <p className="text-center text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.2em] text-ash mb-6">
+          Aligned with National Civic Standards
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Digital_India_logo.svg" alt="Digital India" className="h-8 sm:h-10 object-contain" />
+          <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Swachh_Bharat_Abhiyan_logo.svg" alt="Swachh Bharat" className="h-10 sm:h-12 object-contain" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/MyGov_logo_India.png" alt="MyGov" className="h-8 sm:h-10 object-contain" />
+          <div className="flex items-center gap-2 font-bold text-obsidian text-lg">
+            <span className="w-6 h-6 rounded-full bg-obsidian text-snow flex items-center justify-center text-xs font-bold">NIC</span>
+            National Informatics
+          </div>
+        </div>
       </div>
     </section>
   );

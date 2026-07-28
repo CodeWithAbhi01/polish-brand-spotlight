@@ -28,12 +28,12 @@ export const mockFiledIssues: FiledIssue[] = [
     photoCount: 4,
     escalationHistory: [
       { id: "esc_001a", tierLevel: 0, tierName: "Ground Level", officialName: "Suresh Kumar", officialDesignation: "Junior Engineer (Civil)", timestamp: "2026-04-15T10:30:00", status: "ASSIGNED", note: "Issue assigned to Ward JE for site inspection.", slaHours: 24, hoursElapsed: 0 },
-      { id: "esc_001b", tierLevel: 0, tierName: "Ground Level", officialName: "Suresh Kumar", officialDesignation: "Junior Engineer (Civil)", timestamp: "2026-04-17T10:30:00", status: "SLA_BREACHED", note: "⚠️ No response received from JE in 48 hours. SLA breached.", slaHours: 24, hoursElapsed: 48 },
+      { id: "esc_001b", tierLevel: 0, tierName: "Ground Level", officialName: "Suresh Kumar", officialDesignation: "Junior Engineer (Civil)", timestamp: "2026-04-17T10:30:00", status: "SLA_BREACHED", note: "No response received from JE in 48 hours. SLA breached.", slaHours: 24, hoursElapsed: 48 },
       { id: "esc_001c", tierLevel: 1, tierName: "Ward Level", officialName: "Rajesh Tiwari", officialDesignation: "Ward Councillor", officialPartyCode: "BJP", timestamp: "2026-04-17T11:00:00", status: "ESCALATED", note: "Auto-escalated to Ward Councillor due to SLA breach.", slaHours: 48, hoursElapsed: 0 },
       { id: "esc_001d", tierLevel: 1, tierName: "Ward Level", officialName: "Rajesh Tiwari", officialDesignation: "Ward Councillor", officialPartyCode: "BJP", timestamp: "2026-04-18T09:15:00", status: "ACKNOWLEDGED", note: "Councillor acknowledged. Promised inspection within 3 days.", slaHours: 48, hoursElapsed: 22 },
-      { id: "esc_001e", tierLevel: 1, tierName: "Ward Level", officialName: "Rajesh Tiwari", officialDesignation: "Ward Councillor", officialPartyCode: "BJP", timestamp: "2026-04-22T09:15:00", status: "SLA_BREACHED", note: "⚠️ No action taken despite acknowledgment. 7 days elapsed.", slaHours: 48, hoursElapsed: 120 },
+      { id: "esc_001e", tierLevel: 1, tierName: "Ward Level", officialName: "Rajesh Tiwari", officialDesignation: "Ward Councillor", officialPartyCode: "BJP", timestamp: "2026-04-22T09:15:00", status: "SLA_BREACHED", note: "No action taken despite acknowledgment. 7 days elapsed.", slaHours: 48, hoursElapsed: 120 },
       { id: "esc_001f", tierLevel: 2, tierName: "City Level", officialName: "Ashwini Kumar (IAS)", officialDesignation: "Municipal Commissioner", timestamp: "2026-04-22T10:00:00", status: "ESCALATED", note: "Critical escalation to Municipal Commissioner. 847 citizen endorsements.", slaHours: 72, hoursElapsed: 0 },
-      { id: "esc_001g", tierLevel: 2, tierName: "City Level", officialName: "Ashwini Kumar (IAS)", officialDesignation: "Municipal Commissioner", timestamp: "2026-04-23T14:30:00", status: "ACTION_TAKEN", note: "✅ MC ordered emergency inspection. Engineering team dispatched.", slaHours: 72, hoursElapsed: 28 },
+      { id: "esc_001g", tierLevel: 2, tierName: "City Level", officialName: "Ashwini Kumar (IAS)", officialDesignation: "Municipal Commissioner", timestamp: "2026-04-23T14:30:00", status: "ACTION_TAKEN", note: "MC ordered emergency inspection. Engineering team dispatched.", slaHours: 72, hoursElapsed: 28 },
       { id: "esc_001h", tierLevel: 3, tierName: "State Level", officialName: "Ramesh Bhatia", officialDesignation: "MLA — Malviya Nagar", officialPartyCode: "AAP", timestamp: "2026-04-29T09:00:00", status: "PENDING", note: "Issue persists after 14 days. Escalated to MLA Office for state intervention.", slaHours: 168, hoursElapsed: 0 },
     ],
   },
@@ -60,7 +60,7 @@ export const mockFiledIssues: FiledIssue[] = [
     photoCount: 2,
     escalationHistory: [
       { id: "esc_002a", tierLevel: 0, tierName: "Ground Level", officialName: "BSES Lineman Team", officialDesignation: "Lineman / SDO", timestamp: "2026-06-10T08:00:00", status: "ASSIGNED", note: "Complaint logged at BSES call centre. Lineman assigned.", slaHours: 12, hoursElapsed: 0 },
-      { id: "esc_002b", tierLevel: 0, tierName: "Ground Level", officialName: "BSES Lineman Team", officialDesignation: "Lineman / SDO", timestamp: "2026-06-11T08:00:00", status: "SLA_BREACHED", note: "⚠️ No visit by lineman team. 24 hours elapsed.", slaHours: 12, hoursElapsed: 24 },
+      { id: "esc_002b", tierLevel: 0, tierName: "Ground Level", officialName: "BSES Lineman Team", officialDesignation: "Lineman / SDO", timestamp: "2026-06-11T08:00:00", status: "SLA_BREACHED", note: "No visit by lineman team. 24 hours elapsed.", slaHours: 12, hoursElapsed: 24 },
       { id: "esc_002c", tierLevel: 1, tierName: "Sub-Division", officialName: "Rajiv Bansal", officialDesignation: "Executive Engineer (DISCOM)", timestamp: "2026-06-11T09:00:00", status: "ESCALATED", note: "Auto-escalated to BSES Executive Engineer.", slaHours: 24, hoursElapsed: 0 },
       { id: "esc_002d", tierLevel: 1, tierName: "Sub-Division", officialName: "Rajiv Bansal", officialDesignation: "Executive Engineer (DISCOM)", timestamp: "2026-06-12T10:30:00", status: "ACKNOWLEDGED", note: "EE acknowledged. Transformer inspection scheduled.", slaHours: 24, hoursElapsed: 25 },
       { id: "esc_002e", tierLevel: 2, tierName: "Zonal Level", officialName: "Rajiv Bansal", officialDesignation: "General Manager (Operations)", timestamp: "2026-06-15T09:00:00", status: "IN_PROGRESS", note: "New transformer sanctioned. Installation ETA: 5 working days.", slaHours: 48, hoursElapsed: 0 },
@@ -91,7 +91,7 @@ export const mockFiledIssues: FiledIssue[] = [
       { id: "esc_003a", tierLevel: 0, tierName: "Ground Level", officialName: "Suresh Kumar", officialDesignation: "Junior Engineer (Civil)", timestamp: "2026-07-01T09:00:00", status: "ASSIGNED", note: "Assigned to Ward 42 JE for immediate inspection.", slaHours: 48, hoursElapsed: 0 },
       { id: "esc_003b", tierLevel: 0, tierName: "Ground Level", officialName: "Suresh Kumar", officialDesignation: "Junior Engineer (Civil)", timestamp: "2026-07-01T16:00:00", status: "ACKNOWLEDGED", note: "JE inspected site. Confirmed 8 potholes. Repair order raised.", slaHours: 48, hoursElapsed: 7 },
       { id: "esc_003c", tierLevel: 1, tierName: "Ward Level", officialName: "Kavita Sharma", officialDesignation: "Ward Officer / AE", timestamp: "2026-07-02T10:00:00", status: "IN_PROGRESS", note: "Road repair contractor mobilized. Work started.", slaHours: 48, hoursElapsed: 25 },
-      { id: "esc_003d", tierLevel: 1, tierName: "Ward Level", officialName: "Kavita Sharma", officialDesignation: "Ward Officer / AE", timestamp: "2026-07-03T18:00:00", status: "RESOLVED", note: "✅ All 8 potholes repaired with hot-mix asphalt. Quality check passed.", slaHours: 48, hoursElapsed: 57 },
+      { id: "esc_003d", tierLevel: 1, tierName: "Ward Level", officialName: "Kavita Sharma", officialDesignation: "Ward Officer / AE", timestamp: "2026-07-03T18:00:00", status: "RESOLVED", note: "All 8 potholes repaired with hot-mix asphalt. Quality check passed.", slaHours: 48, hoursElapsed: 57 },
     ],
   },
   {
@@ -118,7 +118,7 @@ export const mockFiledIssues: FiledIssue[] = [
     escalationHistory: [
       { id: "esc_004a", tierLevel: 0, tierName: "Immediate", officialName: "Delhi Police Control Room", officialDesignation: "Police Control Room (112)", timestamp: "2026-07-10T19:30:00", status: "ASSIGNED", note: "Emergency alert sent to local police station & PCR van.", slaHours: 2, hoursElapsed: 0 },
       { id: "esc_004b", tierLevel: 1, tierName: "Station Level", officialName: "Inspector Rajpal Singh", officialDesignation: "SHO — Saket Police Station", timestamp: "2026-07-10T21:00:00", status: "ACKNOWLEDGED", note: "SHO directed deployment of extra patrol. CCTV request forwarded.", slaHours: 2, hoursElapsed: 1.5 },
-      { id: "esc_004c", tierLevel: 1, tierName: "Station Level", officialName: "Inspector Rajpal Singh", officialDesignation: "SHO — Saket Police Station", timestamp: "2026-07-12T21:00:00", status: "SLA_BREACHED", note: "⚠️ No permanent lighting installed. Only temporary patrol. 2,156 endorsements.", slaHours: 2, hoursElapsed: 49 },
+      { id: "esc_004c", tierLevel: 1, tierName: "Station Level", officialName: "Inspector Rajpal Singh", officialDesignation: "SHO — Saket Police Station", timestamp: "2026-07-12T21:00:00", status: "SLA_BREACHED", note: "No permanent lighting installed. Only temporary patrol. 2,156 endorsements.", slaHours: 2, hoursElapsed: 49 },
       { id: "esc_004d", tierLevel: 2, tierName: "District Level", officialName: "Anita Bhardwaj (IPS)", officialDesignation: "DCP — South Delhi", timestamp: "2026-07-13T10:00:00", status: "IN_PROGRESS", note: "DCP ordered joint inspection with MCD Electrical Dept for permanent lighting.", slaHours: 4, hoursElapsed: 0 },
     ],
   },
@@ -172,11 +172,11 @@ export const mockFiledIssues: FiledIssue[] = [
     photoCount: 8,
     escalationHistory: [
       { id: "esc_006a", tierLevel: 0, tierName: "Ground Level", officialName: "Dinesh Mohan", officialDesignation: "Executive Engineer — DJB", timestamp: "2026-07-18T08:00:00", status: "ASSIGNED", note: "Emergency complaint filed with DJB. Water sample collection requested.", slaHours: 24, hoursElapsed: 0 },
-      { id: "esc_006b", tierLevel: 0, tierName: "Ground Level", officialName: "Dinesh Mohan", officialDesignation: "Executive Engineer — DJB", timestamp: "2026-07-20T08:00:00", status: "SLA_BREACHED", note: "⚠️ No water sample collected. 48 hours elapsed. Children hospitalized.", slaHours: 24, hoursElapsed: 48 },
+      { id: "esc_006b", tierLevel: 0, tierName: "Ground Level", officialName: "Dinesh Mohan", officialDesignation: "Executive Engineer — DJB", timestamp: "2026-07-20T08:00:00", status: "SLA_BREACHED", note: "No water sample collected. 48 hours elapsed. Children hospitalized.", slaHours: 24, hoursElapsed: 48 },
       { id: "esc_006c", tierLevel: 1, tierName: "Ward Level", officialName: "Ward Councillor", officialDesignation: "Ward Councillor — Mehrauli", timestamp: "2026-07-20T09:00:00", status: "ESCALATED", note: "Ward Councillor flagged as public health emergency.", slaHours: 48, hoursElapsed: 0 },
       { id: "esc_006d", tierLevel: 2, tierName: "City Level", officialName: "Ashwini Kumar (IAS)", officialDesignation: "Municipal Commissioner", timestamp: "2026-07-21T10:00:00", status: "ACTION_TAKEN", note: "MC ordered emergency water tankers. DJB investigation launched.", slaHours: 72, hoursElapsed: 0 },
       { id: "esc_006e", tierLevel: 3, tierName: "State Level", officialName: "Ramesh Bhatia", officialDesignation: "MLA — Mehrauli", officialPartyCode: "AAP", timestamp: "2026-07-23T09:00:00", status: "ACKNOWLEDGED", note: "MLA visited site. Demanded DJB accountability report.", slaHours: 168, hoursElapsed: 0 },
-      { id: "esc_006f", tierLevel: 4, tierName: "National Level", officialName: "Ministry of Jal Shakti", officialDesignation: "Union Minister — Jal Shakti", officialPartyCode: "BJP", timestamp: "2026-07-26T09:00:00", status: "PENDING", note: "🔴 CRITICAL: Escalated to national level. 3,421 endorsements. Media coverage initiated.", slaHours: 336, hoursElapsed: 0 },
+      { id: "esc_006f", tierLevel: 4, tierName: "National Level", officialName: "Ministry of Jal Shakti", officialDesignation: "Union Minister — Jal Shakti", officialPartyCode: "BJP", timestamp: "2026-07-26T09:00:00", status: "PENDING", note: "CRITICAL: Escalated to national level. 3,421 endorsements. Media coverage initiated.", slaHours: 336, hoursElapsed: 0 },
     ],
   },
   {
@@ -203,9 +203,9 @@ export const mockFiledIssues: FiledIssue[] = [
     escalationHistory: [
       { id: "esc_007a", tierLevel: 0, tierName: "Ground Level", officialName: "Tanuja Joshi", officialDesignation: "Regional Officer — DPCC", timestamp: "2026-05-20T09:00:00", status: "ASSIGNED", note: "Filed with Delhi Pollution Control Committee.", slaHours: 48, hoursElapsed: 0 },
       { id: "esc_007b", tierLevel: 0, tierName: "Ground Level", officialName: "Tanuja Joshi", officialDesignation: "Regional Officer — DPCC", timestamp: "2026-05-23T09:00:00", status: "ACKNOWLEDGED", note: "DPCC acknowledged. Site inspection conducted. Show-cause notice issued.", slaHours: 48, hoursElapsed: 72 },
-      { id: "esc_007c", tierLevel: 1, tierName: "District Level", officialName: "District Environment Officer", officialDesignation: "District Environment Officer", timestamp: "2026-06-01T09:00:00", status: "SLA_BREACHED", note: "⚠️ Burning continues despite show-cause notice. No enforcement.", slaHours: 96, hoursElapsed: 288 },
+      { id: "esc_007c", tierLevel: 1, tierName: "District Level", officialName: "District Environment Officer", officialDesignation: "District Environment Officer", timestamp: "2026-06-01T09:00:00", status: "SLA_BREACHED", note: "Burning continues despite show-cause notice. No enforcement.", slaHours: 96, hoursElapsed: 288 },
       { id: "esc_007d", tierLevel: 2, tierName: "State Level", officialName: "DPCC Director", officialDesignation: "Director — DPCC", timestamp: "2026-06-10T09:00:00", status: "IN_PROGRESS", note: "DPCC Director ordered closure notice. MCD asked to provide alternative.", slaHours: 168, hoursElapsed: 0 },
-      { id: "esc_007e", tierLevel: 3, tierName: "National Level", officialName: "Bhupender Yadav", officialDesignation: "Union Min — Environment", officialPartyCode: "BJP", timestamp: "2026-06-25T09:00:00", status: "PENDING", note: "🔴 Escalated to CPCB and Union Ministry. NGT hearing scheduled.", slaHours: 336, hoursElapsed: 0 },
+      { id: "esc_007e", tierLevel: 3, tierName: "National Level", officialName: "Bhupender Yadav", officialDesignation: "Union Min — Environment", officialPartyCode: "BJP", timestamp: "2026-06-25T09:00:00", status: "PENDING", note: "Escalated to CPCB and Union Ministry. NGT hearing scheduled.", slaHours: 336, hoursElapsed: 0 },
     ],
   },
   {
