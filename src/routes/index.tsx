@@ -189,12 +189,6 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
           ) : (
             <>
               <button
-                onClick={() => setShowOfficialModal(true)}
-                className="hidden md:inline-block rounded-[14px] px-3.5 py-2 text-[13px] font-bold text-blue-600 transition-colors hover:bg-blue-50 mr-1"
-              >
-                Official Portal
-              </button>
-              <button
                 onClick={onOpenLogin}
                 className="hidden rounded-[14px] px-3.5 py-2 text-[14px] font-medium text-graphite transition-colors hover:bg-cloud/60 hover:text-obsidian md:inline-block cursor-pointer"
               >
