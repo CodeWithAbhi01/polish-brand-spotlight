@@ -14,12 +14,12 @@ export const OfficialOnboardingModal: React.FC<OfficialOnboardingModalProps> = (
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-obsidian/40 backdrop-blur-sm p-4 overflow-y-auto">
+      <div className="fixed inset-0 z-[100] flex items-start justify-center bg-obsidian/40 backdrop-blur-sm p-4 pt-12 sm:pt-20 overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
-          className="relative w-full max-w-lg my-auto max-h-[95vh] overflow-y-auto rounded-[24px] sm:rounded-[32px] bg-snow shadow-2xl border border-cloud"
+          className="relative w-full max-w-lg mb-12 rounded-[24px] sm:rounded-[32px] bg-snow shadow-2xl border border-cloud"
         >
           {/* Header */}
           <div className="flex items-center justify-between border-b border-cloud px-6 py-4 bg-paper">

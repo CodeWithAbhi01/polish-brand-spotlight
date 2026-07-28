@@ -14,6 +14,15 @@ function DashboardPage() {
   const [showAuth, setShowAuth] = useState(false);
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
 
+  React.useEffect(() => {
+    const saved = localStorage.getItem("apnisabha_user");
+    if (saved) {
+      try {
+        setUser(JSON.parse(saved));
+      } catch (e) {}
+    }
+  }, []);
+
   const handleOpenLogin = () => {
     setAuthMode("login");
     setShowAuth(true);
@@ -43,6 +52,7 @@ function DashboardPage() {
         initialMode={authMode}
         onSuccess={(u) => {
           setUser(u);
+          localStorage.setItem("apnisabha_user", JSON.stringify(u));
           setShowAuth(false);
         }}
       />
