@@ -7,7 +7,7 @@ import { EscalationAlertBanner } from "./EscalationAlertBanner";
 import { mockFiledIssues } from "@/data/mockIssues";
 
 export const IssueTracker: React.FC = () => {
-  const [selectedIssueId, setSelectedIssueId] = useState<string | null>(null);
+  const [selectedIssueId, setSelectedIssueId] = useState<string | null>(mockFiledIssues[0]?.id || null);
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
 
   const filteredIssues = filterCategory 

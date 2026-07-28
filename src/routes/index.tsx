@@ -154,7 +154,8 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
                   </div>
 
                   <a
-                    href="/dashboard"
+                    href="#dashboard"
+                    onClick={(e) => { smoothScrollToSection(e, "#dashboard"); setShowProfileMenu(false); }}
                     className="w-full flex items-center gap-2.5 rounded-[12px] px-3 py-2 text-[13px] text-graphite hover:bg-paper transition-colors"
                   >
                     <LayoutDashboard className="h-4 w-4 text-fog" /> Civic Dashboard
@@ -163,7 +164,7 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
                     onClick={() => { setShowProfileMenu(false); onOpenReport(); }}
                     className="w-full flex items-center gap-2.5 rounded-[12px] px-3 py-2 text-[13px] text-red-600 hover:bg-red-50 transition-colors font-medium"
                   >
-                    <Megaphone className="h-4 w-4 text-red-500" /> Report Ward Issue 📢
+                    <Megaphone className="h-4 w-4 text-red-500" /> Report Ward Issue
                   </button>
                   <div className="my-1 border-t border-cloud"></div>
                   <button
