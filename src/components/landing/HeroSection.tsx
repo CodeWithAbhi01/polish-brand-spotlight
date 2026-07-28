@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { Sparkles, ArrowRight, CheckCircle2, MapPin, Loader2 } from "lucide-react";
+import { Sparkles, ArrowRight, CheckCircle2, MapPin, Loader2, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import type { UserProfile } from "@/data/types";
 import logoMark from "@/assets/logo-mark.png";
@@ -194,13 +194,32 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
         <p className="text-center text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.2em] text-ash mb-6">
           Aligned with National Civic Standards
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Digital_India_logo.svg" alt="Digital India" className="h-8 sm:h-10 object-contain" />
-          <img src="https://upload.wikimedia.org/wikipedia/en/3/30/Swachh_Bharat_Abhiyan_logo.svg" alt="Swachh Bharat" className="h-10 sm:h-12 object-contain" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/MyGov_logo_India.png" alt="MyGov" className="h-8 sm:h-10 object-contain" />
-          <div className="flex items-center gap-2 font-bold text-obsidian text-lg">
-            <span className="w-6 h-6 rounded-full bg-obsidian text-snow flex items-center justify-center text-xs font-bold">NIC</span>
-            National Informatics
+        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-300">
+          
+          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px]">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 via-white to-green-500 border border-cloud flex items-center justify-center shadow-sm">
+              <span className="w-4 h-4 rounded-full bg-blue-600 border border-white"></span>
+            </div>
+            <span>Digital Bharat</span>
+          </div>
+
+          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px]">
+            <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center">
+              <CheckCircle2 className="w-5 h-5" />
+            </div>
+            <span>Swachh City Data</span>
+          </div>
+
+          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px]">
+            <div className="w-8 h-8 rounded-[8px] bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <span>Gov Connect</span>
+          </div>
+
+          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px]">
+            <span className="w-8 h-8 rounded-[8px] bg-obsidian text-snow flex items-center justify-center text-xs font-black tracking-tighter">NIC</span>
+            <span>National Informatics</span>
           </div>
         </div>
       </div>

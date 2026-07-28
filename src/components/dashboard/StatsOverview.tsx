@@ -47,7 +47,7 @@ export const StatsOverview: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
-            className="bg-snow border border-cloud rounded-[20px] p-5 flex flex-col items-start shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group"
+            className="bg-white border border-cloud/80 rounded-[24px] p-5 flex flex-col items-start shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group"
           >
             <div className="absolute -right-6 -top-6 opacity-5 group-hover:scale-110 transition-transform duration-500">
               <Icon size={100} />

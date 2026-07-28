@@ -31,85 +31,78 @@ export const VolunteerBoard: React.FC = () => {
 
       <div className="bg-snow border border-cloud rounded-[32px] p-6 md:p-10 shadow-sm max-w-4xl mx-auto">
         {/* Podium */}
-        <div className="flex flex-col md:flex-row items-end justify-center gap-6 mb-12 h-auto md:h-64 pt-8">
-          {/* Rank 2 */}
+        <div className="flex flex-col md:flex-row items-end justify-center gap-4 sm:gap-8 mb-16 h-auto md:h-72 pt-8">
+          {/* Rank 2 - Silver */}
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-col items-center order-2 md:order-1"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+            className="flex flex-col items-center order-2 md:order-1 relative group"
           >
-            <div className="relative mb-4">
-              <div className="w-20 h-20 bg-white border-4 border-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-obsidian shadow-md">
+            <div className="relative mb-5 transition-transform group-hover:-translate-y-2">
+              <div className="w-20 h-20 bg-white border-4 border-slate-300 rounded-full flex items-center justify-center text-xl font-bold text-slate-700 shadow-[0_0_20px_rgba(203,213,225,0.4)]">
                 {top3[1].name.split(' ').map(n => n[0]).join('')}
               </div>
-              <div className="absolute -bottom-2 -right-2 bg-gray-400 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-sm border-2 border-white">
+              <div className="absolute -bottom-2 -right-2 bg-gradient-to-br from-slate-400 to-slate-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-md border-2 border-white">
                 2
               </div>
             </div>
-            <h4 className="font-bold text-obsidian">{top3[1].name}</h4>
-            <p className="text-sm text-steel mb-2">{top3[1].ward}</p>
-            <div className="bg-white border border-gray-200 px-4 py-6 rounded-t-[16px] w-32 flex flex-col items-center shadow-sm">
-              <span className="font-bold text-lg text-obsidian">{top3[1].issuesResolved}</span>
-              <span className="text-[10px] uppercase text-fog font-semibold">Resolved</span>
+            <h4 className="font-bold text-obsidian text-sm sm:text-base">{top3[1].name}</h4>
+            <p className="text-xs text-steel mb-3">{top3[1].ward}</p>
+            <div className="bg-gradient-to-t from-slate-100 to-white border border-slate-200 px-4 py-8 rounded-t-[20px] w-28 sm:w-32 flex flex-col items-center shadow-[0_-4px_20px_rgba(203,213,225,0.2)]">
+              <span className="font-black text-xl text-slate-800">{top3[1].issuesResolved}</span>
+              <span className="text-[10px] uppercase text-slate-500 font-bold tracking-wider mt-1">Resolved</span>
             </div>
           </motion.div>
 
-          {/* Rank 1 */}
+          {/* Rank 1 - Gold */}
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col items-center order-1 md:order-2 z-10"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="flex flex-col items-center order-1 md:order-2 z-10 relative group"
           >
-            <div className="relative mb-4">
-              <div className="absolute -top-7 left-1/2 -translate-x-1/2 text-yellow-500 drop-shadow-md">
-                <Award size={36} className="fill-yellow-100" />
+            <div className="relative mb-5 transition-transform group-hover:-translate-y-2">
+              <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-amber-500 drop-shadow-xl animate-bounce">
+                <Award size={40} className="fill-amber-100" />
               </div>
-              <div className="w-24 h-24 bg-white border-4 border-yellow-400 rounded-full flex items-center justify-center text-2xl font-bold text-obsidian shadow-lg">
+              <div className="w-24 h-24 bg-white border-4 border-amber-400 rounded-full flex items-center justify-center text-2xl font-black text-amber-700 shadow-[0_0_30px_rgba(251,191,36,0.4)] relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-100/50 to-transparent"></div>
                 {top3[0].name.split(' ').map(n => n[0]).join('')}
               </div>
-              <div className="absolute -bottom-2 -right-2 bg-yellow-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-sm border-2 border-white">
+              <div className="absolute -bottom-2 -right-2 bg-gradient-to-br from-amber-400 to-amber-600 text-white w-9 h-9 rounded-full flex items-center justify-center font-bold text-base shadow-md border-2 border-white">
                 1
               </div>
             </div>
-            <h4 className="font-bold text-obsidian text-lg">{top3[0].name}</h4>
-            <p className="text-sm text-steel mb-2">{top3[0].ward}</p>
-            <div className="bg-white border border-yellow-200 shadow-[0_-4px_20px_rgba(250,204,21,0.15)] px-4 py-10 rounded-t-[16px] w-36 flex flex-col items-center relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1 bg-yellow-400"></div>
-              <span className="font-bold text-2xl text-obsidian">{top3[0].issuesResolved}</span>
-              <span className="text-[10px] uppercase text-fog font-semibold">Resolved</span>
+            <h4 className="font-black text-obsidian text-base sm:text-lg">{top3[0].name}</h4>
+            <p className="text-xs text-steel mb-3 font-medium">{top3[0].ward}</p>
+            <div className="bg-gradient-to-t from-amber-50 to-white border border-amber-200 px-4 py-12 rounded-t-[24px] w-32 sm:w-36 flex flex-col items-center shadow-[0_-8px_30px_rgba(251,191,36,0.25)] relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-amber-300 to-amber-500"></div>
+              <span className="font-black text-3xl text-amber-700">{top3[0].issuesResolved}</span>
+              <span className="text-[10px] uppercase text-amber-600 font-bold tracking-wider mt-1">Resolved</span>
             </div>
           </motion.div>
 
-          {/* Rank 3 */}
+          {/* Rank 3 - Bronze */}
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-col items-center order-3"
+            initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
+            className="flex flex-col items-center order-3 relative group"
           >
-            <div className="relative mb-4">
-              <div className="w-20 h-20 bg-white border-4 border-amber-700 rounded-full flex items-center justify-center text-xl font-bold text-obsidian shadow-md">
+            <div className="relative mb-5 transition-transform group-hover:-translate-y-2">
+              <div className="w-20 h-20 bg-white border-4 border-orange-300 rounded-full flex items-center justify-center text-xl font-bold text-orange-700 shadow-[0_0_20px_rgba(253,186,116,0.4)]">
                 {top3[2].name.split(' ').map(n => n[0]).join('')}
               </div>
-              <div className="absolute -bottom-2 -right-2 bg-amber-800 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-sm border-2 border-white">
+              <div className="absolute -bottom-2 -right-2 bg-gradient-to-br from-orange-400 to-orange-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-md border-2 border-white">
                 3
               </div>
             </div>
-            <h4 className="font-bold text-obsidian">{top3[2].name}</h4>
-            <p className="text-sm text-steel mb-2">{top3[2].ward}</p>
-            <div className="bg-white border border-amber-100 px-4 py-4 rounded-t-[16px] w-32 flex flex-col items-center shadow-sm">
-              <span className="font-bold text-lg text-obsidian">{top3[2].issuesResolved}</span>
-              <span className="text-[10px] uppercase text-fog font-semibold">Resolved</span>
+            <h4 className="font-bold text-obsidian text-sm sm:text-base">{top3[2].name}</h4>
+            <p className="text-xs text-steel mb-3">{top3[2].ward}</p>
+            <div className="bg-gradient-to-t from-orange-50 to-white border border-orange-200 px-4 py-6 rounded-t-[20px] w-28 sm:w-32 flex flex-col items-center shadow-[0_-4px_20px_rgba(253,186,116,0.15)]">
+              <span className="font-black text-xl text-orange-800">{top3[2].issuesResolved}</span>
+              <span className="text-[10px] uppercase text-orange-600 font-bold tracking-wider mt-1">Resolved</span>
             </div>
           </motion.div>
         </div>
 
         {/* List */}
-        <div className="bg-white border border-cloud rounded-[24px] overflow-hidden shadow-sm">
+        <div className="bg-white border border-cloud/80 rounded-[28px] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
           {rest.map((volunteer, idx) => (
             <motion.div 
               key={volunteer.id}
@@ -117,32 +110,32 @@ export const VolunteerBoard: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 * idx }}
-              className={`flex items-center justify-between p-4 px-6 ${idx !== rest.length - 1 ? 'border-b border-cloud' : ''} hover:bg-paper transition-colors group`}
+              className={`flex items-center justify-between p-4 px-5 sm:px-8 ${idx !== rest.length - 1 ? 'border-b border-cloud/60' : ''} hover:bg-snow transition-all duration-300 group`}
             >
-              <div className="flex items-center gap-4">
-                <div className="w-8 font-bold text-fog group-hover:text-ember transition-colors">#{idx + 4}</div>
-                <div className="w-10 h-10 bg-paper rounded-full flex items-center justify-center text-sm font-bold text-obsidian border border-cloud">
+              <div className="flex items-center gap-4 sm:gap-6">
+                <div className="w-6 sm:w-8 font-black text-fog/60 group-hover:text-ember transition-colors text-sm sm:text-base">#{idx + 4}</div>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-paper to-snow rounded-full flex items-center justify-center text-sm sm:text-base font-bold text-obsidian border border-cloud shadow-sm group-hover:shadow-md transition-shadow">
                   {volunteer.name.split(' ').map(n => n[0]).join('')}
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h5 className="font-bold text-obsidian">{volunteer.name}</h5>
-                    {volunteer.verified && <Shield size={14} className="text-emerald-500" />}
+                    <h5 className="font-bold text-obsidian text-[14px] sm:text-[16px] leading-none">{volunteer.name}</h5>
+                    {volunteer.verified && <Shield size={14} className="text-emerald-500 hidden sm:block" />}
                   </div>
-                  <p className="text-xs text-steel">{volunteer.ward}</p>
+                  <p className="text-[11px] sm:text-[12px] font-medium text-steel mt-1">{volunteer.ward}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-6 text-right">
+              <div className="flex items-center gap-4 sm:gap-8 text-right">
                 <div className="hidden sm:block">
-                  <div className="text-sm font-bold text-obsidian">{volunteer.sabhasJoined}</div>
-                  <div className="text-[10px] text-fog uppercase">Sabhas</div>
+                  <div className="text-[15px] font-bold text-obsidian leading-none mb-1">{volunteer.sabhasJoined}</div>
+                  <div className="text-[10px] text-steel uppercase font-bold tracking-wider">Sabhas</div>
                 </div>
-                <div>
-                  <div className="text-sm font-bold text-obsidian flex items-center justify-end gap-1">
-                    <CheckCircle size={14} className="text-ember" />
+                <div className="text-right">
+                  <div className="text-[15px] font-bold text-ember flex items-center justify-end gap-1.5 leading-none mb-1">
+                    <CheckCircle size={14} className="text-ember hidden sm:block" />
                     {volunteer.issuesResolved}
                   </div>
-                  <div className="text-[10px] text-fog uppercase">Resolved</div>
+                  <div className="text-[10px] text-steel uppercase font-bold tracking-wider">Resolved</div>
                 </div>
               </div>
             </motion.div>

@@ -349,10 +349,10 @@ function FeaturesSection() {
               key={f.title}
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
               custom={i} variants={fadeUp}
-              className="group flex flex-col justify-between rounded-[26px] sm:rounded-[36px] border border-cloud bg-snow p-6 sm:p-8 transition-all hover:border-iron hover:shadow-xl"
+              className="group flex flex-col justify-between rounded-[24px] sm:rounded-[32px] border border-cloud/80 bg-white p-6 sm:p-8 transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 hover:border-cloud"
             >
               <div>
-                <div className="grid h-11 w-11 sm:h-12 sm:w-12 place-items-center rounded-[14px] sm:rounded-[16px] bg-paper text-obsidian group-hover:bg-obsidian group-hover:text-snow transition-colors">
+                <div className="grid h-12 w-12 sm:h-14 sm:w-14 place-items-center rounded-[14px] sm:rounded-[16px] bg-gradient-to-br from-paper to-snow border border-cloud/60 text-obsidian shadow-sm group-hover:bg-gradient-to-br group-hover:from-obsidian group-hover:to-graphite group-hover:text-white transition-all duration-300">
                   <f.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
                 <h3 className="mt-6 sm:mt-8 text-[20px] sm:text-[22px] font-semibold tracking-tight text-obsidian">{f.title}</h3>
@@ -365,9 +365,9 @@ function FeaturesSection() {
           ))}
         </div>
 
-        <div className="mt-6 sm:mt-8 grid gap-3 sm:gap-4 rounded-[26px] sm:rounded-[36px] border border-cloud bg-snow p-5 sm:p-7 sm:grid-cols-2 lg:grid-cols-4 shadow-md">
+        <div className="mt-6 sm:mt-8 grid gap-3 sm:gap-4 rounded-[24px] sm:rounded-[32px] border border-cloud/80 bg-white p-4 sm:p-6 sm:grid-cols-2 lg:grid-cols-4 shadow-[0_4px_20px_rgb(0,0,0,0.02)]">
           {highlights.map(h => (
-            <div key={h.label} className="flex items-center gap-3 rounded-[18px] sm:rounded-[22px] bg-paper px-4 py-3 sm:px-5 sm:py-3.5 border border-cloud/50">
+            <div key={h.label} className="flex items-center gap-3 rounded-[16px] sm:rounded-[20px] bg-paper px-4 py-3 sm:px-5 sm:py-3.5 border border-cloud/50 hover:bg-snow transition-colors duration-300">
               <div className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-[12px] sm:rounded-[14px] bg-snow text-obsidian border border-cloud shadow-sm flex-none">
                 <h.icon className="h-4 w-4 sm:h-5 sm:w-5 text-ember" />
               </div>
