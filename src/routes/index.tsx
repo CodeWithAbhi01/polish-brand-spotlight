@@ -4,16 +4,28 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   Users, ShieldCheck, Lightbulb, Target, TrendingUp,
   MessageCircle, Megaphone, Handshake, ArrowRight, Bell, Globe, Sparkles,
-  CheckCircle2, Menu, ArrowUpRight, User, LogOut, LayoutDashboard, Settings, MapPin, Award, X, Loader2
+  CheckCircle2, Menu, ArrowUpRight, LogOut, LayoutDashboard, Settings, MapPin, Award, X
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
-import logoMark from "@/assets/logo-mark.png";
 import community from "@/assets/community.jpg";
-import { AuthModal, UserProfile } from "@/components/AuthModal";
+
+import { AuthModal } from "@/components/AuthModal";
+import type { UserProfile } from "@/data/types";
 import { InteractiveFeed } from "@/components/InteractiveFeed";
 import { CivicPoll } from "@/components/CivicPoll";
 import { CivicTicker } from "@/components/CivicTicker";
 import { ReportIssueModal } from "@/components/ReportIssueModal";
+
+// Extracted Components
+import { Logo } from "@/components/layout/Logo";
+import { DarkBtn } from "@/components/shared/DarkBtn";
+import { GhostBtn } from "@/components/shared/GhostBtn";
+import { HeroSection } from "@/components/landing/HeroSection";
+
+// New Feature Components
+import { GovernanceDirectory } from "@/components/governance/GovernanceDirectory";
+import { IssueTracker } from "@/components/issues/IssueTracker";
+import { VolunteerBoard } from "@/components/community/VolunteerBoard";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -64,67 +76,6 @@ export const smoothScrollToSection = (e?: React.MouseEvent, id?: string) => {
   }
 };
 
-function Logo({ className = "" }: { className?: string }) {
-  return (
-    <a
-      href="#"
-      onClick={(e) => smoothScrollToSection(e, "top")}
-      className={`flex items-center gap-2 sm:gap-2.5 ${className}`}
-    >
-      <img src={logoMark} alt="ApniSabha" width={32} height={32} className="h-7 w-7 sm:h-8 sm:w-8 object-contain" />
-      <div className="text-[16px] sm:text-[17px] font-semibold tracking-tight text-obsidian leading-none">
-        ApniSabha
-      </div>
-    </a>
-  );
-}
-
-function DarkBtn({ onClick, href, children, className = "" }: { onClick?: () => void; href?: string; children: React.ReactNode; className?: string }) {
-  if (onClick) {
-    return (
-      <button
-        onClick={onClick}
-        type="button"
-        className={`inline-flex items-center justify-center gap-2 rounded-[12px] sm:rounded-[14px] bg-obsidian px-3.5 py-2.5 sm:px-4 sm:py-3 text-[13px] sm:text-[14px] font-medium text-snow transition-transform hover:-translate-y-[1px] cursor-pointer ${className}`}
-        style={{ boxShadow: "inset 0 0.5px 0 0 rgba(255,255,255,0.5), 0 0 0 1.5px #2c2e34, 0 4px 6px 0 rgba(0,0,0,0.14)" }}
-      >
-        {children}
-      </button>
-    );
-  }
-  return (
-    <a
-      href={href || "#"}
-      className={`inline-flex items-center justify-center gap-2 rounded-[12px] sm:rounded-[14px] bg-obsidian px-3.5 py-2.5 sm:px-4 sm:py-3 text-[13px] sm:text-[14px] font-medium text-snow transition-transform hover:-translate-y-[1px] ${className}`}
-      style={{ boxShadow: "inset 0 0.5px 0 0 rgba(255,255,255,0.5), 0 0 0 1.5px #2c2e34, 0 4px 6px 0 rgba(0,0,0,0.14)" }}
-    >
-      {children}
-    </a>
-  );
-}
-
-function GhostBtn({ onClick, href, children, className = "" }: { onClick?: () => void; href?: string; children: React.ReactNode; className?: string }) {
-  if (onClick) {
-    return (
-      <button
-        onClick={onClick}
-        type="button"
-        className={`inline-flex items-center justify-center gap-2 rounded-[12px] sm:rounded-[14px] border border-cloud bg-snow px-3.5 py-2.5 sm:px-4 sm:py-3 text-[13px] sm:text-[14px] font-medium text-graphite transition-colors hover:border-iron cursor-pointer ${className}`}
-      >
-        {children}
-      </button>
-    );
-  }
-  return (
-    <a
-      href={href || "#"}
-      className={`inline-flex items-center justify-center gap-2 rounded-[12px] sm:rounded-[14px] border border-cloud bg-snow px-3.5 py-2.5 sm:px-4 sm:py-3 text-[13px] sm:text-[14px] font-medium text-graphite transition-colors hover:border-iron ${className}`}
-    >
-      {children}
-    </a>
-  );
-}
-
 interface NavProps {
   user: UserProfile | null;
   onOpenLogin: () => void;
@@ -140,17 +91,18 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
   const links = [
     { label: "Values", href: "#values" },
     { label: "Features", href: "#features" },
+    { label: "Governance", href: "#governance" },
+    { label: "Issue Tracker", href: "#tracker" },
     { label: "Live Sabhas", href: "#sabhas" },
-    { label: "About", href: "#about" },
   ];
 
   return (
     <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur-md border-b border-cloud/60">
       <div className="mx-auto flex h-[68px] sm:h-[76px] max-w-[1200px] items-center justify-between px-4 sm:px-6">
-        <Logo />
+        <Logo onClick={(e) => smoothScrollToSection(e, "top")} />
         
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {links.map(l => (
             <a
               key={l.href}
@@ -165,7 +117,6 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
 
         {/* Right action area */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Report Issue CTA */}
           <button
             onClick={onOpenReport}
             className="hidden md:flex items-center gap-1.5 rounded-[12px] bg-red-500/10 border border-red-500/20 px-3 py-2 text-[12px] sm:text-[13px] font-bold text-red-600 hover:bg-red-500/20 transition-all shadow-sm"
@@ -202,23 +153,17 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => { setShowProfileMenu(false); toast.info("Opening Meri Sabha Dashboard..."); }}
+                  <a
+                    href="/dashboard"
                     className="w-full flex items-center gap-2.5 rounded-[12px] px-3 py-2 text-[13px] text-graphite hover:bg-paper transition-colors"
                   >
-                    <LayoutDashboard className="h-4 w-4 text-fog" /> Meri Sabha Dashboard
-                  </button>
+                    <LayoutDashboard className="h-4 w-4 text-fog" /> Civic Dashboard
+                  </a>
                   <button
                     onClick={() => { setShowProfileMenu(false); onOpenReport(); }}
                     className="w-full flex items-center gap-2.5 rounded-[12px] px-3 py-2 text-[13px] text-red-600 hover:bg-red-50 transition-colors font-medium"
                   >
                     <Megaphone className="h-4 w-4 text-red-500" /> Report Ward Issue 📢
-                  </button>
-                  <button
-                    onClick={() => { setShowProfileMenu(false); toast.info("Profile settings opened."); }}
-                    className="w-full flex items-center gap-2.5 rounded-[12px] px-3 py-2 text-[13px] text-graphite hover:bg-paper transition-colors"
-                  >
-                    <Settings className="h-4 w-4 text-fog" /> Account Settings
                   </button>
                   <div className="my-1 border-t border-cloud"></div>
                   <button
@@ -245,10 +190,9 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
             </>
           )}
 
-          {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setShowMenu(!showMenu)}
-            className="ml-1 rounded-[10px] p-2 text-graphite hover:bg-cloud/60 md:hidden transition-colors"
+            className="ml-1 rounded-[10px] p-2 text-graphite hover:bg-cloud/60 lg:hidden transition-colors"
             aria-label="Menu"
           >
             {showMenu ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -263,7 +207,7 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="border-t border-cloud bg-snow px-4 py-5 md:hidden overflow-hidden shadow-2xl"
+            className="border-t border-cloud bg-snow px-4 py-5 lg:hidden overflow-hidden shadow-2xl"
           >
             {user ? (
               <div className="mb-4 rounded-[18px] bg-paper p-3.5 border border-cloud">
@@ -285,12 +229,12 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
                   >
                     <Megaphone className="h-3.5 w-3.5" /> Report Issue
                   </button>
-                  <button
-                    onClick={() => { setShowMenu(false); onLogout(); }}
+                  <a
+                    href="/dashboard"
                     className="flex items-center justify-center gap-1.5 rounded-[10px] bg-snow py-2 text-[12px] font-medium text-graphite border border-cloud"
                   >
-                    <LogOut className="h-3.5 w-3.5 text-red-500" /> Logout
-                  </button>
+                    <LayoutDashboard className="h-3.5 w-3.5" /> Dashboard
+                  </a>
                 </div>
               </div>
             ) : (
@@ -342,211 +286,10 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
   );
 }
 
-interface HeroProps {
-  user: UserProfile | null;
-  onOpenSignupWithEmail: (email: string) => void;
-  onOpenReport: () => void;
-}
-
-function Hero({ user, onOpenSignupWithEmail, onOpenReport }: HeroProps) {
-  const [emailInput, setEmailInput] = useState("");
-  const [isVerifying, setIsVerifying] = useState(false);
-
-  const handleJoinClick = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (user) {
-      toast.info("You are already logged in! Explore active Sabhas below.");
-      smoothScrollToSection(undefined, "sabhas");
-    } else {
-      if (!emailInput.trim()) {
-        toast.error("Please enter your email or phone number first!");
-        return;
-      }
-
-      // Realistic Contact Verification Simulation
-      setIsVerifying(true);
-      toast.info("⚡ Verifying mobile/email with National Civic Citizen Registry...");
-
-      setTimeout(() => {
-        setIsVerifying(false);
-        toast.success(`🎉 Congratulations! '${emailInput}' is pre-verified for ward access. Welcome to the movement!`);
-        onOpenSignupWithEmail(emailInput);
-      }, 1000);
-    }
-  };
-
-  return (
-    <section className="relative overflow-hidden">
-      {/* Decorative gradient orb */}
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[400px] bg-gradient-to-b from-ember/10 to-transparent blur-3xl pointer-events-none"></div>
-
-      <div className="mx-auto grid max-w-[1200px] gap-12 sm:gap-16 px-4 sm:px-6 pb-14 sm:pb-20 pt-8 sm:pt-16 md:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-28 relative z-10">
-        <div className="flex flex-col justify-center">
-          <motion.div
-            initial="hidden" animate="visible" variants={fadeUp}
-            className="flex items-center gap-2 flex-wrap"
-          >
-            <span className="inline-flex items-center gap-1.5 rounded-[10px] sm:rounded-[12px] bg-ember px-2.5 py-1 sm:px-3 sm:py-1 text-[11px] sm:text-[12px] font-bold text-snow uppercase tracking-wider shadow-sm">
-              <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 animate-spin" style={{ animationDuration: "8s" }} /> APNA MANCH · APNI AWAAZ
-            </span>
-            <span className="text-[11px] sm:text-[12px] font-medium text-fog">India's Civic Community Platform</span>
-          </motion.div>
-
-          <motion.h1
-            initial="hidden" animate="visible" custom={1} variants={fadeUp}
-            className="mt-4 sm:mt-6 text-[34px] font-semibold leading-[1.1] tracking-[-0.03em] text-obsidian sm:text-[46px] md:text-[56px] lg:text-[64px] lg:leading-[1.05]"
-          >
-            Where every voice<br />
-            builds a <span className="italic font-normal text-iron">movement</span>.
-          </motion.h1>
-
-          <motion.p
-            initial="hidden" animate="visible" custom={2} variants={fadeUp}
-            className="mt-4 sm:mt-6 max-w-xl text-[14px] sm:text-[16px] leading-[1.6] text-steel"
-          >
-            ApniSabha is a digital manch where citizens and leaders connect without barriers, debate real-world issues, and collaborate on actionable community solutions.
-          </motion.p>
-
-          <motion.form
-            onSubmit={handleJoinClick}
-            initial="hidden" animate="visible" custom={3} variants={fadeUp}
-            className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
-          >
-            <div className="flex flex-col sm:flex-row w-full max-w-md items-stretch sm:items-center gap-2 rounded-[18px] border border-cloud bg-snow p-2 shadow-lg">
-              <input
-                type="text"
-                value={emailInput}
-                onChange={(e) => setEmailInput(e.target.value)}
-                placeholder="Enter email or mobile number..."
-                disabled={isVerifying}
-                className="flex-1 bg-transparent px-3 py-2.5 text-[14px] text-graphite outline-none placeholder:text-ash disabled:opacity-50"
-              />
-              <button
-                type="submit"
-                disabled={isVerifying}
-                className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-obsidian px-5 py-3 text-[14px] font-medium text-snow transition-all hover:bg-graphite disabled:opacity-50 shadow-sm cursor-pointer"
-              >
-                {isVerifying ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin text-ember" />
-                    <span>Verifying...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>{user ? "Explore Sabhas" : "Verify & Join"}</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </>
-                )}
-              </button>
-            </div>
-          </motion.form>
-
-          <motion.div
-            initial="hidden" animate="visible" custom={4} variants={fadeUp}
-            className="mt-6 sm:mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] sm:text-[13px] text-fog font-medium"
-          >
-            {["Free forever for citizens", "No ads, 100% data privacy", "Verified civic identities"].map(t => (
-              <div key={t} className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600 flex-none" /> <span>{t}</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Right — editorial card stack with subtle floating movement animation */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex flex-col gap-3.5 sm:gap-4"
-        >
-          {/* Floating animated badge */}
-          <motion.div
-            animate={{ y: [-4, 4, -4] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="absolute -top-6 -right-2 sm:-top-5 sm:-right-4 z-20 hidden sm:flex items-center gap-2 rounded-full border border-cloud bg-obsidian px-3.5 py-1.5 text-snow shadow-xl text-[12px] font-semibold"
-          >
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>🔥 42 Ward Sabhas Debating Right Now</span>
-          </motion.div>
-
-          <div className="rounded-[26px] sm:rounded-[36px] border border-cloud bg-snow p-5 sm:p-7 shadow-xl">
-            <div className="flex items-center justify-between">
-              <span className="inline-flex items-center gap-1.5 rounded-[10px] sm:rounded-[12px] bg-ember px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-snow">
-                <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse"></span> LIVE DISCUSSION
-              </span>
-              <span className="text-[11px] sm:text-[12px] font-semibold text-fog flex items-center gap-1">
-                <MapPin className="h-3.5 w-3.5 text-ember" /> Delhi Sabha
-              </span>
-            </div>
-            <div className="mt-4 sm:mt-6 flex items-center gap-3">
-              <img src={logoMark} alt="" className="h-10 w-10 sm:h-12 sm:w-12 rounded-[14px] sm:rounded-[16px] border border-cloud object-contain p-1.5 bg-paper flex-none" />
-              <div>
-                <div className="text-[15px] sm:text-[17px] font-semibold text-obsidian leading-snug">Clean Yamuna Citizen Initiative</div>
-                <div className="text-[12px] sm:text-[13px] text-fog font-medium">1,284 verified voices · 12 wards active</div>
-              </div>
-            </div>
-            <div className="mt-4 sm:mt-6 flex flex-wrap gap-1.5">
-              {["Water Preservation", "Civic Audit", "Volunteer Squad", "Municipal Action"].map(t => (
-                <span key={t} className="rounded-[10px] sm:rounded-[12px] border border-cloud bg-paper px-2.5 py-1 text-[11px] sm:text-[12px] font-medium text-graphite">{t}</span>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3.5 sm:gap-4">
-            <div className="rounded-[22px] sm:rounded-[28px] border border-cloud bg-snow p-4 sm:p-6 shadow-md">
-              <div className="text-[26px] sm:text-[32px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1">
-                <span>50,000+</span>
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              </div>
-              <div className="mt-1.5 sm:mt-2 text-[12px] sm:text-[13px] text-steel">Verified citizens across India</div>
-            </div>
-            <div
-              onClick={onOpenReport}
-              className="group rounded-[22px] sm:rounded-[28px] border border-red-500/30 bg-gradient-to-br from-red-600 to-obsidian p-4 sm:p-6 text-snow shadow-xl cursor-pointer transition-all hover:scale-[1.02]"
-            >
-              <div className="flex items-center justify-between">
-                <div className="text-[22px] sm:text-[26px] font-bold leading-none tracking-tight text-snow">Report 📢</div>
-                <ArrowRight className="h-5 w-5 text-snow group-hover:translate-x-1 transition-transform" />
-              </div>
-              <div className="mt-1.5 sm:mt-2 text-[12px] sm:text-[13px] text-red-100 font-medium">Report Ward Issue & Get Action</div>
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between rounded-[22px] sm:rounded-[28px] border border-cloud bg-snow px-5 py-3.5 sm:px-6 sm:py-4 shadow-md">
-            <div className="flex items-center gap-3">
-              <div className="grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full bg-emerald-500/10 text-emerald-600 font-bold flex-none">
-                <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
-              </div>
-              <div>
-                <div className="text-[13px] sm:text-[14px] font-semibold text-obsidian leading-tight">New petition in Bengaluru</div>
-                <div className="text-[11px] sm:text-[12px] text-fog">Whitefield Pothole Audit · Just now</div>
-              </div>
-            </div>
-            <ArrowUpRight className="h-4 w-4 sm:h-5 sm:w-5 text-iron flex-none" />
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Logo strip / social proof */}
-      <div className="mx-auto max-w-[1200px] border-y border-cloud px-4 sm:px-6 py-6 sm:py-8">
-        <div className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-10 gap-y-3 text-fog text-center">
-          <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.2em] text-ash w-full sm:w-auto">Active Sabhas in Metro Cities:</span>
-          {["Delhi NCR", "Mumbai", "Bengaluru", "Pune", "Jaipur", "Hyderabad", "Kolkata", "Lucknow"].map(c => (
-            <span key={c} className="text-[13px] sm:text-[15px] font-semibold text-graphite flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 flex-none animate-pulse"></span> {c}
-            </span>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ValueSection() {
   return (
     <section id="values" className="px-4 sm:px-6 py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] rounded-[26px] sm:rounded-[36px] bg-obsidian p-6 sm:p-10 md:p-14 text-snow shadow-2xl relative overflow-hidden">
-        {/* Glow */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-ember/15 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start relative z-10">
@@ -622,7 +365,6 @@ function FeaturesSection() {
           ))}
         </div>
 
-        {/* Highlights strip */}
         <div className="mt-6 sm:mt-8 grid gap-3 sm:gap-4 rounded-[26px] sm:rounded-[36px] border border-cloud bg-snow p-5 sm:p-7 sm:grid-cols-2 lg:grid-cols-4 shadow-md">
           {highlights.map(h => (
             <div key={h.label} className="flex items-center gap-3 rounded-[18px] sm:rounded-[22px] bg-paper px-4 py-3 sm:px-5 sm:py-3.5 border border-cloud/50">
@@ -630,20 +372,6 @@ function FeaturesSection() {
                 <h.icon className="h-4 w-4 sm:h-5 sm:w-5 text-ember" />
               </div>
               <div className="text-[14px] sm:text-[15px] font-semibold text-graphite">{h.label}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* Stats row */}
-        <div className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 sm:grid-cols-3 pt-8 sm:pt-10 border-t border-cloud">
-          {[
-            { n: "50,000+", l: "Verified citizens building the digital manch every day" },
-            { n: "1,200+", l: "Active ward sabhas across 240+ Indian cities and towns" },
-            { n: "98.4%", l: "Members trust ApniSabha as a safe, unbiassed civic space" },
-          ].map(s => (
-            <div key={s.n} className="flex items-baseline gap-3 sm:gap-4">
-              <div className="text-[38px] sm:text-[48px] font-bold leading-none tracking-[-0.03em] text-obsidian md:text-[58px]">{s.n}</div>
-              <div className="text-[13px] sm:text-[14px] leading-relaxed text-steel font-medium">{s.l}</div>
             </div>
           ))}
         </div>
@@ -713,9 +441,7 @@ function CTASection({ user, onOpenLogin, onOpenSignup, onOpenReport }: CTASectio
   return (
     <section id="cta" className="px-4 sm:px-6 pb-16 sm:pb-24 pt-8 sm:pt-10 bg-snow">
       <div className="mx-auto max-w-[1200px] rounded-[26px] sm:rounded-[36px] border border-cloud bg-obsidian p-6 sm:p-10 md:p-16 text-snow shadow-2xl relative overflow-hidden">
-        {/* Glows */}
         <div className="absolute top-0 right-0 w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-ember/20 rounded-full blur-3xl pointer-events-none"></div>
-
         <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.4fr_1fr] md:items-center relative z-10">
           <div>
             <span className="inline-flex items-center gap-1.5 rounded-[10px] sm:rounded-[12px] bg-ember px-3 py-1 text-[10px] sm:text-[11px] font-bold text-snow uppercase tracking-wider">
@@ -760,7 +486,7 @@ function Footer() {
     <footer className="border-t border-cloud bg-paper">
       <div className="mx-auto grid max-w-[1200px] gap-8 sm:gap-10 px-4 sm:px-6 py-12 sm:py-16 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo />
+          <Logo onClick={(e) => smoothScrollToSection(e, "top")} />
           <p className="mt-3.5 sm:mt-4 max-w-xs text-[13px] sm:text-[14px] leading-relaxed text-steel">
             Apna Manch, Apni Awaaz — building a transparent, citizen-led digital public space for every neighborhood.
           </p>
@@ -813,15 +539,12 @@ function Index() {
   const [reportOpen, setReportOpen] = useState(false);
   const [user, setUser] = useState<UserProfile | null>(null);
 
-  // Load user from localStorage if saved
   useEffect(() => {
     const saved = localStorage.getItem("apnisabha_user");
     if (saved) {
       try {
         setUser(JSON.parse(saved));
-      } catch (e) {
-        // ignore
-      }
+      } catch (e) {}
     }
   }, []);
 
@@ -857,7 +580,6 @@ function Index() {
     <main className="min-h-screen overflow-x-clip bg-paper text-graphite selection:bg-ember selection:text-snow">
       <Toaster position="top-right" richColors closeButton />
       
-      {/* Live Activity Ticker */}
       <CivicTicker />
 
       <Nav
@@ -867,15 +589,25 @@ function Index() {
         onOpenReport={() => setReportOpen(true)}
         onLogout={handleLogout}
       />
-      <Hero
+      
+      <HeroSection
         user={user}
         onOpenSignupWithEmail={openSignupWithEmail}
         onOpenReport={() => setReportOpen(true)}
       />
+      
       <ValueSection />
+      
+      {/* ── NEW FEATURES INJECTED HERE ── */}
+      <IssueTracker />
+      
+      <GovernanceDirectory />
+      
+      <VolunteerBoard />
+      {/* ──────────────────────────────── */}
+
       <FeaturesSection />
       
-      {/* New Interactive Sections */}
       <InteractiveFeed
         user={user}
         onOpenAuth={openLogin}
@@ -894,7 +626,6 @@ function Index() {
       />
       <Footer />
 
-      {/* Auth Modal */}
       <AuthModal
         isOpen={authOpen}
         onClose={() => setAuthOpen(false)}
@@ -905,7 +636,6 @@ function Index() {
         initialEmail={authEmail}
       />
 
-      {/* Report Local Issue Modal */}
       <ReportIssueModal
         isOpen={reportOpen}
         onClose={() => setReportOpen(false)}

@@ -1,0 +1,195 @@
+import React, { useState } from "react";
+import { motion } from "motion/react";
+import { Sparkles, ArrowRight, CheckCircle2, MapPin, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import type { UserProfile } from "@/data/types";
+import logoMark from "@/assets/logo-mark.png";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (i: number = 0) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const, delay: i * 0.08 },
+  }),
+} as const;
+
+interface HeroProps {
+  user: UserProfile | null;
+  onOpenSignupWithEmail: (email: string) => void;
+  onOpenReport: () => void;
+}
+
+export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroProps) {
+  const [emailInput, setEmailInput] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
+
+  const smoothScrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const yOffset = -84;
+      const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
+  const handleJoinClick = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (user) {
+      toast.info("You are already logged in! Explore active Sabhas below.");
+      smoothScrollToSection("sabhas");
+    } else {
+      if (!emailInput.trim()) {
+        toast.error("Please enter your email or phone number first!");
+        return;
+      }
+
+      // Realistic Contact Verification Simulation
+      setIsVerifying(true);
+      toast.info("⚡ Verifying mobile/email with National Civic Citizen Registry...");
+
+      setTimeout(() => {
+        setIsVerifying(false);
+        toast.success(`🎉 Congratulations! '${emailInput}' is pre-verified for ward access. Welcome to the movement!`);
+        onOpenSignupWithEmail(emailInput);
+      }, 1000);
+    }
+  };
+
+  return (
+    <section className="relative overflow-hidden">
+      {/* Decorative gradient orb */}
+      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[400px] bg-gradient-to-b from-ember/10 to-transparent blur-3xl pointer-events-none"></div>
+
+      <div className="mx-auto grid max-w-[1200px] gap-12 sm:gap-16 px-4 sm:px-6 pb-14 sm:pb-20 pt-8 sm:pt-16 md:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-28 relative z-10">
+        <div className="flex flex-col justify-center">
+          <motion.div
+            initial="hidden" animate="visible" variants={fadeUp}
+            className="flex items-center gap-2 flex-wrap"
+          >
+            <span className="inline-flex items-center gap-1.5 rounded-[10px] sm:rounded-[12px] bg-ember px-2.5 py-1 sm:px-3 sm:py-1 text-[11px] sm:text-[12px] font-bold text-snow uppercase tracking-wider shadow-sm">
+              <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5 animate-spin" style={{ animationDuration: "8s" }} /> APNA MANCH · APNI AWAAZ
+            </span>
+            <span className="text-[11px] sm:text-[12px] font-medium text-fog">India's Civic Community Platform</span>
+          </motion.div>
+
+          <motion.h1
+            initial="hidden" animate="visible" custom={1} variants={fadeUp}
+            className="mt-4 sm:mt-6 text-[34px] font-semibold leading-[1.1] tracking-[-0.03em] text-obsidian sm:text-[46px] md:text-[56px] lg:text-[64px] lg:leading-[1.05]"
+          >
+            Where every voice<br />
+            builds a <span className="italic font-normal text-iron">movement</span>.
+          </motion.h1>
+
+          <motion.p
+            initial="hidden" animate="visible" custom={2} variants={fadeUp}
+            className="mt-4 sm:mt-6 max-w-xl text-[14px] sm:text-[16px] leading-[1.6] text-steel"
+          >
+            ApniSabha is a digital manch where citizens and leaders connect without barriers, debate real-world issues, and collaborate on actionable community solutions.
+          </motion.p>
+
+          <motion.form
+            onSubmit={handleJoinClick}
+            initial="hidden" animate="visible" custom={3} variants={fadeUp}
+            className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+          >
+            <div className="flex flex-col sm:flex-row w-full max-w-md items-stretch sm:items-center gap-2 rounded-[18px] border border-cloud bg-snow p-2 shadow-lg">
+              <input
+                type="text"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                placeholder="Enter email or mobile number..."
+                disabled={isVerifying}
+                className="flex-1 bg-transparent px-3 py-2.5 text-[14px] text-graphite outline-none placeholder:text-ash disabled:opacity-50"
+              />
+              <button
+                type="submit"
+                disabled={isVerifying}
+                className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-obsidian px-5 py-3 text-[14px] font-medium text-snow transition-all hover:bg-graphite disabled:opacity-50 shadow-sm cursor-pointer"
+              >
+                {isVerifying ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin text-ember" />
+                    <span>Verifying...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>{user ? "Explore Sabhas" : "Verify & Join"}</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </>
+                )}
+              </button>
+            </div>
+          </motion.form>
+
+          <motion.div
+            initial="hidden" animate="visible" custom={4} variants={fadeUp}
+            className="mt-6 sm:mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px] sm:text-[13px] text-fog font-medium"
+          >
+            {["Free forever for citizens", "No ads, 100% data privacy", "Verified civic identities"].map(t => (
+               <div key={t} className="flex items-center gap-1.5">
+                 <CheckCircle2 className="h-4 w-4 text-emerald-600 flex-none" /> <span>{t}</span>
+               </div>
+             ))}
+          </motion.div>
+        </div>
+
+        {/* Right — editorial card stack with subtle floating movement animation */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="relative flex flex-col gap-3.5 sm:gap-4"
+        >
+          {/* Floating animated badge */}
+          <motion.div
+            animate={{ y: [-4, 4, -4] }}
+            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+            className="absolute -top-6 -right-2 sm:-top-5 sm:-right-4 z-20 hidden sm:flex items-center gap-2 rounded-full border border-cloud bg-obsidian px-3.5 py-1.5 text-snow shadow-xl text-[12px] font-semibold"
+          >
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>🔥 42 Ward Sabhas Debating Right Now</span>
+          </motion.div>
+
+          <div className="rounded-[26px] sm:rounded-[36px] border border-cloud bg-snow p-5 sm:p-7 shadow-xl">
+            <div className="flex items-center justify-between">
+              <span className="inline-flex items-center gap-1.5 rounded-[10px] sm:rounded-[12px] bg-ember px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-snow">
+                <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse"></span> LIVE DISCUSSION
+              </span>
+              <span className="text-[11px] sm:text-[12px] font-semibold text-fog flex items-center gap-1">
+                <MapPin className="h-3.5 w-3.5 text-ember" /> Delhi Sabha
+              </span>
+            </div>
+            <div className="mt-4 sm:mt-6 flex items-center gap-3">
+              <img src={logoMark} alt="" className="h-10 w-10 sm:h-12 sm:w-12 rounded-[14px] sm:rounded-[16px] border border-cloud object-contain p-1.5 bg-paper flex-none" />
+              <div>
+                <div className="text-[15px] sm:text-[17px] font-semibold text-obsidian leading-snug">Clean Yamuna Citizen Initiative</div>
+                <div className="text-[12px] sm:text-[13px] text-fog font-medium">1,284 verified voices · 12 wards active</div>
+              </div>
+            </div>
+            <div className="mt-4 sm:mt-6 flex flex-wrap gap-1.5">
+              {["Water Preservation", "Civic Audit", "Volunteer Squad", "Municipal Action"].map(t => (
+                <span key={t} className="rounded-[10px] sm:rounded-[12px] border border-cloud bg-paper px-2.5 py-1 text-[11px] sm:text-[12px] font-medium text-graphite">{t}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3.5 sm:gap-4">
+            <div className="rounded-[22px] sm:rounded-[28px] border border-cloud bg-snow p-4 sm:p-6 shadow-md">
+              <div className="text-[26px] sm:text-[32px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1">
+                <span>50,000+</span>
+                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              </div>
+              <div className="mt-1 text-[12px] sm:text-[13px] font-medium text-fog">Citizens across India actively engaged</div>
+            </div>
+            <div className="rounded-[22px] sm:rounded-[28px] border border-cloud bg-paper p-4 sm:p-6 shadow-md">
+              <div className="text-[26px] sm:text-[32px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1">
+                <span>92%</span>
+                <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse"></span>
+              </div>
+              <div className="mt-1 text-[12px] sm:text-[13px] font-medium text-fog">Civic issues routed to municipal officers</div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
