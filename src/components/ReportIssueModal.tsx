@@ -9,6 +9,7 @@ import {
 import { toast } from "sonner";
 import type { UserProfile } from "@/data/types";
 import { issueCategories } from "@/data/issueCategories";
+import { indiaStates, getDistrictsForState } from "@/data/indiaLocations";
 
 // Icon mapping for dynamic icon rendering from category data
 const iconMap: Record<string, React.ElementType> = {
@@ -27,7 +28,9 @@ interface ReportIssueModalProps {
 
 export function ReportIssueModal({ isOpen, onClose, user, onOpenAuth }: ReportIssueModalProps) {
   const [selectedCategoryCode, setSelectedCategoryCode] = useState<string | null>(null);
-  const [ward, setWard] = useState("Ward 42 (Metro Station Road)");
+  const [selectedState, setSelectedState] = useState("");
+  const [district, setDistrict] = useState("");
+  const [ward, setWard] = useState("");
   const [description, setDescription] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [step, setStep] = useState<"category" | "form" | "simulating" | "success">("category");
@@ -66,8 +69,8 @@ export function ReportIssueModal({ isOpen, onClose, user, onOpenAuth }: ReportIs
       onOpenAuth();
       return;
     }
-    if (!description.trim()) {
-      toast.error("Please enter issue details and suggested resolution.");
+    if (!selectedCategoryCode || !ward || !description || !selectedState || !district) {
+      toast.error("Please fill in all location details and issue description.");
       return;
     }
 
@@ -252,6 +255,36 @@ export function ReportIssueModal({ isOpen, onClose, user, onOpenAuth }: ReportIs
 
               {/* Form Fields */}
               <form onSubmit={handleSubmit} className="mt-4 space-y-3.5">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[12px] font-semibold text-obsidian mb-1.5">State</label>
+                    <select
+                      value={selectedState}
+                      onChange={(e) => { setSelectedState(e.target.value); setDistrict(""); }}
+                      className="w-full rounded-[14px] border border-cloud bg-paper px-3 py-3 text-[13px] font-medium text-obsidian outline-none focus:border-obsidian transition-colors appearance-none"
+                    >
+                      <option value="" disabled>Select State...</option>
+                      {indiaStates.map(s => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[12px] font-semibold text-obsidian mb-1.5">District / Region</label>
+                    <select
+                      value={district}
+                      onChange={(e) => setDistrict(e.target.value)}
+                      disabled={!selectedState}
+                      className="w-full rounded-[14px] border border-cloud bg-paper px-3 py-3 text-[13px] font-medium text-obsidian outline-none focus:border-obsidian transition-colors appearance-none disabled:opacity-50"
+                    >
+                      <option value="" disabled>Select District...</option>
+                      {selectedState && getDistrictsForState(selectedState).map(d => (
+                        <option key={d} value={d}>{d}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-[12px] font-semibold text-obsidian mb-1.5">Ward / Locality Name</label>
                   <div className="relative">

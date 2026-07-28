@@ -5,6 +5,7 @@ import { governanceOfficials, searchOfficials, getOfficialsByTier } from '@/data
 import { GovernanceTier } from '@/data/types';
 import { OfficialCard } from './OfficialCard';
 import { HierarchyTree } from './HierarchyTree';
+import { indiaStates, getDistrictsForState } from '@/data/indiaLocations';
 
 const tabs: { label: string; value: GovernanceTier | 'ALL' }[] = [
   { label: 'All Tiers', value: 'ALL' },
@@ -17,6 +18,8 @@ const tabs: { label: string; value: GovernanceTier | 'ALL' }[] = [
 export const GovernanceDirectory: React.FC = () => {
   const [activeTab, setActiveTab] = useState<GovernanceTier | 'ALL'>('ALL');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedDistrict, setSelectedDistrict] = useState('');
 
   const filteredOfficials = useMemo(() => {
     let result = governanceOfficials;
@@ -134,6 +137,27 @@ export const GovernanceDirectory: React.FC = () => {
             />
           </div>
 
+          <div className="flex items-center gap-2 w-full lg:w-auto">
+            <select
+              value={selectedState}
+              onChange={(e) => { setSelectedState(e.target.value); setSelectedDistrict(''); }}
+              className="w-full lg:w-40 px-3 py-2.5 border border-cloud rounded-[16px] bg-white text-sm text-obsidian focus:outline-none focus:border-ember appearance-none"
+            >
+              <option value="">All States</option>
+              {indiaStates.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+            
+            <select
+              value={selectedDistrict}
+              onChange={(e) => setSelectedDistrict(e.target.value)}
+              disabled={!selectedState}
+              className="w-full lg:w-40 px-3 py-2.5 border border-cloud rounded-[16px] bg-white text-sm text-obsidian focus:outline-none focus:border-ember appearance-none disabled:opacity-50"
+            >
+              <option value="">All Districts</option>
+              {selectedState && getDistrictsForState(selectedState).map(d => <option key={d} value={d}>{d}</option>)}
+            </select>
+          </div>
+          
           <div className="flex overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 gap-2 hide-scrollbar">
             {tabs.map((tab) => (
               <button

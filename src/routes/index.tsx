@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "motion/react";
 import {
   Users, ShieldCheck, Lightbulb, Target, TrendingUp,
@@ -23,6 +23,7 @@ import { GhostBtn } from "@/components/shared/GhostBtn";
 import { HeroSection } from "@/components/landing/HeroSection";
 
 // New Feature Components
+import { OfficialOnboardingModal } from "@/components/governance/OfficialOnboardingModal";
 import { GovernanceDirectory } from "@/components/governance/GovernanceDirectory";
 import { IssueTracker } from "@/components/issues/IssueTracker";
 import { VolunteerBoard } from "@/components/community/VolunteerBoard";
@@ -87,6 +88,7 @@ interface NavProps {
 function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavProps) {
   const [showMenu, setShowMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showOfficialModal, setShowOfficialModal] = useState(false);
 
   const links = [
     { label: "Values", href: "#values" },
@@ -117,6 +119,14 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
 
         {/* Right action area */}
         <div className="flex items-center gap-2 sm:gap-3">
+          <button
+            onClick={() => setShowOfficialModal(true)}
+            className="hidden lg:flex items-center gap-1.5 rounded-[12px] bg-blue-500/10 border border-blue-500/20 px-3 py-2 text-[12px] sm:text-[13px] font-bold text-blue-600 hover:bg-blue-500/20 transition-all shadow-sm"
+          >
+            <ShieldCheck className="h-3.5 w-3.5" />
+            <span>Official Portal</span>
+          </button>
+
           <button
             onClick={onOpenReport}
             className="hidden md:flex items-center gap-1.5 rounded-[12px] bg-red-500/10 border border-red-500/20 px-3 py-2 text-[12px] sm:text-[13px] font-bold text-red-600 hover:bg-red-500/20 transition-all shadow-sm"
@@ -153,13 +163,13 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
                     </div>
                   </div>
 
-                  <a
-                    href="#dashboard"
-                    onClick={(e) => { smoothScrollToSection(e, "#dashboard"); setShowProfileMenu(false); }}
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setShowProfileMenu(false)}
                     className="w-full flex items-center gap-2.5 rounded-[12px] px-3 py-2 text-[13px] text-graphite hover:bg-paper transition-colors"
                   >
                     <LayoutDashboard className="h-4 w-4 text-fog" /> Civic Dashboard
-                  </a>
+                  </Link>
                   <button
                     onClick={() => { setShowProfileMenu(false); onOpenReport(); }}
                     className="w-full flex items-center gap-2.5 rounded-[12px] px-3 py-2 text-[13px] text-red-600 hover:bg-red-50 transition-colors font-medium"
@@ -178,6 +188,12 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
             </div>
           ) : (
             <>
+              <button
+                onClick={() => setShowOfficialModal(true)}
+                className="hidden md:inline-block rounded-[14px] px-3.5 py-2 text-[13px] font-bold text-blue-600 transition-colors hover:bg-blue-50 mr-1"
+              >
+                Official Portal
+              </button>
               <button
                 onClick={onOpenLogin}
                 className="hidden rounded-[14px] px-3.5 py-2 text-[14px] font-medium text-graphite transition-colors hover:bg-cloud/60 hover:text-obsidian md:inline-block cursor-pointer"
@@ -200,6 +216,11 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
           </button>
         </div>
       </div>
+      
+      <OfficialOnboardingModal 
+        isOpen={showOfficialModal} 
+        onClose={() => setShowOfficialModal(false)} 
+      />
 
       {/* Mobile Drawer Menu */}
       <AnimatePresence>

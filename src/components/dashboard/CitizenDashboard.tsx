@@ -9,9 +9,10 @@ import { toast } from 'sonner';
 
 interface CitizenDashboardProps {
   user: UserProfile | null;
+  onOpenLogin?: () => void;
 }
 
-export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ user }) => {
+export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ user, onOpenLogin }) => {
   if (!user) {
     return (
       <section id="dashboard" className="py-16 px-4 md:px-8 max-w-7xl mx-auto">
@@ -30,8 +31,8 @@ export const CitizenDashboard: React.FC<CitizenDashboardProps> = ({ user }) => {
           <h3 className="text-2xl font-bold text-obsidian mb-4">Login to access your Civic Dashboard</h3>
           <p className="text-steel mb-8 max-w-md mx-auto">Track your issues, view platform transparency, and engage with your local community sabhas.</p>
           <button 
-            onClick={() => toast.info('Redirecting to login...')}
-            className="bg-obsidian text-white px-8 py-3 rounded-[16px] font-semibold text-lg hover:bg-graphite transition-all hover:shadow-md"
+            onClick={onOpenLogin}
+            className="mt-8 bg-obsidian text-snow px-8 py-3.5 rounded-full font-bold text-sm hover:bg-graphite transition-all shadow-md cursor-pointer inline-flex items-center gap-2"
           >
             Log In or Sign Up
           </button>
