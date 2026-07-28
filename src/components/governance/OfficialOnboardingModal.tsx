@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ShieldCheck, Mail, Building, ArrowRight, CheckCircle2 } from "lucide-react";
 
@@ -10,9 +11,15 @@ interface OfficialOnboardingModalProps {
 export const OfficialOnboardingModal: React.FC<OfficialOnboardingModalProps> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState(1);
 
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
 
-  return (
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
+
+  return createPortal(
     <AnimatePresence>
       <div className="fixed inset-0 z-[100] flex items-start justify-center bg-obsidian/40 backdrop-blur-sm p-4 pt-12 sm:pt-20 overflow-y-auto">
         <motion.div
@@ -103,6 +110,7 @@ export const OfficialOnboardingModal: React.FC<OfficialOnboardingModalProps> = (
           </div>
         </motion.div>
       </div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
