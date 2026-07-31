@@ -307,6 +307,7 @@ function ValueSection() {
     <section id="values" className="px-4 sm:px-6 py-14 sm:py-20 md:py-28">
       <div className="mx-auto max-w-[1200px] rounded-[26px] sm:rounded-[36px] bg-obsidian p-6 sm:p-10 md:p-14 text-snow shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-ember/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start relative z-10">
           <div>
@@ -327,8 +328,9 @@ function ValueSection() {
                 key={v.title}
                 initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
                 custom={i} variants={fadeUp}
-                className="group rounded-[20px] sm:rounded-[26px] border border-white/10 bg-slate/80 p-5 sm:p-6 transition-all hover:border-white/30 hover:bg-slate shadow-lg"
+                className="group relative rounded-[20px] sm:rounded-[26px] border border-white/10 bg-slate/80 p-5 sm:p-6 transition-all hover:border-white/30 hover:bg-slate hover:shadow-[0_0_30px_rgba(255,90,0,0.15)] shadow-lg"
               >
+                <div className="absolute top-4 right-4 text-[11px] font-black text-white/10 sm:text-[12px]">0{i + 1}</div>
                 <div className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-[12px] sm:rounded-[14px] bg-snow/10 text-snow group-hover:bg-ember group-hover:text-snow transition-colors">
                   <v.icon className="h-5 w-5" />
                 </div>
@@ -365,17 +367,17 @@ function FeaturesSection() {
               key={f.title}
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
               custom={i} variants={fadeUp}
-              className="group flex flex-col justify-between rounded-[24px] sm:rounded-[32px] border border-cloud/80 bg-white p-6 sm:p-8 transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 hover:border-cloud"
+              className="group flex flex-col justify-between rounded-[24px] sm:rounded-[32px] border border-cloud/80 bg-white p-6 sm:p-8 transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 hover:border-cloud hover:border-t-ember/40"
             >
               <div>
-                <div className="grid h-12 w-12 sm:h-14 sm:w-14 place-items-center rounded-[14px] sm:rounded-[16px] bg-gradient-to-br from-paper to-snow border border-cloud/60 text-obsidian shadow-sm group-hover:bg-gradient-to-br group-hover:from-obsidian group-hover:to-graphite group-hover:text-white transition-all duration-300">
+                <div className="grid h-12 w-12 sm:h-14 sm:w-14 place-items-center rounded-[14px] sm:rounded-[16px] bg-gradient-to-br from-paper to-snow border border-cloud/60 text-obsidian shadow-sm group-hover:bg-gradient-to-br group-hover:from-obsidian group-hover:to-graphite group-hover:text-white group-hover:rotate-6 transition-all duration-300">
                   <f.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
                 <h3 className="mt-6 sm:mt-8 text-[20px] sm:text-[22px] font-semibold tracking-tight text-obsidian">{f.title}</h3>
                 <p className="mt-2 text-[13px] sm:text-[14px] leading-relaxed text-steel">{f.desc}</p>
               </div>
               <div className="mt-6 sm:mt-8 flex items-center gap-1.5 text-[13px] font-semibold text-obsidian pt-4 border-t border-cloud">
-                Explore feature <ArrowUpRight className="h-4 w-4 text-ember transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <><span className="inline-block group-hover:translate-x-1 transition-transform">Explore feature</span><ArrowUpRight className="h-4 w-4 text-ember transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></>
               </div>
             </motion.div>
           ))}
@@ -405,15 +407,18 @@ function AboutSection() {
           viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7 }}
           className="relative"
         >
-          <img
-            src={community} alt="Community in conversation"
-            width={1600} height={1200} loading="lazy"
-            className="aspect-[4/3] w-full rounded-[26px] sm:rounded-[36px] border border-cloud object-cover shadow-2xl"
-          />
-          <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 rounded-[22px] sm:rounded-[28px] border border-cloud bg-obsidian p-4 sm:p-6 text-snow shadow-2xl max-w-[220px] sm:max-w-[260px] hidden sm:block">
+          <div className="relative overflow-hidden">
+            <img
+              src={community} alt="Community in conversation"
+              width={1600} height={1200} loading="lazy"
+              className="aspect-[4/3] w-full rounded-[26px] sm:rounded-[36px] border border-cloud object-cover shadow-2xl"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-obsidian/10 via-transparent to-transparent rounded-[26px] sm:rounded-[36px] pointer-events-none"></div>
+          </div>
+          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 rounded-[22px] sm:rounded-[28px] border border-cloud bg-obsidian p-4 sm:p-6 text-snow shadow-2xl max-w-[220px] sm:max-w-[260px] hidden sm:block">
             <div className="text-[20px] sm:text-[24px] font-bold text-ember">100% Democratic</div>
             <div className="text-[12px] sm:text-[13px] text-ash mt-1">No corporate algorithms. No echo chambers. Just community.</div>
-          </div>
+          </motion.div>
         </motion.div>
 
         <div>
@@ -432,7 +437,7 @@ function AboutSection() {
               "Multi-lingual interface — participate in Hindi, English, Marathi, Kannada, and Bengali.",
               "Civic accountability tools that connect community consensus directly to municipal authorities.",
             ].map(t => (
-              <div key={t} className="flex items-start gap-3 rounded-[18px] sm:rounded-[22px] border border-cloud bg-paper px-4 py-3.5 sm:px-5 sm:py-4 transition-colors hover:border-iron/40">
+              <div key={t} className="flex items-start gap-3 rounded-[18px] sm:rounded-[22px] border border-cloud bg-paper px-4 py-3.5 sm:px-5 sm:py-4 transition-colors hover:border-iron/40 hover:translate-x-1">
                 <div className="mt-0.5 grid h-5 w-5 sm:h-6 sm:w-6 flex-none place-items-center rounded-full bg-obsidian text-snow">
                   <CheckCircle2 className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-emerald-400" />
                 </div>
@@ -458,6 +463,7 @@ function CTASection({ user, onOpenLogin, onOpenSignup, onOpenReport }: CTASectio
     <section id="cta" className="px-4 sm:px-6 pb-16 sm:pb-24 pt-8 sm:pt-10 bg-snow">
       <div className="mx-auto max-w-[1200px] rounded-[26px] sm:rounded-[36px] border border-cloud bg-obsidian p-6 sm:p-10 md:p-16 text-snow shadow-2xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-ember/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -bottom-20 -left-20 w-[350px] h-[350px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.4fr_1fr] md:items-center relative z-10">
           <div>
             <span className="inline-flex items-center gap-1.5 rounded-[10px] sm:rounded-[12px] bg-ember px-3 py-1 text-[10px] sm:text-[11px] font-bold text-snow uppercase tracking-wider">
@@ -469,6 +475,7 @@ function CTASection({ user, onOpenLogin, onOpenSignup, onOpenReport }: CTASectio
             <p className="mt-3.5 sm:mt-5 max-w-xl text-[14px] sm:text-[16px] leading-relaxed text-ash">
               Join 50,000+ active citizens and community leaders shaping the conversation on ApniSabha. Free forever. Built for India.
             </p>
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-4 sm:mt-5 flex items-center gap-2 text-[13px] sm:text-[14px] text-ash"><span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span><span className="text-snow font-semibold">50,247</span> citizens active right now</motion.div>
           </div>
           <div id="contact" className="flex flex-col gap-3 sm:gap-3.5">
             {user ? (
@@ -525,7 +532,7 @@ function Footer() {
                   <a
                     href="#"
                     onClick={(e) => { e.preventDefault(); toast.info(`${i} section loading...`); }}
-                    className="text-steel transition-colors hover:text-obsidian block py-0.5"
+                    className="text-steel transition-all hover:text-obsidian hover:translate-x-0.5 block py-0.5"
                   >
                     {i}
                   </a>
@@ -539,7 +546,7 @@ function Footer() {
         <div className="mx-auto flex max-w-[1200px] flex-col items-center justify-between gap-3 sm:gap-4 px-4 sm:px-6 py-6 sm:py-8 text-[12px] sm:text-[13px] text-fog sm:flex-row text-center">
           <div className="font-medium">© {new Date().getFullYear()} ApniSabha. All rights reserved. Built for democratic empowerment.</div>
           <div className="flex items-center gap-2">
-            <span>Made with intention ·</span>
+            <span>Made with ❤️ intention ·</span>
             <span className="font-semibold text-obsidian">Apna Manch, Apni Awaaz</span>
           </div>
         </div>

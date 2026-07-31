@@ -97,7 +97,7 @@ export function CivicTicker() {
     <div
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="relative overflow-hidden border-b border-cloud bg-obsidian py-3 sm:py-3.5 px-4 sm:px-6 text-snow shadow-md transition-all selection:bg-ember selection:text-snow"
+      className="relative overflow-hidden border-b border-cloud bg-obsidian/95 backdrop-blur-xl py-3 sm:py-3.5 px-4 sm:px-6 text-snow shadow-md transition-all selection:bg-ember selection:text-snow"
     >
       <div className="mx-auto flex flex-col md:flex-row max-w-[1200px] items-stretch md:items-center justify-between gap-2.5 md:gap-3 text-[12px] sm:text-[13px]">
         {/* Top bar on mobile / Left indicator on desktop */}
@@ -148,7 +148,7 @@ export function CivicTicker() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.35 }}
+              transition={{ duration: 0.4, type: 'spring', stiffness: 300, damping: 30 }}
               className="flex flex-col md:flex-row md:items-center gap-1 md:gap-2"
             >
               {/* Badge & Name Row - Shown cleanly without truncate on mobile! */}
@@ -201,6 +201,7 @@ export function CivicTicker() {
           </button>
         </div>
       </div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ember/40 to-transparent"></div>
     </div>
   );
 }

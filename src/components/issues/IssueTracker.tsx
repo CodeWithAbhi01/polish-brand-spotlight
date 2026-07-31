@@ -23,7 +23,8 @@ export const IssueTracker: React.FC = () => {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header section */}
-        <div className="text-center mb-12">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-ember/10 text-ember text-sm font-semibold mb-4"><span className="h-2 w-2 rounded-full bg-ember animate-pulse"></span>Civic Accountability</div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-obsidian mb-4">
             Issue Escalation Tracker
           </h2>
@@ -31,22 +32,23 @@ export const IssueTracker: React.FC = () => {
             Track every civic issue from filing to resolution. Complete transparency at every level.
           </p>
         </div>
+        <div className="h-1 w-20 mx-auto rounded-full bg-gradient-to-r from-ember to-ember/20 mb-12"></div>
 
         {/* Stats bar */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center">
+          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center hover:shadow-md transition-all hover:-translate-y-0.5">
             <span className="block text-2xl font-bold text-obsidian">{totalIssues}</span>
             <span className="text-xs text-fog uppercase font-bold tracking-wider">Total Issues</span>
           </div>
-          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center">
+          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center hover:shadow-md transition-all hover:-translate-y-0.5">
             <span className="block text-2xl font-bold text-green-600">{resolvedCount}</span>
             <span className="text-xs text-fog uppercase font-bold tracking-wider">Resolved</span>
           </div>
-          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center">
+          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center hover:shadow-md transition-all hover:-translate-y-0.5">
             <span className="block text-2xl font-bold text-blue-600">48h</span>
             <span className="text-xs text-fog uppercase font-bold tracking-wider">Avg Resolution</span>
           </div>
-          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center">
+          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center hover:shadow-md transition-all hover:-translate-y-0.5">
             <span className="block text-2xl font-bold text-amber-600">{activeEscalations}</span>
             <span className="text-xs text-fog uppercase font-bold tracking-wider">Active Escalations</span>
           </div>

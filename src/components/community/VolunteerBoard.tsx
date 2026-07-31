@@ -25,6 +25,7 @@ export const VolunteerBoard: React.FC = () => {
         viewport={{ once: true }}
         className="mb-10 text-center"
       >
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[11px] font-bold text-amber-600 uppercase tracking-wider border border-amber-200 mb-3"><Award className="h-3 w-3" /> Hall of Impact</div>
         <h2 className="text-3xl font-bold text-obsidian mb-2">Civic Champions</h2>
         <p className="text-steel">Citizens making a real difference</p>
       </motion.div>
@@ -62,7 +63,7 @@ export const VolunteerBoard: React.FC = () => {
               <div className="absolute -top-6 sm:-top-8 left-1/2 -translate-x-1/2 text-amber-500 drop-shadow-xl animate-bounce">
                 <Award size={32} className="fill-amber-100 sm:w-10 sm:h-10" />
               </div>
-              <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white border-2 sm:border-4 border-amber-400 rounded-full flex items-center justify-center text-xl sm:text-2xl font-black text-amber-700 shadow-[0_0_30px_rgba(251,191,36,0.4)] relative overflow-hidden">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 bg-white border-2 sm:border-4 border-amber-400 rounded-full flex items-center justify-center text-xl sm:text-2xl font-black text-amber-700 shadow-[0_0_30px_rgba(251,191,36,0.4)] hover:shadow-[0_0_40px_rgba(251,191,36,0.6)] transition-shadow relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-100/50 to-transparent"></div>
                 {top3[0].name.split(' ').map(n => n[0]).join('')}
               </div>
@@ -72,7 +73,7 @@ export const VolunteerBoard: React.FC = () => {
             </div>
             <h4 className="font-black text-obsidian text-[12px] sm:text-lg text-center leading-tight truncate w-24 sm:w-auto">{top3[0].name}</h4>
             <p className="text-[10px] sm:text-xs text-steel mb-2 sm:mb-3 font-medium">{top3[0].ward}</p>
-            <div className="bg-gradient-to-t from-amber-50 to-white border border-amber-200 px-2 py-10 sm:px-4 sm:py-12 rounded-t-[20px] sm:rounded-t-[24px] w-24 sm:w-36 flex flex-col items-center shadow-[0_-8px_30px_rgba(251,191,36,0.25)] relative overflow-hidden">
+            <div className="bg-gradient-to-t from-amber-50 to-white border border-amber-200 px-2 py-10 sm:px-4 sm:py-12 rounded-t-[20px] sm:rounded-t-[24px] w-24 sm:w-36 flex flex-col items-center shadow-[0_-8px_30px_rgba(251,191,36,0.25)] hover:shadow-[0_-12px_40px_rgba(251,191,36,0.3)] transition-shadow relative overflow-hidden">
               <div className="absolute top-0 left-0 w-full h-1 sm:h-1.5 bg-gradient-to-r from-amber-300 to-amber-500"></div>
               <span className="font-black text-2xl sm:text-3xl text-amber-700">{top3[0].issuesResolved}</span>
               <span className="text-[8px] sm:text-[10px] uppercase text-amber-600 font-bold tracking-wider mt-1">Resolved</span>
@@ -110,7 +111,7 @@ export const VolunteerBoard: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 * idx }}
-              className={`flex items-center justify-between p-4 px-5 sm:px-8 ${idx !== rest.length - 1 ? 'border-b border-cloud/60' : ''} hover:bg-snow transition-all duration-300 group`}
+              className={`flex items-center justify-between p-4 px-5 sm:px-8 ${idx !== rest.length - 1 ? 'border-b border-cloud/60' : ''} hover:bg-paper/80 transition-colors duration-300 group`}
             >
               <div className="flex items-center gap-4 sm:gap-6">
                 <div className="w-6 sm:w-8 font-black text-fog/60 group-hover:text-ember transition-colors text-sm sm:text-base">#{idx + 4}</div>

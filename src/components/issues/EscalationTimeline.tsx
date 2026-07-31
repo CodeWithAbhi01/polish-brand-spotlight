@@ -25,7 +25,7 @@ export const EscalationTimeline: React.FC<EscalationTimelineProps> = ({ steps })
   return (
     <div className="relative pl-6 py-4">
       {/* Vertical line connecting steps */}
-      <div className="absolute top-8 bottom-8 left-[39px] w-0.5 bg-cloud rounded" />
+      <div className="absolute top-8 bottom-8 left-[39px] w-0.5 bg-gradient-to-b from-cloud via-ember/20 to-cloud rounded" />
 
       <div className="flex flex-col gap-6 relative">
         {steps.map((step, idx) => {
@@ -74,7 +74,7 @@ export const EscalationTimeline: React.FC<EscalationTimelineProps> = ({ steps })
               </div>
 
               {/* Content Card */}
-              <div className={`flex-1 p-4 rounded-[16px] border ${isBreached ? 'border-red-200 bg-red-50/30' : 'border-cloud bg-snow'}`}>
+              <div className={`flex-1 p-4 rounded-[16px] border hover:shadow-sm transition-shadow ${isBreached ? 'border-red-200 bg-red-50/30' : 'border-cloud bg-snow'}`}>
                 <div className="flex items-start justify-between flex-wrap gap-2 mb-2">
                   <div>
                     <div className="flex items-center gap-2 mb-1">

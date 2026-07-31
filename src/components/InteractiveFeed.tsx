@@ -165,6 +165,7 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
             <h2 className="mt-2 text-[30px] font-semibold leading-[1.15] tracking-[-0.025em] text-obsidian sm:text-[38px] md:text-[48px]">
               Active discussions shaping our cities.
             </h2>
+            <div className="mt-3 h-1 w-16 rounded-full bg-gradient-to-r from-ember to-ember/30"></div>
           </div>
           <p className="max-w-md text-[13px] sm:text-[14px] leading-relaxed text-steel">
             Filter by civic category, support verified citizen initiatives, and join real-world working groups in your neighborhood.
@@ -179,7 +180,7 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
               onClick={() => setSelectedCat(cat)}
               className={`whitespace-nowrap rounded-[14px] px-3.5 py-2 text-[12px] sm:text-[13px] font-medium transition-all flex-none ${
                 selectedCat === cat
-                  ? "bg-obsidian text-snow shadow-md scale-[1.02]"
+                  ? "bg-obsidian text-snow shadow-md scale-[1.02] ring-1 ring-obsidian/10"
                   : "bg-snow text-graphite border border-cloud hover:border-iron"
               }`}
             >
@@ -203,13 +204,13 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   key={item.id}
-                  className="group flex flex-col justify-between rounded-[24px] sm:rounded-[32px] border border-cloud bg-snow p-5 sm:p-7 transition-all hover:border-iron/40 hover:shadow-xl"
+                  className="group flex flex-col justify-between rounded-[24px] sm:rounded-[32px] border border-cloud bg-snow p-5 sm:p-7 transition-all hover:border-iron/40 hover:border-ember/20 hover:shadow-xl"
                 >
                   <div>
                     {/* Top strip */}
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-bold text-snow ${item.badgeColor}`}>
+                        <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[10px] font-bold text-snow shadow-sm ${item.badgeColor}`}>
                           <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse"></span>
                           {item.status}
                         </span>
@@ -234,7 +235,7 @@ export function InteractiveFeed({ user, onOpenAuth }: InteractiveFeedProps) {
                   {/* Author info & Actions footer */}
                   <div className="mt-5 sm:mt-6 pt-4 sm:pt-5 border-t border-cloud flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
                     <div className="flex items-center gap-2.5">
-                      <div className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full bg-obsidian text-[11px] sm:text-[12px] font-bold text-snow flex-none">
+                      <div className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full bg-obsidian ring-2 ring-obsidian group-hover:ring-ember/50 transition-all text-[11px] sm:text-[12px] font-bold text-snow flex-none">
                         {item.author.slice(0, 2).toUpperCase()}
                       </div>
                       <div>

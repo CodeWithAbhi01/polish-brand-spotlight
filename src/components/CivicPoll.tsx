@@ -77,8 +77,9 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
   };
 
   return (
-    <section className="px-4 sm:px-6 py-12 sm:py-16 bg-snow border-y border-cloud">
-      <div className="mx-auto max-w-[1000px] rounded-[26px] sm:rounded-[36px] bg-obsidian p-6 sm:p-10 md:p-12 text-snow shadow-2xl relative overflow-hidden">
+    <section className="relative overflow-hidden px-4 sm:px-6 py-12 sm:py-16 bg-snow border-y border-cloud">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-ember/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="mx-auto max-w-[1000px] rounded-[26px] sm:rounded-[36px] bg-obsidian ring-1 ring-ember/10 p-6 sm:p-10 md:p-12 text-snow shadow-2xl relative overflow-hidden">
         {/* Decorative background blur */}
         <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-ember/20 blur-3xl pointer-events-none"></div>
         <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-blue-500/15 blur-3xl pointer-events-none"></div>
@@ -102,6 +103,7 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
               <span>·</span>
               <span>{totalVotes.toLocaleString()} Votes Today</span>
             </div>
+            <div className="mt-3 flex items-center gap-2 text-[12px] text-snow/70"><span className="font-mono font-bold text-ember text-[14px]">4h 23m</span> remaining to vote</div>
           </div>
 
           {/* Right Column: Interactive Options */}
@@ -112,7 +114,7 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
                 <div
                   key={opt.id}
                   onClick={() => handleVote(opt.id)}
-                  className={`group relative overflow-hidden rounded-[18px] sm:rounded-[22px] border p-4 sm:p-5 transition-all cursor-pointer ${
+                  className={`group relative overflow-hidden rounded-[18px] sm:rounded-[22px] border p-4 sm:p-5 transition-all hover:scale-[1.01] cursor-pointer ${
                     isSelected
                       ? "border-ember bg-slate/90 shadow-lg shadow-ember/10"
                       : "border-slate bg-graphite/80 hover:border-iron hover:bg-slate/50"
@@ -123,7 +125,7 @@ export function CivicPoll({ user, onOpenAuth }: CivicPollProps) {
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${opt.percentage}%` }}
-                      transition={{ duration: 0.8, ease: "easeOut" }}
+                      transition={{ duration: 1, type: "spring", stiffness: 100, damping: 20 }}
                       className={`absolute left-0 top-0 bottom-0 opacity-15 ${opt.color}`}
                     />
                   )}

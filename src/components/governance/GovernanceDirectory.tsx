@@ -51,7 +51,7 @@ export const GovernanceDirectory: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-ember/10 text-ember text-sm font-semibold mb-4"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-ember/10 text-ember text-sm font-semibold mb-4 shadow-sm"
           >
             <Shield className="w-4 h-4" />
             <span>Civic Transparency</span>
@@ -74,6 +74,7 @@ export const GovernanceDirectory: React.FC = () => {
           >
             Every official. Every tier. Complete transparency.
           </motion.p>
+          <div className="mt-4 h-1 w-16 mx-auto rounded-full bg-gradient-to-r from-ember to-ember/20"></div>
         </div>
 
         {/* Stats */}
@@ -84,8 +85,8 @@ export const GovernanceDirectory: React.FC = () => {
           transition={{ delay: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16"
         >
-          <div className="bg-white rounded-[24px] p-6 shadow-sm border border-cloud flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500">
+          <div className="bg-white rounded-[24px] p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 group border border-cloud flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500 group-hover:scale-110 transition-transform">
               <Users className="w-6 h-6" />
             </div>
             <div>
@@ -93,8 +94,8 @@ export const GovernanceDirectory: React.FC = () => {
               <p className="text-2xl font-bold text-obsidian">{totalOfficials}</p>
             </div>
           </div>
-          <div className="bg-white rounded-[24px] p-6 shadow-sm border border-cloud flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500">
+          <div className="bg-white rounded-[24px] p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 group border border-cloud flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform">
               <CheckCircle2 className="w-6 h-6" />
             </div>
             <div>
@@ -102,8 +103,8 @@ export const GovernanceDirectory: React.FC = () => {
               <p className="text-2xl font-bold text-obsidian">{onboardedCount}</p>
             </div>
           </div>
-          <div className="bg-white rounded-[24px] p-6 shadow-sm border border-cloud flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center text-amber-500">
+          <div className="bg-white rounded-[24px] p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 group border border-cloud flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-amber-50 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
               <Activity className="w-6 h-6" />
             </div>
             <div>
@@ -133,7 +134,7 @@ export const GovernanceDirectory: React.FC = () => {
               placeholder="Search by name, designation, or jurisdiction..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="block w-full pl-10 pr-3 py-3 border border-cloud rounded-[20px] bg-white leading-5 placeholder-fog focus:outline-none focus:ring-2 focus:ring-ember/50 focus:border-ember transition-colors sm:text-sm shadow-sm"
+              className="block w-full pl-10 pr-3 py-3 border border-cloud rounded-[20px] bg-white leading-5 placeholder-fog focus:outline-none focus:ring-2 focus:ring-ember/50 focus:border-ember transition-colors sm:text-sm shadow-sm hover:shadow-md transition-shadow"
             />
           </div>
 

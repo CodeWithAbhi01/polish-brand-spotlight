@@ -207,3 +207,55 @@
   border: 1px solid var(--cloud);
   border-radius: 36px;
 }
+
+@utility glass-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(236,236,238,0.6);
+}
+
+@utility shimmer-text {
+  background: linear-gradient(90deg, var(--obsidian) 0%, var(--ember) 50%, var(--obsidian) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmerSlide 3s ease-in-out infinite;
+}
+
+@keyframes shimmerSlide {
+  0%, 100% { background-position: 200% center; }
+  50% { background-position: 0% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@utility animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@layer base {
+  /* Smooth scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--ash);
+    border-radius: 100px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--iron);
+  }
+}

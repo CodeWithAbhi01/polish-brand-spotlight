@@ -59,6 +59,7 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
     <section className="relative overflow-hidden">
       {/* Decorative gradient orb */}
       <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[400px] bg-gradient-to-b from-ember/10 to-transparent blur-3xl pointer-events-none"></div>
+      <div className="absolute -bottom-20 right-1/4 w-[400px] h-[300px] bg-gradient-to-t from-ember/5 to-transparent blur-3xl pointer-events-none"></div>
 
       <div className="mx-auto grid max-w-[1200px] gap-12 sm:gap-16 px-4 sm:px-6 pb-14 sm:pb-20 pt-8 sm:pt-16 md:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-28 relative z-10">
         <div className="flex flex-col justify-center">
@@ -77,7 +78,7 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
             className="mt-4 sm:mt-6 text-[34px] font-semibold leading-[1.1] tracking-[-0.03em] text-obsidian sm:text-[46px] md:text-[56px] lg:text-[64px] lg:leading-[1.05]"
           >
             Where every voice<br />
-            builds a <span className="italic font-normal text-iron">movement</span>.
+            builds a <span className="italic font-normal bg-gradient-to-r from-iron via-ember to-iron bg-[length:200%_auto] bg-clip-text text-transparent animate-[shimmerSlide_4s_ease-in-out_infinite]">movement</span>.
           </motion.h1>
 
           <motion.p
@@ -143,7 +144,7 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
           <motion.div
             animate={{ y: [-4, 4, -4] }}
             transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="absolute -top-6 -right-2 sm:-top-5 sm:-right-4 z-20 hidden sm:flex items-center gap-2 rounded-full border border-cloud bg-obsidian px-3.5 py-1.5 text-snow shadow-xl text-[12px] font-semibold"
+            className="absolute -top-6 -right-2 sm:-top-5 sm:-right-4 z-20 hidden sm:flex items-center gap-2 rounded-full border border-cloud bg-gradient-to-r from-obsidian to-graphite px-3.5 py-1.5 text-snow shadow-xl text-[12px] font-semibold"
           >
             <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
             <span>42 Ward Sabhas Debating Right Now</span>
@@ -173,15 +174,15 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
           </div>
 
           <div className="grid grid-cols-2 gap-3.5 sm:gap-4">
-            <div className="rounded-[20px] sm:rounded-[24px] border border-cloud/80 bg-snow p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
+            <div className="group rounded-[20px] sm:rounded-[24px] border border-cloud/80 bg-snow p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
               <div className="text-[28px] sm:text-[34px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1.5">
-                <span>50,000+</span>
+                <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>50,000+</motion.span>
               </div>
               <div className="mt-2 text-[12px] sm:text-[13px] font-medium text-steel leading-snug">Citizens across India actively engaged</div>
             </div>
-            <div className="rounded-[20px] sm:rounded-[24px] border border-cloud/80 bg-paper p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
+            <div className="group rounded-[20px] sm:rounded-[24px] border border-cloud/80 bg-paper p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
               <div className="text-[28px] sm:text-[34px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1.5">
-                <span>92%</span>
+                <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>92%</motion.span>
               </div>
               <div className="mt-2 text-[12px] sm:text-[13px] font-medium text-steel leading-snug">Civic issues routed to municipal officers</div>
             </div>
@@ -196,28 +197,28 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
         </p>
         <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-300">
           
-          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px]">
+          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px] transition-transform hover:scale-105">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 via-white to-green-500 border border-cloud flex items-center justify-center shadow-sm">
               <span className="w-4 h-4 rounded-full bg-blue-600 border border-white"></span>
             </div>
             <span>Digital Bharat</span>
           </div>
 
-          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px]">
+          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px] transition-transform hover:scale-105">
             <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center">
               <CheckCircle2 className="w-5 h-5" />
             </div>
             <span>Swachh City Data</span>
           </div>
 
-          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px]">
+          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px] transition-transform hover:scale-105">
             <div className="w-8 h-8 rounded-[8px] bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <span>Gov Connect</span>
           </div>
 
-          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px]">
+          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px] transition-transform hover:scale-105">
             <span className="w-8 h-8 rounded-[8px] bg-obsidian text-snow flex items-center justify-center text-xs font-black tracking-tighter">NIC</span>
             <span>National Informatics</span>
           </div>

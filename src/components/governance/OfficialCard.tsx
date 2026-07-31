@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { GovernanceOfficial } from '@/data/types';
 import { PartyBadge } from './PartyBadge';
 import { CheckCircle2, MapPin, Briefcase } from 'lucide-react';
@@ -22,7 +23,7 @@ export const OfficialCard: React.FC<OfficialCardProps> = ({ official }) => {
     <div className="bg-white rounded-[24px] p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-all duration-300 transform hover:-translate-y-1 border border-cloud/80 flex flex-col gap-4 group">
       {/* Header */}
       <div className="flex items-start gap-4">
-        <div className="flex-shrink-0 w-12 h-12 rounded-[14px] bg-gradient-to-br from-paper to-snow flex items-center justify-center text-obsidian font-bold text-lg border border-cloud/80 shadow-sm group-hover:shadow-md transition-shadow">
+        <div className="flex-shrink-0 w-12 h-12 rounded-[14px] bg-gradient-to-br from-paper to-snow flex items-center justify-center text-obsidian font-bold text-lg border border-cloud/80 shadow-sm group-hover:shadow-lg group-hover:scale-105 transition-all">
           {initials}
         </div>
         <div className="flex-1 min-w-0">
@@ -62,7 +63,7 @@ export const OfficialCard: React.FC<OfficialCardProps> = ({ official }) => {
           <span className="text-xs font-bold text-obsidian">{responseRate}%</span>
         </div>
         <div className="w-full bg-paper rounded-full h-1.5 mb-3">
-          <div className={`h-1.5 rounded-full ${progressColor}`} style={{ width: `${responseRate}%` }}></div>
+          <motion.div initial={{ width: 0 }} whileInView={{ width: `${responseRate}%` }} viewport={{ once: true }} transition={{ duration: 0.8, ease: 'easeOut' }} className={`h-1.5 rounded-full ${progressColor}`}></motion.div>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-xs font-medium text-steel">Issues Routed</span>

@@ -74,10 +74,10 @@ export const HierarchyTree: React.FC = () => {
           <React.Fragment key={tier.level}>
             <motion.div 
               variants={itemVariants}
-              className={`w-full relative bg-snow border border-cloud rounded-[24px] p-6 shadow-sm flex flex-col md:flex-row items-center gap-4 md:gap-6 ${tier.bgColor} bg-opacity-30`}
+              className={`group w-full relative bg-snow border border-cloud rounded-[24px] p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row items-center gap-4 md:gap-6 ${tier.bgColor} bg-opacity-30`}
             >
               <div className={`flex-shrink-0 w-16 h-16 rounded-full ${tier.color} bg-opacity-10 flex items-center justify-center`}>
-                <div className={`w-12 h-12 rounded-full ${tier.color} text-white flex items-center justify-center font-bold text-sm shadow-sm`}>
+                <div className={`w-12 h-12 rounded-full ${tier.color} text-white flex items-center justify-center font-bold text-sm shadow-sm group-hover:scale-110 transition-transform`}>
                   {index + 1}
                 </div>
               </div>
@@ -103,7 +103,7 @@ export const HierarchyTree: React.FC = () => {
             {index < tiers.length - 1 && (
               <motion.div 
                 variants={itemVariants}
-                className="h-10 border-l-2 border-dashed border-fog/30 flex flex-col items-center justify-center relative my-2"
+                className="h-10 border-l-2 border-dashed border-ember/30 flex flex-col items-center justify-center relative my-2"
               >
                 <div className="absolute -bottom-2 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[8px] border-transparent border-t-fog/40"></div>
               </motion.div>

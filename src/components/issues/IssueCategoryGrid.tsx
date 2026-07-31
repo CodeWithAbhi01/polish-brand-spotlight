@@ -47,14 +47,14 @@ export const IssueCategoryGrid: React.FC<IssueCategoryGridProps> = ({ onSelectCa
             whileHover={{ scale: 1.02, y: -2 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onSelectCategory?.(cat.code)}
-            className="flex flex-col items-start p-4 rounded-[16px] border border-cloud bg-snow text-left hover:shadow-md transition-shadow relative overflow-hidden group"
+            className="flex flex-col items-start p-4 rounded-[16px] border border-cloud bg-snow text-left hover:shadow-md hover:shadow-lg transition-shadow relative overflow-hidden group"
           >
             <div 
               className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity" 
               style={{ backgroundColor: cat.color }} 
             />
             
-            <div className="flex items-center justify-center w-10 h-10 rounded-full mb-3" style={{ backgroundColor: `${cat.color}20`, color: cat.color }}>
+            <div className="flex items-center justify-center w-10 h-10 rounded-full mb-3 group-hover:scale-110 transition-transform" style={{ backgroundColor: `${cat.color}20`, color: cat.color }}>
               <IconComponent className="w-5 h-5" />
             </div>
             
