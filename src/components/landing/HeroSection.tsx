@@ -6,7 +6,7 @@ import type { UserProfile } from "@/data/types";
 import logoMark from "@/assets/logo-mark.png";
 import civicTownhall from "@/assets/civic-townhall.jpg";
 import communityVolunteers from "@/assets/community-volunteers.jpg";
-import govtCivicBanner from "@/assets/govt-civic-banner.jpg";
+import govtCitizenCollaboration from "@/assets/govt-citizen-collaboration.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -272,11 +272,11 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
             </div>
           </div>
           <div className="relative rounded-[20px] sm:rounded-[24px] overflow-hidden aspect-[4/3] group">
-            <img src={govtCivicBanner} alt="Government civic framework" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src={govtCitizenCollaboration} alt="Citizens and officials collaborating" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-obsidian/10 to-transparent" />
             <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
-              <div className="text-[13px] sm:text-[15px] font-bold text-snow">Govt Framework</div>
-              <div className="text-[10px] sm:text-[11px] text-snow/70">National Civic Standards</div>
+              <div className="text-[13px] sm:text-[15px] font-bold text-snow">Direct Collaboration</div>
+              <div className="text-[10px] sm:text-[11px] text-snow/70">Citizens & Officials</div>
             </div>
           </div>
         </div>
