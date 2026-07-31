@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { toast, Toaster } from "sonner";
 import community from "@/assets/community.jpg";
+import communityVolunteers from "@/assets/community-volunteers.jpg";
 
 import { AuthModal } from "@/components/AuthModal";
 import type { UserProfile } from "@/data/types";
@@ -398,6 +399,105 @@ function FeaturesSection() {
   );
 }
 
+function TestimonialsSection() {
+  const testimonials = [
+    {
+      name: "Ananya Iyer",
+      role: "Ward Committee Member",
+      city: "Bengaluru",
+      quote: "ApniSabha helped us fix 142 potholes in our ward in just 3 weeks. The municipal response time dropped from 45 days to 48 hours. This is real democratic tech.",
+      impact: "142 issues resolved",
+    },
+    {
+      name: "Rohan Verma",
+      role: "Environmental Lead",
+      city: "Delhi",
+      quote: "We organized 500 volunteers for the Yamuna clean-up drive through the platform. The coordination tools and civic audit features are a game-changer for community action.",
+      impact: "500+ volunteers mobilized",
+    },
+    {
+      name: "Pooja Deshmukh",
+      role: "Safety Advocate",
+      city: "Mumbai",
+      quote: "Women's safety in transit was always talked about but never acted on. Through ApniSabha, our petition reached the municipal commissioner in 72 hours with 3,100 verified signatures.",
+      impact: "3,100 signatures collected",
+    },
+  ];
+
+  return (
+    <section className="px-4 sm:px-6 py-14 sm:py-20 md:py-28 bg-snow border-t border-cloud relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-ember/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="mx-auto max-w-[1200px] relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 sm:mb-14">
+          <div>
+            <span className="inline-flex items-center gap-1.5 rounded-[10px] bg-emerald-500/10 px-3 py-1 text-[11px] font-bold text-emerald-600 uppercase tracking-wider border border-emerald-500/20">
+              <Users className="h-3 w-3" /> Real Impact Stories
+            </span>
+            <h2 className="mt-3 text-[30px] font-semibold leading-[1.1] tracking-[-0.025em] text-obsidian sm:text-[40px] md:text-[52px]">
+              Citizens making it happen.
+            </h2>
+            <div className="mt-3 h-1 w-16 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-500/30"></div>
+          </div>
+          <p className="max-w-sm text-[14px] sm:text-[15px] leading-relaxed text-steel">
+            Real stories from verified citizens who used ApniSabha to drive measurable change in their communities.
+          </p>
+        </div>
+
+        <div className="grid gap-5 sm:gap-6 lg:grid-cols-3">
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={t.name}
+              initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
+              custom={i} variants={fadeUp}
+              className="group flex flex-col justify-between rounded-[24px] sm:rounded-[32px] border border-cloud bg-paper p-6 sm:p-8 hover:bg-snow hover:shadow-xl hover:border-emerald-200/50 transition-all duration-300"
+            >
+              <div>
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <svg key={j} className="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+                  ))}
+                </div>
+                <p className="text-[14px] sm:text-[15px] leading-[1.7] text-graphite italic">
+                  "{t.quote}"
+                </p>
+              </div>
+              <div className="mt-6 pt-5 border-t border-cloud flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-10 w-10 place-items-center rounded-full bg-obsidian text-[12px] font-bold text-snow flex-none">
+                    {t.name.slice(0, 2).toUpperCase()}
+                  </div>
+                  <div>
+                    <div className="text-[13px] sm:text-[14px] font-semibold text-obsidian flex items-center gap-1">
+                      {t.name} <ShieldCheck className="h-3.5 w-3.5 text-blue-600" />
+                    </div>
+                    <div className="text-[11px] sm:text-[12px] text-fog">{t.role} · {t.city}</div>
+                  </div>
+                </div>
+                <div className="hidden sm:block text-right">
+                  <div className="text-[13px] font-bold text-emerald-600">{t.impact}</div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Community Photo Banner */}
+        <div className="mt-10 sm:mt-14 relative rounded-[26px] sm:rounded-[36px] overflow-hidden">
+          <img
+            src={communityVolunteers} alt="Community volunteers working together"
+            className="w-full h-[200px] sm:h-[280px] object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-obsidian/80 via-obsidian/40 to-transparent" />
+          <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-10">
+            <div className="text-[22px] sm:text-[28px] font-bold text-snow tracking-tight">Join the Movement</div>
+            <div className="text-[13px] sm:text-[15px] text-snow/80 mt-1">50,000+ citizens across 200+ wards building a better India</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function AboutSection() {
   return (
     <section id="about" className="px-4 sm:px-6 py-14 sm:py-20 md:py-28 bg-snow border-t border-cloud">
@@ -639,6 +739,8 @@ function Index() {
         user={user}
         onOpenAuth={openLogin}
       />
+
+      <TestimonialsSection />
 
       <AboutSection />
       <CTASection

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { Sparkles, ArrowRight, CheckCircle2, MapPin, Loader2, ShieldCheck } from "lucide-react";
+import { Sparkles, ArrowRight, CheckCircle2, MapPin, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import type { UserProfile } from "@/data/types";
 import logoMark from "@/assets/logo-mark.png";
+import civicTownhall from "@/assets/civic-townhall.jpg";
+import communityVolunteers from "@/assets/community-volunteers.jpg";
+import govtCivicBanner from "@/assets/govt-civic-banner.jpg";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -190,37 +193,91 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
         </motion.div>
       </div>
 
-      {/* Official Government Logos Integration Section */}
-      <div className="mx-auto max-w-[1200px] border-t border-cloud mt-6 sm:mt-10 px-4 sm:px-6 py-6 sm:py-8 relative z-10">
-        <p className="text-center text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.2em] text-ash mb-6">
-          Aligned with National Civic Standards
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-300">
-          
-          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px] transition-transform hover:scale-105">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-500 via-white to-green-500 border border-cloud flex items-center justify-center shadow-sm">
-              <span className="w-4 h-4 rounded-full bg-blue-600 border border-white"></span>
+      {/* Trusted By Government & Civic Bodies */}
+      <div className="mx-auto max-w-[1200px] border-t border-cloud mt-6 sm:mt-10 px-4 sm:px-6 py-8 sm:py-12 relative z-10">
+        <div className="text-center mb-8">
+          <p className="text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.2em] text-ash mb-2">
+            Trusted Infrastructure
+          </p>
+          <p className="text-[13px] sm:text-[14px] text-steel max-w-lg mx-auto">
+            Built on open civic data standards used by municipal bodies across India
+          </p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          {/* Digital India */}
+          <div className="group flex flex-col items-center gap-3 rounded-[20px] border border-cloud bg-snow p-5 sm:p-6 hover:shadow-lg hover:border-ember/20 transition-all hover:-translate-y-1 cursor-default">
+            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 via-white to-green-500 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+              <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center shadow-inner">
+                <span className="text-white text-[10px] font-black">DI</span>
+              </div>
             </div>
-            <span>Digital Bharat</span>
+            <div className="text-center">
+              <div className="text-[14px] sm:text-[15px] font-bold text-obsidian">Digital India</div>
+              <div className="text-[11px] text-fog mt-0.5">Open Data Platform</div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px] transition-transform hover:scale-105">
-            <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200 flex items-center justify-center">
-              <CheckCircle2 className="w-5 h-5" />
+          {/* Swachh Bharat */}
+          <div className="group flex flex-col items-center gap-3 rounded-[20px] border border-cloud bg-snow p-5 sm:p-6 hover:shadow-lg hover:border-emerald-300/40 transition-all hover:-translate-y-1 cursor-default">
+            <div className="w-14 h-14 rounded-full bg-emerald-50 border-2 border-emerald-200 flex items-center justify-center group-hover:border-emerald-400 transition-colors">
+              <svg className="w-7 h-7 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 12l3 3 5-5"/></svg>
             </div>
-            <span>Swachh City Data</span>
+            <div className="text-center">
+              <div className="text-[14px] sm:text-[15px] font-bold text-obsidian">Swachh Bharat</div>
+              <div className="text-[11px] text-fog mt-0.5">Urban Mission Data</div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px] transition-transform hover:scale-105">
-            <div className="w-8 h-8 rounded-[8px] bg-indigo-50 text-indigo-600 border border-indigo-200 flex items-center justify-center">
-              <ShieldCheck className="w-5 h-5" />
+          {/* SMART Cities */}
+          <div className="group flex flex-col items-center gap-3 rounded-[20px] border border-cloud bg-snow p-5 sm:p-6 hover:shadow-lg hover:border-indigo-300/40 transition-all hover:-translate-y-1 cursor-default">
+            <div className="w-14 h-14 rounded-[14px] bg-indigo-50 border-2 border-indigo-200 flex items-center justify-center group-hover:border-indigo-400 transition-colors">
+              <svg className="w-7 h-7 text-indigo-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
             </div>
-            <span>Gov Connect</span>
+            <div className="text-center">
+              <div className="text-[14px] sm:text-[15px] font-bold text-obsidian">SMART Cities</div>
+              <div className="text-[11px] text-fog mt-0.5">Mission Integration</div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 font-bold text-obsidian text-[15px] sm:text-[17px] transition-transform hover:scale-105">
-            <span className="w-8 h-8 rounded-[8px] bg-obsidian text-snow flex items-center justify-center text-xs font-black tracking-tighter">NIC</span>
-            <span>National Informatics</span>
+          {/* NIC */}
+          <div className="group flex flex-col items-center gap-3 rounded-[20px] border border-cloud bg-snow p-5 sm:p-6 hover:shadow-lg hover:border-slate/20 transition-all hover:-translate-y-1 cursor-default">
+            <div className="w-14 h-14 rounded-[14px] bg-obsidian flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
+              <span className="text-snow text-[13px] font-black tracking-tight">NIC</span>
+            </div>
+            <div className="text-center">
+              <div className="text-[14px] sm:text-[15px] font-bold text-obsidian">NIC India</div>
+              <div className="text-[11px] text-fog mt-0.5">Secure Infrastructure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Community Photo Strip */}
+      <div className="mx-auto max-w-[1200px] px-4 sm:px-6 pb-8 sm:pb-12 relative z-10">
+        <div className="grid grid-cols-3 gap-3 sm:gap-4">
+          <div className="relative rounded-[20px] sm:rounded-[24px] overflow-hidden aspect-[4/3] group">
+            <img src={civicTownhall} alt="Citizens in town hall meeting" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-obsidian/10 to-transparent" />
+            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+              <div className="text-[13px] sm:text-[15px] font-bold text-snow">Town Hall Sabhas</div>
+              <div className="text-[10px] sm:text-[11px] text-snow/70">12 cities · Weekly</div>
+            </div>
+          </div>
+          <div className="relative rounded-[20px] sm:rounded-[24px] overflow-hidden aspect-[4/3] group">
+            <img src={communityVolunteers} alt="Community volunteers in action" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-obsidian/10 to-transparent" />
+            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+              <div className="text-[13px] sm:text-[15px] font-bold text-snow">Volunteer Drives</div>
+              <div className="text-[10px] sm:text-[11px] text-snow/70">50,000+ citizens</div>
+            </div>
+          </div>
+          <div className="relative rounded-[20px] sm:rounded-[24px] overflow-hidden aspect-[4/3] group">
+            <img src={govtCivicBanner} alt="Government civic framework" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-obsidian/60 via-obsidian/10 to-transparent" />
+            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+              <div className="text-[13px] sm:text-[15px] font-bold text-snow">Govt Framework</div>
+              <div className="text-[10px] sm:text-[11px] text-snow/70">National Civic Standards</div>
+            </div>
           </div>
         </div>
       </div>
