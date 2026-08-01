@@ -19,40 +19,71 @@ export const IssueTracker: React.FC = () => {
   const activeEscalations = mockFiledIssues.filter(i => i.status === "ESCALATED").length;
 
   return (
-    <section id="tracker" className="py-16 bg-paper min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="tracker" className="py-20 md:py-32 bg-snow min-h-screen relative overflow-hidden">
+      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-ember/5 rounded-full blur-[100px] pointer-events-none mix-blend-multiply"></div>
+      
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header section */}
-        <div className="text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-ember/10 text-ember text-sm font-semibold mb-4"><span className="h-2 w-2 rounded-full bg-ember animate-pulse"></span>Civic Accountability</div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-obsidian mb-4">
+        <div className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-ember/10 text-ember text-[11px] font-bold uppercase tracking-wider mb-6"
+          >
+            <span className="h-2 w-2 rounded-full bg-ember animate-pulse"></span>
+            Civic Accountability
+          </motion.div>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-[38px] md:text-[56px] font-black text-obsidian tracking-tight mb-5 leading-[1.1]"
+          >
             Issue Escalation Tracker
-          </h2>
-          <p className="text-lg text-steel max-w-2xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-[16px] md:text-[18px] text-steel max-w-2xl mx-auto font-medium"
+          >
             Track every civic issue from filing to resolution. Complete transparency at every level.
-          </p>
+          </motion.p>
         </div>
-        <div className="h-1 w-20 mx-auto rounded-full bg-gradient-to-r from-ember to-ember/20 mb-12"></div>
 
         {/* Stats bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center hover:shadow-md transition-all hover:-translate-y-0.5">
-            <span className="block text-2xl font-bold text-obsidian">{totalIssues}</span>
-            <span className="text-xs text-fog uppercase font-bold tracking-wider">Total Issues</span>
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 mb-16"
+        >
+          <div className="bg-white/80 backdrop-blur-xl p-5 md:p-6 rounded-[24px] border border-cloud/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 text-center group relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span className="block text-[28px] md:text-[32px] font-black text-obsidian relative z-10 leading-none mb-1">{totalIssues}</span>
+            <span className="text-[11px] text-steel uppercase font-bold tracking-wider relative z-10">Total Issues</span>
           </div>
-          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center hover:shadow-md transition-all hover:-translate-y-0.5">
-            <span className="block text-2xl font-bold text-green-600">{resolvedCount}</span>
-            <span className="text-xs text-fog uppercase font-bold tracking-wider">Resolved</span>
+          <div className="bg-white/80 backdrop-blur-xl p-5 md:p-6 rounded-[24px] border border-cloud/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 text-center group relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span className="block text-[28px] md:text-[32px] font-black text-emerald-600 relative z-10 leading-none mb-1">{resolvedCount}</span>
+            <span className="text-[11px] text-emerald-600 uppercase font-bold tracking-wider relative z-10">Resolved</span>
           </div>
-          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center hover:shadow-md transition-all hover:-translate-y-0.5">
-            <span className="block text-2xl font-bold text-blue-600">48h</span>
-            <span className="text-xs text-fog uppercase font-bold tracking-wider">Avg Resolution</span>
+          <div className="bg-white/80 backdrop-blur-xl p-5 md:p-6 rounded-[24px] border border-cloud/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 text-center group relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span className="block text-[28px] md:text-[32px] font-black text-blue-600 relative z-10 leading-none mb-1">48h</span>
+            <span className="text-[11px] text-blue-600 uppercase font-bold tracking-wider relative z-10">Avg Resolution</span>
           </div>
-          <div className="p-4 rounded-[16px] bg-snow border border-cloud text-center hover:shadow-md transition-all hover:-translate-y-0.5">
-            <span className="block text-2xl font-bold text-amber-600">{activeEscalations}</span>
-            <span className="text-xs text-fog uppercase font-bold tracking-wider">Active Escalations</span>
+          <div className="bg-white/80 backdrop-blur-xl p-5 md:p-6 rounded-[24px] border border-cloud/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 text-center group relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-ember/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <span className="block text-[28px] md:text-[32px] font-black text-ember relative z-10 leading-none mb-1">{activeEscalations}</span>
+            <span className="text-[11px] text-ember uppercase font-bold tracking-wider relative z-10">Active Escalations</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Category Grid */}
         <div className="mb-12">
@@ -95,11 +126,14 @@ export const IssueTracker: React.FC = () => {
                         exit={{ opacity: 0, height: 0 }}
                         className="overflow-hidden"
                       >
-                        <div className="mt-4 p-6 bg-white rounded-[24px] border border-cloud shadow-sm">
+                        <div className="mt-4 p-6 sm:p-8 bg-white/60 backdrop-blur-xl rounded-[28px] border border-cloud/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
                           <EscalationAlertBanner issue={issue} />
                           
-                          <div className="mt-6">
-                            <h4 className="text-sm font-bold text-obsidian uppercase tracking-wider mb-4 px-2">Escalation History</h4>
+                          <div className="mt-8">
+                            <h4 className="text-[13px] font-bold text-obsidian uppercase tracking-widest mb-6 px-2 flex items-center gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-ember"></span>
+                              Escalation History
+                            </h4>
                             <EscalationTimeline steps={issue.escalationHistory} />
                           </div>
                         </div>
