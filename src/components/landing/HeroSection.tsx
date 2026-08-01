@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { Sparkles, ArrowRight, CheckCircle2, MapPin, Loader2 } from "lucide-react";
+import { Sparkles, ArrowRight, CheckCircle2, MapPin, Loader2, Mic } from "lucide-react";
 import { toast } from "sonner";
 import type { UserProfile } from "@/data/types";
 import logoMark from "@/assets/logo-mark.png";
@@ -21,6 +21,19 @@ interface HeroProps {
   onOpenSignupWithEmail: (email: string) => void;
   onOpenReport: () => void;
 }
+
+const VoiceWave = () => (
+  <div className="flex items-center gap-1 h-5 mx-2">
+    {[0.2, 0.5, 1, 0.6, 0.3].map((scale, i) => (
+      <motion.div
+        key={i}
+        animate={{ scaleY: [scale, 1.2, scale] }}
+        transition={{ repeat: Infinity, duration: 1.2, delay: i * 0.15, ease: "easeInOut" }}
+        className="w-[3px] h-full rounded-full bg-ember origin-bottom"
+      />
+    ))}
+  </div>
+);
 
 export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroProps) {
   const [emailInput, setEmailInput] = useState("");
@@ -61,8 +74,8 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
   return (
     <section className="relative overflow-hidden">
       {/* Enhanced Animated gradient orbs */}
-      <div className="absolute -top-[20%] -left-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-ember/15 to-transparent blur-[100px] mix-blend-multiply animate-pulse" style={{ animationDuration: '6s' }}></div>
-      <div className="absolute top-[20%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-magenta-spark/10 to-transparent blur-[100px] mix-blend-multiply animate-pulse" style={{ animationDuration: '8s' }}></div>
+      <div className="absolute -top-[20%] -left-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-ember/10 to-transparent blur-[100px] mix-blend-multiply animate-pulse" style={{ animationDuration: '6s' }}></div>
+      <div className="absolute top-[20%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-blue-500/10 to-transparent blur-[100px] mix-blend-multiply animate-pulse" style={{ animationDuration: '8s' }}></div>
 
       <div className="mx-auto grid max-w-[1200px] gap-12 sm:gap-16 px-4 sm:px-6 pb-14 sm:pb-20 pt-8 sm:pt-16 md:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-28 relative z-10">
         <div className="flex flex-col justify-center">
@@ -81,7 +94,7 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
             className="mt-5 sm:mt-6 text-[38px] font-bold leading-[1.1] tracking-[-0.04em] text-obsidian sm:text-[48px] md:text-[60px] lg:text-[72px] lg:leading-[1.05]"
           >
             Where every voice<br />
-            builds a <span className="italic font-normal bg-gradient-to-r from-ember via-magenta-spark to-ember bg-[length:200%_auto] bg-clip-text text-transparent animate-[shimmerSlide_4s_ease-in-out_infinite]">movement</span>.
+            builds a <span className="italic font-normal bg-gradient-to-r from-ember via-orange-500 to-ember bg-[length:200%_auto] bg-clip-text text-transparent animate-[shimmerSlide_4s_ease-in-out_infinite]">movement</span>.
           </motion.h1>
 
           <motion.p
@@ -137,30 +150,26 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
           </motion.div>
         </div>
 
-        {/* Right — editorial card stack with subtle floating movement animation */}
+        {/* Right — Perfectly aligned editorial card stack */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex flex-col gap-3.5 sm:gap-4"
+          className="relative flex flex-col gap-5 w-full max-w-[480px] mx-auto lg:ml-auto lg:mt-4"
         >
-          {/* Floating animated badge */}
-          <motion.div
-            animate={{ y: [-6, 6, -6] }}
-            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-            className="absolute -top-6 -right-2 sm:-top-8 sm:-right-6 z-30 hidden sm:flex items-center gap-2 rounded-full border border-white/20 bg-gradient-to-r from-obsidian to-slate px-4 py-2 text-snow shadow-2xl text-[12px] font-bold backdrop-blur-md"
-          >
-            <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>42 Ward Sabhas Debating Right Now</span>
-          </motion.div>
-
-          <div className="group rounded-[28px] sm:rounded-[36px] border border-cloud/60 bg-snow/80 backdrop-blur-lg p-6 sm:p-8 shadow-[0_8px_40px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_50px_rgba(255,90,0,0.08)] transition-all duration-300 hover:border-ember/20 relative overflow-hidden">
+          {/* Main Card */}
+          <div className="group rounded-[32px] border border-cloud bg-white/80 backdrop-blur-xl p-7 sm:p-8 shadow-[0_16px_40px_rgb(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgba(255,90,0,0.08)] transition-all duration-300 relative overflow-hidden flex flex-col">
             <div className="absolute inset-0 bg-gradient-to-br from-transparent to-ember/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="flex items-center justify-between border-b border-cloud/60 pb-4 mb-4">
-              <span className="inline-flex items-center gap-1.5 rounded-[8px] bg-ember/10 px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-ember uppercase tracking-wider">
-                <span className="h-1.5 w-1.5 rounded-full bg-ember animate-pulse"></span> LIVE DISCUSSION
-              </span>
-              <span className="text-[11px] sm:text-[12px] font-semibold text-fog flex items-center gap-1">
-                <MapPin className="h-3.5 w-3.5 text-ember" /> Delhi Sabha
+            
+            {/* Header part with Voice wave and Live text */}
+            <div className="flex items-center justify-between pb-5 mb-5 border-b border-cloud/60 relative z-10">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-ember/10 px-3 py-1.5 text-[11px] font-bold text-ember uppercase tracking-wider">
+                  <span className="h-1.5 w-1.5 rounded-full bg-ember animate-pulse"></span> LIVE
+                </span>
+                <VoiceWave />
+              </div>
+              <span className="text-[12px] font-semibold text-fog flex items-center gap-1 bg-paper px-3 py-1.5 rounded-full border border-cloud">
+                <MapPin className="h-3.5 w-3.5 text-obsidian" /> Delhi Sabha
               </span>
             </div>
             <div className="flex items-center gap-4">
@@ -170,25 +179,26 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
                 <div className="text-[12px] sm:text-[13px] text-steel font-medium mt-0.5">1,284 verified voices · 12 wards active</div>
               </div>
             </div>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2.5 relative z-10">
               {["Water Preservation", "Civic Audit", "Volunteer Squad", "Municipal Action"].map(t => (
-                <span key={t} className="rounded-[8px] border border-cloud/60 bg-paper px-2.5 py-1 text-[11px] sm:text-[12px] font-medium text-graphite hover:border-iron/40 cursor-default">{t}</span>
+                <span key={t} className="rounded-full border border-cloud bg-snow px-3 py-1.5 text-[12px] font-medium text-graphite hover:border-obsidian/20 hover:bg-paper transition-colors cursor-default shadow-sm">{t}</span>
               ))}
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:gap-5">
-            <div className="group rounded-[24px] sm:rounded-[28px] border border-cloud/60 bg-white/60 backdrop-blur-md p-5 sm:p-7 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:bg-white">
-              <div className="text-[32px] sm:text-[40px] font-extrabold leading-none tracking-tight text-obsidian flex items-center gap-1.5 bg-gradient-to-br from-obsidian to-slate bg-clip-text text-transparent">
-                <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>50,000+</motion.span>
+          <div className="grid grid-cols-2 gap-5">
+            <div className="group rounded-[28px] border border-cloud bg-white/70 backdrop-blur-xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:bg-white flex flex-col justify-center">
+              <div className="text-[34px] sm:text-[42px] font-black leading-none tracking-tight text-obsidian">
+                <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>50k+</motion.span>
               </div>
-              <div className="mt-2 text-[13px] sm:text-[14px] font-semibold text-steel leading-snug">Citizens across India actively engaged</div>
+              <div className="mt-2 text-[13px] font-medium text-steel leading-snug">Citizens engaged nationwide</div>
             </div>
-            <div className="group rounded-[24px] sm:rounded-[28px] border border-cloud/60 bg-paper/60 backdrop-blur-md p-5 sm:p-7 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:bg-paper">
-              <div className="text-[32px] sm:text-[40px] font-extrabold leading-none tracking-tight text-obsidian flex items-center gap-1.5 bg-gradient-to-br from-obsidian to-slate bg-clip-text text-transparent">
+            <div className="group rounded-[28px] border border-cloud bg-obsidian text-snow p-6 shadow-[0_8px_30px_rgb(0,0,0,0.1)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.15)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-center relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-ember/20 rounded-full blur-2xl group-hover:bg-ember/30 transition-colors duration-500 pointer-events-none"></div>
+              <div className="text-[34px] sm:text-[42px] font-black leading-none tracking-tight">
                 <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>92%</motion.span>
               </div>
-              <div className="mt-2 text-[12px] sm:text-[13px] font-medium text-steel leading-snug">Civic issues routed to municipal officers</div>
+              <div className="mt-2 text-[13px] font-medium text-snow/80 leading-snug relative z-10">Issues routed to officials</div>
             </div>
           </div>
         </motion.div>
