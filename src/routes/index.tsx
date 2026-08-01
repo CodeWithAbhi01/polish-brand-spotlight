@@ -100,7 +100,7 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur-md border-b border-cloud/60">
+    <header className="sticky top-0 z-40 bg-white/70 backdrop-blur-2xl border-b border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
       <div className="mx-auto flex h-[68px] sm:h-[76px] max-w-[1200px] items-center justify-between px-4 sm:px-6">
         <Logo onClick={(e) => smoothScrollToSection(e, "top")} />
         
@@ -306,9 +306,9 @@ function Nav({ user, onOpenLogin, onOpenSignup, onOpenReport, onLogout }: NavPro
 function ValueSection() {
   return (
     <section id="values" className="px-4 sm:px-6 py-14 sm:py-20 md:py-28">
-      <div className="mx-auto max-w-[1200px] rounded-[26px] sm:rounded-[36px] bg-obsidian p-6 sm:p-10 md:p-14 text-snow shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-ember/15 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="mx-auto max-w-[1200px] rounded-[32px] sm:rounded-[40px] bg-obsidian p-8 sm:p-12 md:p-16 text-snow shadow-[0_20px_60px_rgba(0,0,0,0.3)] relative overflow-hidden border border-slate">
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-ember/20 rounded-full blur-[120px] pointer-events-none mix-blend-lighten"></div>
+        <div className="absolute -bottom-40 -left-20 w-[500px] h-[500px] bg-magenta-spark/15 rounded-full blur-[100px] pointer-events-none mix-blend-lighten"></div>
 
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start relative z-10">
           <div>
@@ -368,9 +368,10 @@ function FeaturesSection() {
               key={f.title}
               initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
               custom={i} variants={fadeUp}
-              className="group flex flex-col justify-between rounded-[24px] sm:rounded-[32px] border border-cloud/80 bg-white p-6 sm:p-8 transition-all duration-300 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 hover:border-cloud hover:border-t-ember/40"
+              className="group flex flex-col justify-between rounded-[28px] sm:rounded-[36px] border border-cloud/60 bg-snow/80 backdrop-blur-md p-6 sm:p-8 transition-all duration-500 hover:shadow-[0_20px_40px_rgb(0,0,0,0.06)] hover:-translate-y-2 hover:border-ember/30 relative overflow-hidden"
             >
-              <div>
+              <div className="absolute inset-0 bg-gradient-to-br from-transparent to-ember/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="relative z-10">
                 <div className="grid h-12 w-12 sm:h-14 sm:w-14 place-items-center rounded-[14px] sm:rounded-[16px] bg-gradient-to-br from-paper to-snow border border-cloud/60 text-obsidian shadow-sm group-hover:bg-gradient-to-br group-hover:from-obsidian group-hover:to-graphite group-hover:text-white group-hover:rotate-6 transition-all duration-300">
                   <f.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
@@ -560,10 +561,10 @@ interface CTASectionProps {
 
 function CTASection({ user, onOpenLogin, onOpenSignup, onOpenReport }: CTASectionProps) {
   return (
-    <section id="cta" className="px-4 sm:px-6 pb-16 sm:pb-24 pt-8 sm:pt-10 bg-snow">
-      <div className="mx-auto max-w-[1200px] rounded-[26px] sm:rounded-[36px] border border-cloud bg-obsidian p-6 sm:p-10 md:p-16 text-snow shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-ember/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute -bottom-20 -left-20 w-[350px] h-[350px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <section id="cta" className="px-4 sm:px-6 pb-16 sm:pb-24 pt-8 sm:pt-10 bg-snow relative">
+      <div className="mx-auto max-w-[1200px] rounded-[32px] sm:rounded-[48px] border border-slate bg-obsidian p-8 sm:p-12 md:p-20 text-snow shadow-[0_20px_60px_rgba(0,0,0,0.25)] relative overflow-hidden">
+        <div className="absolute -top-40 -right-20 w-[600px] sm:w-[700px] h-[600px] sm:h-[700px] bg-gradient-to-br from-ember/30 to-magenta-spark/10 rounded-full blur-[100px] pointer-events-none mix-blend-lighten animate-pulse" style={{ animationDuration: '8s' }}></div>
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-magenta-spark/20 rounded-full blur-[120px] pointer-events-none mix-blend-lighten animate-pulse" style={{ animationDuration: '10s' }}></div>
         <div className="grid gap-8 sm:gap-10 md:grid-cols-[1.4fr_1fr] md:items-center relative z-10">
           <div>
             <span className="inline-flex items-center gap-1.5 rounded-[10px] sm:rounded-[12px] bg-ember px-3 py-1 text-[10px] sm:text-[11px] font-bold text-snow uppercase tracking-wider">

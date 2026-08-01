@@ -60,9 +60,9 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
 
   return (
     <section className="relative overflow-hidden">
-      {/* Decorative gradient orb */}
-      <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] sm:w-[800px] h-[300px] sm:h-[400px] bg-gradient-to-b from-ember/10 to-transparent blur-3xl pointer-events-none"></div>
-      <div className="absolute -bottom-20 right-1/4 w-[400px] h-[300px] bg-gradient-to-t from-ember/5 to-transparent blur-3xl pointer-events-none"></div>
+      {/* Enhanced Animated gradient orbs */}
+      <div className="absolute -top-[20%] -left-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-ember/15 to-transparent blur-[100px] mix-blend-multiply animate-pulse" style={{ animationDuration: '6s' }}></div>
+      <div className="absolute top-[20%] -right-[10%] w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-magenta-spark/10 to-transparent blur-[100px] mix-blend-multiply animate-pulse" style={{ animationDuration: '8s' }}></div>
 
       <div className="mx-auto grid max-w-[1200px] gap-12 sm:gap-16 px-4 sm:px-6 pb-14 sm:pb-20 pt-8 sm:pt-16 md:pt-20 lg:grid-cols-[1.15fr_0.85fr] lg:pb-28 relative z-10">
         <div className="flex flex-col justify-center">
@@ -78,10 +78,10 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
 
           <motion.h1
             initial="hidden" animate="visible" custom={1} variants={fadeUp}
-            className="mt-4 sm:mt-6 text-[34px] font-semibold leading-[1.1] tracking-[-0.03em] text-obsidian sm:text-[46px] md:text-[56px] lg:text-[64px] lg:leading-[1.05]"
+            className="mt-5 sm:mt-6 text-[38px] font-bold leading-[1.1] tracking-[-0.04em] text-obsidian sm:text-[48px] md:text-[60px] lg:text-[72px] lg:leading-[1.05]"
           >
             Where every voice<br />
-            builds a <span className="italic font-normal bg-gradient-to-r from-iron via-ember to-iron bg-[length:200%_auto] bg-clip-text text-transparent animate-[shimmerSlide_4s_ease-in-out_infinite]">movement</span>.
+            builds a <span className="italic font-normal bg-gradient-to-r from-ember via-magenta-spark to-ember bg-[length:200%_auto] bg-clip-text text-transparent animate-[shimmerSlide_4s_ease-in-out_infinite]">movement</span>.
           </motion.h1>
 
           <motion.p
@@ -96,19 +96,19 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
             initial="hidden" animate="visible" custom={3} variants={fadeUp}
             className="mt-6 sm:mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
-            <div className="flex flex-col sm:flex-row w-full max-w-md items-stretch sm:items-center gap-2 rounded-[18px] border border-cloud bg-snow p-2 shadow-lg">
+            <div className="flex flex-col sm:flex-row w-full max-w-md items-stretch sm:items-center gap-2 rounded-[20px] border border-white/40 bg-white/40 backdrop-blur-xl p-2 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
               <input
                 type="text"
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 placeholder="Enter email or mobile number..."
                 disabled={isVerifying}
-                className="flex-1 bg-transparent px-3 py-2.5 text-[14px] text-graphite outline-none placeholder:text-ash disabled:opacity-50"
+                className="flex-1 bg-transparent px-4 py-3 text-[15px] font-medium text-obsidian outline-none placeholder:text-fog disabled:opacity-50"
               />
               <button
                 type="submit"
                 disabled={isVerifying}
-                className="inline-flex items-center justify-center gap-2 rounded-[14px] bg-obsidian px-5 py-3 text-[14px] font-medium text-snow transition-all hover:bg-graphite disabled:opacity-50 shadow-sm cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 rounded-[16px] bg-obsidian px-6 py-3.5 text-[14px] font-bold text-snow transition-all hover:bg-ember hover:shadow-lg hover:shadow-ember/20 disabled:opacity-50 hover:-translate-y-0.5 cursor-pointer"
               >
                 {isVerifying ? (
                   <>
@@ -145,15 +145,16 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
         >
           {/* Floating animated badge */}
           <motion.div
-            animate={{ y: [-4, 4, -4] }}
-            transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-            className="absolute -top-6 -right-2 sm:-top-5 sm:-right-4 z-20 hidden sm:flex items-center gap-2 rounded-full border border-cloud bg-gradient-to-r from-obsidian to-graphite px-3.5 py-1.5 text-snow shadow-xl text-[12px] font-semibold"
+            animate={{ y: [-6, 6, -6] }}
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+            className="absolute -top-6 -right-2 sm:-top-8 sm:-right-6 z-30 hidden sm:flex items-center gap-2 rounded-full border border-white/20 bg-gradient-to-r from-obsidian to-slate px-4 py-2 text-snow shadow-2xl text-[12px] font-bold backdrop-blur-md"
           >
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-ping"></span>
             <span>42 Ward Sabhas Debating Right Now</span>
           </motion.div>
 
-          <div className="rounded-[24px] sm:rounded-[32px] border border-cloud/80 bg-snow p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow">
+          <div className="group rounded-[28px] sm:rounded-[36px] border border-cloud/60 bg-snow/80 backdrop-blur-lg p-6 sm:p-8 shadow-[0_8px_40px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_50px_rgba(255,90,0,0.08)] transition-all duration-300 hover:border-ember/20 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-ember/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="flex items-center justify-between border-b border-cloud/60 pb-4 mb-4">
               <span className="inline-flex items-center gap-1.5 rounded-[8px] bg-ember/10 px-2.5 py-1 text-[10px] sm:text-[11px] font-bold text-ember uppercase tracking-wider">
                 <span className="h-1.5 w-1.5 rounded-full bg-ember animate-pulse"></span> LIVE DISCUSSION
@@ -176,15 +177,15 @@ export function HeroSection({ user, onOpenSignupWithEmail, onOpenReport }: HeroP
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3.5 sm:gap-4">
-            <div className="group rounded-[20px] sm:rounded-[24px] border border-cloud/80 bg-snow p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
-              <div className="text-[28px] sm:text-[34px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1.5">
+          <div className="grid grid-cols-2 gap-4 sm:gap-5">
+            <div className="group rounded-[24px] sm:rounded-[28px] border border-cloud/60 bg-white/60 backdrop-blur-md p-5 sm:p-7 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:bg-white">
+              <div className="text-[32px] sm:text-[40px] font-extrabold leading-none tracking-tight text-obsidian flex items-center gap-1.5 bg-gradient-to-br from-obsidian to-slate bg-clip-text text-transparent">
                 <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>50,000+</motion.span>
               </div>
-              <div className="mt-2 text-[12px] sm:text-[13px] font-medium text-steel leading-snug">Citizens across India actively engaged</div>
+              <div className="mt-2 text-[13px] sm:text-[14px] font-semibold text-steel leading-snug">Citizens across India actively engaged</div>
             </div>
-            <div className="group rounded-[20px] sm:rounded-[24px] border border-cloud/80 bg-paper p-5 sm:p-6 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-[0_4px_20px_rgb(0,0,0,0.06)] transition-shadow">
-              <div className="text-[28px] sm:text-[34px] font-bold leading-none tracking-tight text-obsidian flex items-center gap-1.5">
+            <div className="group rounded-[24px] sm:rounded-[28px] border border-cloud/60 bg-paper/60 backdrop-blur-md p-5 sm:p-7 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:bg-paper">
+              <div className="text-[32px] sm:text-[40px] font-extrabold leading-none tracking-tight text-obsidian flex items-center gap-1.5 bg-gradient-to-br from-obsidian to-slate bg-clip-text text-transparent">
                 <motion.span initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>92%</motion.span>
               </div>
               <div className="mt-2 text-[12px] sm:text-[13px] font-medium text-steel leading-snug">Civic issues routed to municipal officers</div>
